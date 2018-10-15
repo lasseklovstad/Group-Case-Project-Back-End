@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class Association {
 	@Id
 	@GeneratedValue
-	private Long association_id;
+	private Long associationId;
 
 	private String name;
 	private String description;
