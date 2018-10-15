@@ -22,4 +22,9 @@ public class Match {
 	//  FOREIGN KEY (location_id) REFERENCES LOCATION(location_id),
 	//  FOREIGN KEY (home_team_id) REFERENCES TEAM(team_id),
 	//  FOREIGN KEY (away_team_id) REFERENCES TEAM(team_id)
+
+
+	public Match(LocalDate matchDate) {
+		this.matchDate = matchDate;
+	}
 }
