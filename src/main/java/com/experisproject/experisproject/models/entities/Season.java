@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class Season {
 	@Id
 	@GeneratedValue
-	private Long seasonId;
+	private int seasonId;
 
 	private LocalDate startDate;
 	private LocalDate endDate;

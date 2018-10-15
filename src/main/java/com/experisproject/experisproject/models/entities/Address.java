@@ -1,14 +1,17 @@
 package com.experisproject.experisproject.models.entities;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
+@Data
 public class Address {
 	@Id
 	@GeneratedValue
-	private Long addressId;
+	private int addressId;
 
 	private String addressLine1;
 	private String addressLine2;
