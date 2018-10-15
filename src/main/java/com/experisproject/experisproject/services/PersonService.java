@@ -1,6 +1,6 @@
 package com.experisproject.experisproject.services;
 
-import com.experisproject.experisproject.models.entities.Person;
+import com.experisproject.experisproject.models.entities.PersonTest;
 import com.experisproject.experisproject.models.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -21,15 +21,15 @@ public class PersonService implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        this.repository.save(new Person("Lasse Kløvstad","lklov@gmail.com"));
-        this.repository.save(new Person("Emil Kløvstad","ldsa@gmail.com"));
-        this.repository.save(new Person("Ruth Kløvstad","lkldsaov@gmail.com"));
+        this.repository.save(new PersonTest("Lasse Kløvstad","lklov@gmail.com"));
+        this.repository.save(new PersonTest("Emil Kløvstad","ldsa@gmail.com"));
+        this.repository.save(new PersonTest("Ruth Kløvstad","lkldsaov@gmail.com"));
     }
 
-    public List<Person> getAll(){
-        Iterable<Person> persons = this.repository.findAll();
-        List<Person> result = new ArrayList<>();
-        for (Person person : persons) {
+    public List<PersonTest> getAll(){
+        Iterable<PersonTest> persons = this.repository.findAll();
+        List<PersonTest> result = new ArrayList<>();
+        for (PersonTest person : persons) {
             result.add(person);
         }
 

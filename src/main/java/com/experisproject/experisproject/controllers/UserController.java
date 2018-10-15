@@ -1,7 +1,7 @@
 package com.experisproject.experisproject.controllers;
 
 import com.experisproject.experisproject.services.PersonService;
-import com.experisproject.experisproject.models.entities.Person;
+import com.experisproject.experisproject.models.entities.PersonTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ public class UserController {
 
     @CrossOrigin(origins = "localhost:3000")
     @RequestMapping(value = "/person")
-    public Person getAll(){
+    public PersonTest getAll(){
         return personService.getAll().get(0);
     }
 
