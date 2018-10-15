@@ -13,7 +13,7 @@ public class Result {
 	//  result VARCHAR(4) NOT NULL,
 	//  match_id INT NOT NULL,
 	//  team_id INT NOT NULL,
-	//  PRIMARY KEY (match_id),
+	//  PRIMARY KEY (match_id), skal den ikke også ha team_id? tenker mer!
 	//  FOREIGN KEY (match_id) REFERENCES MATCH(match_id),
 	//  FOREIGN KEY (team_id) REFERENCES TEAM(team_id)
 
