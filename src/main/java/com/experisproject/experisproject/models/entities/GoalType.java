@@ -11,4 +11,11 @@ public class GoalType {
 	private Long goalTypeId;
 
 	private String type;
+
+	public GoalType() {
+	}
+
+	public GoalType(String type) {
+		this.type = type;
+	}
 }

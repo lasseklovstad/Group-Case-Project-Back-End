@@ -15,4 +15,9 @@ public class Association {
 
 	public Association() {
 	}
+
+	public Association(String name, String description) {
+		this.name = name;
+		this.description = description;
+	}
 }
