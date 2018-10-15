@@ -16,7 +16,13 @@ public class Person {
 	private LocalDate dateOfBirth;
 
 	//addressId as foreign key, reference address(addressId)
-
+	//  person_id INT NOT NULL,
+	//  first_name VARCHAR(64) NOT NULL,
+	//  last_name VARCHAR(64) NOT NULL,
+	//  date_of_birth DATE NOT NULL,
+	//  address_id VARCHAR(64),
+	//  PRIMARY KEY (person_id),
+	//  FOREIGN KEY (address_id) REFERENCES ADDRESS(address_id)
 
 	public Person() {
 	}

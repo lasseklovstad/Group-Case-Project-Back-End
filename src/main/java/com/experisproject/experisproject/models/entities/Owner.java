@@ -13,7 +13,6 @@ public class Owner {
 	// PRIMARY KEY (owner_id),
 	// FOREIGN KEY (person_id) REFERENCES PERSON(person_id)
 
-
 	public Owner() {
 	}
 }
