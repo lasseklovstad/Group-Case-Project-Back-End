@@ -14,8 +14,8 @@ public class Coach {
 	//  PRIMARY KEY (coach_id),
 	//  FOREIGN KEY (person_id) REFERENCES PERSON(person_id)
 
-
-	// private Person person;
+	@OneToOne()
+	private Person person;
 
 	public Coach() {
 	}
