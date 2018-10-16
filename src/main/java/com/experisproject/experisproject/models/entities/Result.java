@@ -6,6 +6,9 @@ import javax.persistence.Id;
 @Entity
 public class Result {
 
+	@Id
+	private int matchId;
+
 	private int score;
 	private String result;
 

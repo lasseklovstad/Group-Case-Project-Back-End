@@ -15,7 +15,7 @@ public class Coach {
 	//  FOREIGN KEY (person_id) REFERENCES PERSON(person_id)
 
 
-	private Person person;
+	//private Person person;
 
 	public Coach() {
 	}

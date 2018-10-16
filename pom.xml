@@ -5,7 +5,7 @@
 
     <groupId>com.experis-project</groupId>
     <artifactId>experis-project</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>Experis-Football-Manager-0.0.1</version>
     <packaging>jar</packaging>
 
     <name>experis-project</name>
