@@ -1,12 +1,13 @@
 package com.experisproject.experisproject.models.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class MatchGoal {
 	//?? about primary key, can be goalId??? why? how?
-	//@Id
-	//goalId;
+	@Id
+	private int goalId; //to be edited
 	private String description;
 
     // goal_id INT NOT NULL,

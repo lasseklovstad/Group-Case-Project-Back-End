@@ -17,7 +17,7 @@ public class Person {
 	private LocalDate dateOfBirth;
 
 
-	private Coach coach;
+	//private Coach coach;
 	//addressId as foreign key, reference address(addressId)
 	//  person_id INT NOT NULL,
 	//  first_name VARCHAR(64) NOT NULL,
