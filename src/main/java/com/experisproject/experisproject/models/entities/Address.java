@@ -5,6 +5,8 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,6 +20,10 @@ public class Address {
 	private String addressLine3;
 	private int postalCode;
 	private String country;
+
+
+	//@OneToMany
+	// private List<Person> persons; Set<Person> persons = new Hashmap
 
 	public Address() {
 	}

@@ -1,9 +1,6 @@
 package com.experisproject.experisproject.models.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -16,8 +13,13 @@ public class Person {
 	private String lastName;
 	private LocalDate dateOfBirth;
 
-	@OneToOne(name ="")
+	@OneToOne(mappedBy ="person", cascade = CascadeType.ALL)//if a person is deleted and is a coach, no longer a coach
 	private Coach coach;
+
+	@ManyToOne
+	@MapsId("addressId")
+	@JoinColumn(name = "addressId") //referencedColumnName =""?
+	private Address address;
 	//addressId as foreign key, reference address(addressId)
 	//  person_id INT NOT NULL,
 	//  first_name VARCHAR(64) NOT NULL,
