@@ -5,8 +5,11 @@ import javax.persistence.Id;
 
 @Entity
 public class MatchPosition {
+
+
 	@Id
-	private int playerId;
+	private int playerId; //to be edited
+
 	private String position;
 
 	//  position VARCHAR(64),

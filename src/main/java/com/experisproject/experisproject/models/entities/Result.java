@@ -7,7 +7,7 @@ import javax.persistence.Id;
 public class Result {
 
 	@Id
-	private int matchId;
+	private int matchId; //to be edited
 
 	private int score;
 	private String result;
