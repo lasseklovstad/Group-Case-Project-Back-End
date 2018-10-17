@@ -15,9 +15,12 @@ public class Coach {
 	//  FOREIGN KEY (person_id) REFERENCES PERSON(person_id)
 
 	@OneToOne
-	@MapsId("personID") //smør på flesk?
+	//@MapsId("personID") //smør på flesk?
 	@JoinColumn(name = "personId")
 	private Person person;
+
+	@OneToOne(mappedBy = "coach")
+	private Team team;
 
 	public Coach() {
 	}

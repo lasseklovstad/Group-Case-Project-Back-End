@@ -1,14 +1,25 @@
 package com.experisproject.experisproject.models.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.experisproject.experisproject.models.helpClasses.MatchPositionId;
+
+import javax.persistence.*;
 
 @Entity
+@IdClass(MatchPositionId.class)
 public class MatchPosition {
 
-	@Id
-	private int playerId; //to be edited
+	@Id private int playerId; //maybe need to get from approprate class as well?????
+	@Id private int matchId; // google on how to set primary keys from other classes
 	private String position;
+
+	@ManyToOne
+	@JoinColumn(name = "matchId")
+	private Match match;
+
+	@OneToOne
+	@JoinColumn(name = "playerId")
+	private Player player;
+
 
 	//  position VARCHAR(64),
 	//  player_id INT NOT NULL,

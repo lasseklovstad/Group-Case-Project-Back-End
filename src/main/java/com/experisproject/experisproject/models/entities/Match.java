@@ -1,9 +1,8 @@
 package com.experisproject.experisproject.models.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Match {
@@ -12,6 +11,31 @@ public class Match {
 	private int matchId;
 
 	private LocalDate matchDate;
+
+	@ManyToOne
+	@JoinColumn(name = "seasonId")
+	private Season season;
+
+	@ManyToOne
+	@JoinColumn(name = "locationId")
+	private Location location;
+
+	@ManyToOne
+	@JoinColumn(name = "teamId")
+	private Team homeTeam;
+
+	@ManyToOne
+	@JoinColumn(name = "teamId")
+	private Team awayTeam;
+
+	@OneToMany(mappedBy = "match")
+	private List<MatchPosition> matchpositions;
+
+	@OneToMany(mappedBy = "match")
+	private List<Match> matches;
+
+	@OneToMany(mappedBy = "match")
+	private List<Team> teams;
 
     //  season_id INT NOT NULL,
 	//  location_id INT NOT NULL,
@@ -26,5 +50,13 @@ public class Match {
 
 	public Match(LocalDate matchDate) {
 		this.matchDate = matchDate;
+	}
+
+	public Match() {
+
+	}
+
+	public int getMatchId() {
+		return matchId;
 	}
 }

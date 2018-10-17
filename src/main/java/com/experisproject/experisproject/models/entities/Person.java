@@ -16,8 +16,17 @@ public class Person {
 	@OneToOne(mappedBy ="person", cascade = CascadeType.ALL)//if a person is deleted and is a coach, no longer a coach
 	private Coach coach;
 
+	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL) //if a person is deleted and is a player, no longer a player
+	private Player player;
+
+	@OneToOne(mappedBy = "person")
+	private Contact contact;
+
+	@OneToOne(mappedBy = "person")
+	private Owner owner;
+
 	@ManyToOne
-	@MapsId("addressId")
+	//@MapsId("addressId")
 	@JoinColumn(name = "addressId") //referencedColumnName =""?
 	private Address address;
 	//addressId as foreign key, reference address(addressId)

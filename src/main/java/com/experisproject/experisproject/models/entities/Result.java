@@ -1,15 +1,25 @@
 package com.experisproject.experisproject.models.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.experisproject.experisproject.models.helpClasses.ResultId;
+
+import javax.persistence.*;
 
 @Entity
+@IdClass(ResultId.class)
 public class Result {
 
-	@Id
-	private int matchId; //to be edited
+	@Id private int matchId; //to be checked and googled with helpclass
+	@Id private int teamId;
 	private int score;
 	private String result;
+
+	@ManyToOne
+	@JoinColumn(name = "matchId")
+	private Match match;
+
+	@ManyToOne
+	@JoinColumn(name = "teamId")
+	private Team team;
 
 	//  score INT NOT NULL,
 	//  result VARCHAR(4) NOT NULL,

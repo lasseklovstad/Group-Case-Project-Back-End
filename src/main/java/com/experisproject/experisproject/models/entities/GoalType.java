@@ -3,6 +3,7 @@ package com.experisproject.experisproject.models.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class GoalType {
@@ -11,6 +12,10 @@ public class GoalType {
 	private Long goalTypeId;
 
 	private String type;
+
+	@OneToOne(mappedBy = "goaltype")
+	private MatchGoal matchGoal;
+
 
 	public GoalType() {
 	}
