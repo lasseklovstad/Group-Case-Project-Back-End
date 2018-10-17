@@ -7,7 +7,9 @@ import javax.persistence.Id;
 public class MatchGoal {
 	//?? about primary key, can be goalId??? why? how?
 	@Id
+
 	private int goalId; //to be edited
+
 	private String description;
 
     // goal_id INT NOT NULL,

@@ -21,9 +21,7 @@ public class PersonService implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        this.repository.save(new PersonTest("Lasse Kløvstad","lklov@gmail.com"));
-        this.repository.save(new PersonTest("Emil Kløvstad","ldsa@gmail.com"));
-        this.repository.save(new PersonTest("Ruth Kløvstad","lkldsaov@gmail.com"));
+
     }
 
     public List<PersonTest> getAll(){
