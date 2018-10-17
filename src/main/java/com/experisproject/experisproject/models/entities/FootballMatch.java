@@ -8,10 +8,10 @@ import java.util.List;
 
 @Entity
 @Data
-public class Match {
+public class FootballMatch {
 	@Id
 	@GeneratedValue
-	private int matchId;
+	private int footballMatchId;
 
 	private LocalDate matchDate;
 
@@ -31,15 +31,15 @@ public class Match {
 	@JoinColumn(name = "teamId", updatable = false, insertable = false)
 	private Team awayTeam;
 
-	@OneToMany(mappedBy = "match")
+	@OneToMany(mappedBy = "footballMatch")
 	private List<MatchPosition> matchpositions;
 
-	public Match() {
+	public FootballMatch() {
 
 	}
 
-	public int getMatchId() {
-		return matchId;
+	public int getFootballMatchId() {
+		return footballMatchId;
 	}
 
 	//  season_id INT NOT NULL,

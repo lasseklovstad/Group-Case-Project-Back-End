@@ -20,7 +20,7 @@ public class Location {
 	private Address address;
 
 	@OneToMany(mappedBy = "location")
-	private List<Match> matches;
+	private List<FootballMatch> footballMatches;
 
 	@OneToOne(mappedBy = "location")
 	private Team team;

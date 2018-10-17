@@ -20,10 +20,10 @@ public class Team {
 	private Association association;
 
 	@OneToMany(mappedBy = "homeTeam")
-	private List<Match> homeMatches;
+	private List<FootballMatch> homeFootballMatches;
 
 	@OneToMany(mappedBy = "awayTeam")
-	private List<Match> awayMatches;
+	private List<FootballMatch> awayFootballMatches;
 
 	@OneToOne
 	@JoinColumn(name = "ownerId")

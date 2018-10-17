@@ -1,6 +1,6 @@
 package com.experisproject.experisproject.models.helpClasses;
 
-import com.experisproject.experisproject.models.entities.Match;
+import com.experisproject.experisproject.models.entities.FootballMatch;
 import com.experisproject.experisproject.models.entities.Player;
 
 import java.io.Serializable;
@@ -10,9 +10,9 @@ public class MatchPositionId implements Serializable {
 	private int playerId;
 
 	public MatchPositionId() {
-		Match match = new Match();
+		FootballMatch footballMatch = new FootballMatch();
 		Player player = new Player();
-		this.matchId = match.getMatchId();
+		this.matchId = footballMatch.getFootballMatchId();
 		this.playerId = player.getPlayerId();
 	}
 }

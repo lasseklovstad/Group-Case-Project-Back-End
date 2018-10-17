@@ -17,7 +17,7 @@ public class Result {
 
 	@ManyToOne
 	@JoinColumn(name = "matchId", updatable = false, insertable = false)
-	private Match match;
+	private FootballMatch footballMatch;
 
 	@ManyToOne
 	@JoinColumn(name = "teamId", updatable = false, insertable = false)

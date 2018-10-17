@@ -18,7 +18,7 @@ public class MatchGoal {
 
 	@ManyToOne
 	@JoinColumn(name = "matchId")
-	private Match match;
+	private FootballMatch footballMatch;
 
 	@ManyToOne
 	@JoinColumn(name = "playerId")

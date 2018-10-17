@@ -22,7 +22,7 @@ public class Season {
 	private String description;
 
 	@OneToMany(mappedBy = "season")
-	private List<Match> matches;
+	private List<FootballMatch> footballMatches;
 
 	public Season() {
 	}
