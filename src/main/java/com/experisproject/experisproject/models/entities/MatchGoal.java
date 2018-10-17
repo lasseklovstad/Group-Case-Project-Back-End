@@ -1,16 +1,25 @@
 package com.experisproject.experisproject.models.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class MatchGoal {
-	//?? about primary key, can be goalId??? why? how?
 	@Id
-
-	private int goalId; //to be edited
-
+	@GeneratedValue
+	private int matchGoalId;
 	private String description;
+
+	@OneToOne
+	@JoinColumn(name = "goalTypeId")
+	private GoalType goalType;
+
+	@ManyToOne
+	@JoinColumn(name = "matchId")
+	private Match match;
+
+	@ManyToOne
+	@JoinColumn(name = "playerId")
+	private Player player;
 
     // goal_id INT NOT NULL,
 	//  description VARCHAR(64),

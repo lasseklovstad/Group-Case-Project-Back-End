@@ -1,8 +1,7 @@
 package com.experisproject.experisproject.models.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Location {
@@ -12,6 +11,17 @@ public class Location {
 
 	private String name;
 	private String description;
+
+	@OneToOne
+	@JoinColumn(name = "addressId")
+	private Address address;
+
+	@OneToMany(mappedBy = "location")
+	private List<Match> matches;
+
+	@OneToOne(mappedBy = "location")
+	private Team team;
+
 	//foreign key Address.addressId
 	// location_id INT NOT NULL,
 	//  name VARCHAR(64) NOT NULL,

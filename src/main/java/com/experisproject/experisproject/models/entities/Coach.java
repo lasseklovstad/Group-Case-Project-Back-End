@@ -14,11 +14,13 @@ public class Coach {
 	//  PRIMARY KEY (coach_id),
 	//  FOREIGN KEY (person_id) REFERENCES PERSON(person_id)
 
+	@OneToOne
+	//@MapsId("personID") //smør på flesk?
+	@JoinColumn(name = "personId")
+	private Person person;
 
-
-	//private Person person;
-
-
+	@OneToOne(mappedBy = "coach")
+	private Team team;
 
 	public Coach() {
 	}
