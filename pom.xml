@@ -5,7 +5,7 @@
 
     <groupId>com.experis-project</groupId>
     <artifactId>experis-project</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>Experis-Football-Manager-0.0.1</version>
     <packaging>jar</packaging>
 
     <name>experis-project</name>
@@ -35,9 +35,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
         <dependency>

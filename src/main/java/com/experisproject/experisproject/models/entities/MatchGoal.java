@@ -7,6 +7,7 @@ public class MatchGoal {
 	@Id
 	@GeneratedValue
 	private int matchGoalId;
+  
 	private String description;
 
 	@OneToOne

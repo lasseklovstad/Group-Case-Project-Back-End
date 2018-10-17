@@ -10,6 +10,7 @@ public class Result {
 
 	@Id private int matchId; //to be checked and googled with helpclass
 	@Id private int teamId;
+
 	private int score;
 	private String result;
 
