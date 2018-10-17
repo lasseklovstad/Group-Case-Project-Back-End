@@ -1,5 +1,7 @@
 package com.experisproject.experisproject.models.entities;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -7,6 +9,7 @@ import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
+@Data
 public class Association {
 	@Id
 	@GeneratedValue
@@ -21,8 +24,4 @@ public class Association {
 	public Association() {
 	}
 
-	public Association(String name, String description) {
-		this.name = name;
-		this.description = description;
-	}
 }

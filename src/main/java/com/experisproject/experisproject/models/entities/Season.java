@@ -1,5 +1,7 @@
 package com.experisproject.experisproject.models.entities;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,14 +10,15 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Data
 public class Season {
 	@Id
 	@GeneratedValue
 	private int seasonId;
 
+	private String name;
 	private LocalDate startDate;
 	private LocalDate endDate;
-	private String name;
 	private String description;
 
 	@OneToMany(mappedBy = "season")
@@ -24,10 +27,4 @@ public class Season {
 	public Season() {
 	}
 
-	public Season(LocalDate startDate, LocalDate endDate, String name, String description) {
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.name = name;
-		this.description = description;
-	}
 }

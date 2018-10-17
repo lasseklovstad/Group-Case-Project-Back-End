@@ -1,9 +1,12 @@
 package com.experisproject.experisproject.models.entities;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Data
 public class Person {
 	@Id
 	@GeneratedValue
@@ -26,9 +29,12 @@ public class Person {
 	private Owner owner;
 
 	@ManyToOne
-	//@MapsId("addressId")
 	@JoinColumn(name = "addressId") //referencedColumnName =""?
 	private Address address;
+
+	public Person() {
+	}
+
 	//addressId as foreign key, reference address(addressId)
 	//  person_id INT NOT NULL,
 	//  first_name VARCHAR(64) NOT NULL,
@@ -38,12 +44,4 @@ public class Person {
 	//  PRIMARY KEY (person_id),
 	//  FOREIGN KEY (address_id) REFERENCES ADDRESS(address_id)
 
-	public Person() {
-	}
-
-	public Person(String firstName, String lastName, LocalDate dateOfBirth) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.dateOfBirth = dateOfBirth;
-	}
 }

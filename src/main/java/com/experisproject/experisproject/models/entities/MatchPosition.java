@@ -1,10 +1,12 @@
 package com.experisproject.experisproject.models.entities;
 
 import com.experisproject.experisproject.models.helpClasses.MatchPositionId;
+import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
+@Data
 @IdClass(MatchPositionId.class)
 public class MatchPosition {
 
@@ -20,6 +22,8 @@ public class MatchPosition {
 	@JoinColumn(name = "playerId")
 	private Player player;
 
+	public MatchPosition() {
+	}
 
 	//  position VARCHAR(64),
 	//  player_id INT NOT NULL,
@@ -27,6 +31,4 @@ public class MatchPosition {
 	//  PRIMARY KEY (player_id, match_id),
 	//  FOREIGN KEY (player_id) REFERENCES PLAYER(player_id),
 	//  FOREIGN KEY (match_id) REFERENCES MATCH(match_id)
-
-
 }

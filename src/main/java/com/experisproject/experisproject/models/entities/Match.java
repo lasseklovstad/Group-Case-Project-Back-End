@@ -1,10 +1,13 @@
 package com.experisproject.experisproject.models.entities;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Data
 public class Match {
 	@Id
 	@GeneratedValue
@@ -37,7 +40,15 @@ public class Match {
 	@OneToMany(mappedBy = "match")
 	private List<Team> teams;
 
-    //  season_id INT NOT NULL,
+	public Match() {
+
+	}
+
+	public int getMatchId() {
+		return matchId;
+	}
+
+	//  season_id INT NOT NULL,
 	//  location_id INT NOT NULL,
 	//  home_team_id INT NOT NULL,
 	//  away_team_id INT NOT NULL,
@@ -47,16 +58,4 @@ public class Match {
 	//  FOREIGN KEY (home_team_id) REFERENCES TEAM(team_id),
 	//  FOREIGN KEY (away_team_id) REFERENCES TEAM(team_id)
 
-
-	public Match(LocalDate matchDate) {
-		this.matchDate = matchDate;
-	}
-
-	public Match() {
-
-	}
-
-	public int getMatchId() {
-		return matchId;
-	}
 }

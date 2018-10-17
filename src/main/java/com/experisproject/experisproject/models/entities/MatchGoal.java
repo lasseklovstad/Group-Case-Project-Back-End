@@ -1,8 +1,11 @@
 package com.experisproject.experisproject.models.entities;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
+@Data
 public class MatchGoal {
 	@Id
 	@GeneratedValue
@@ -21,7 +24,10 @@ public class MatchGoal {
 	@JoinColumn(name = "playerId")
 	private Player player;
 
-    // goal_id INT NOT NULL,
+	public MatchGoal() {
+	}
+
+	// goal_id INT NOT NULL,
 	//  description VARCHAR(64),
 	//  goal_type_id INT NOT NULL,
 	//  match_id INT NOT NULL,

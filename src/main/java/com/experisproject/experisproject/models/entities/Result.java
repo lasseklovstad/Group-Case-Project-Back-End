@@ -1,10 +1,12 @@
 package com.experisproject.experisproject.models.entities;
 
 import com.experisproject.experisproject.models.helpClasses.ResultId;
+import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
+@Data
 @IdClass(ResultId.class)
 public class Result {
 
@@ -21,6 +23,9 @@ public class Result {
 	@JoinColumn(name = "teamId")
 	private Team team;
 
+	public Result() {
+	}
+
 	//  score INT NOT NULL,
 	//  result VARCHAR(4) NOT NULL,
 	//  match_id INT NOT NULL,
@@ -28,6 +33,5 @@ public class Result {
 	//  PRIMARY KEY (match_id), skal den ikke også ha team_id? tenker mer!
 	//  FOREIGN KEY (match_id) REFERENCES MATCH(match_id),
 	//  FOREIGN KEY (team_id) REFERENCES TEAM(team_id)
-
 
 }

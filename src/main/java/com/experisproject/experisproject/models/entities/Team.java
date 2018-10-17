@@ -1,16 +1,19 @@
 package com.experisproject.experisproject.models.entities;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Data
 public class Team {
 	@Id
 	@GeneratedValue
 	private int teamId;
 
 	@OneToMany(mappedBy = "team")
-	private List<Player> player;
+	private List<Player> players;
 
 	@ManyToOne
 	@JoinColumn(name = "associationId")
@@ -31,6 +34,13 @@ public class Team {
 	@JoinColumn(name = "locationId")
 	private Location location;
 
+	public Team() {
+	}
+
+	public int getTeamId() {
+		return teamId;
+	}
+
 	//  owner_id INT NOT NULL,
 	//  association_id INT NOT NULL,
 	//  coach_id INT NOT NULL,
@@ -41,11 +51,4 @@ public class Team {
 	//  FOREIGN KEY (coach_id) REFERENCES COACH(coach_id),
 	//  FOREIGN KEY (location_id) REFERENCES LOCATION(location_id)
 
-
-	public Team() {
-	}
-
-	public int getTeamId() {
-		return teamId;
-	}
 }

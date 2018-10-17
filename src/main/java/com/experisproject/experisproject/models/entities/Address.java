@@ -28,11 +28,4 @@ public class Address {
 	public Address() {
 	}
 
-	public Address(String addressLine1, String addressLine2, String addressLine3, int postalCode, String country) {
-		this.addressLine1 = addressLine1;
-		this.addressLine2 = addressLine2;
-		this.addressLine3 = addressLine3;
-		this.postalCode = postalCode;
-		this.country = country;
-	}
 }
