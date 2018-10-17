@@ -1,8 +1,7 @@
 package com.experisproject.experisproject.models.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Player {
@@ -14,6 +13,19 @@ public class Player {
 	private String number;
 
 
+	@OneToOne
+	@JoinColumn(name = "personId")
+	private Person person;
+
+	@ManyToOne
+	@JoinColumn(name = "teamId")
+	private Team team;
+
+	@OneToOne(mappedBy = "player")
+	private MatchPosition matchposition;
+
+	@OneToMany(mappedBy = "player")
+	private List<MatchGoal> matchGoals;
 
 //  player_id INT NOT NULL,
 //  normal_position VARCHAR(64),
@@ -31,5 +43,9 @@ public class Player {
 	public Player(String normalPosition, String number) {
 		this.normalPosition = normalPosition;
 		this.number = number;
+	}
+
+	public int getPlayerId() {
+		return playerId;
 	}
 }

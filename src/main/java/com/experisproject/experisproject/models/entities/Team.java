@@ -1,14 +1,35 @@
 package com.experisproject.experisproject.models.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Team {
 	@Id
 	@GeneratedValue
 	private int teamId;
+
+	@OneToMany(mappedBy = "team")
+	private List<Player> player;
+
+	@ManyToOne
+	@JoinColumn(name = "associationId")
+	private Association association;
+
+	@OneToMany(mappedBy = "team")
+	private List<Match> matches; //check relation to Match (home and away team)
+
+	@OneToOne
+	@JoinColumn(name = "ownerId")
+	private Owner owner;
+
+	@OneToOne
+	@JoinColumn(name = "coachId")
+	private Coach coach;
+
+	@OneToOne
+	@JoinColumn(name = "locationId")
+	private Location location;
 
 	//  owner_id INT NOT NULL,
 	//  association_id INT NOT NULL,
@@ -22,5 +43,9 @@ public class Team {
 
 
 	public Team() {
+	}
+
+	public int getTeamId() {
+		return teamId;
 	}
 }

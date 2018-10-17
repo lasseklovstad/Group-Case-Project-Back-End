@@ -2,9 +2,8 @@ package com.experisproject.experisproject.models.entities;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,6 +17,13 @@ public class Address {
 	private String addressLine3;
 	private int postalCode;
 	private String country;
+
+
+	@OneToMany(mappedBy = "address")
+	private List<Person> persons; //Set<Person> persons = new Hashmap
+
+	@OneToOne(mappedBy = "address")
+	private Location location;
 
 	public Address() {
 	}
