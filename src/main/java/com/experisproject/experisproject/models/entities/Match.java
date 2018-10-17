@@ -28,17 +28,11 @@ public class Match {
 	private Team homeTeam;
 
 	@ManyToOne
-	@JoinColumn(name = "teamId")
+	@JoinColumn(name = "teamId", updatable = false, insertable = false)
 	private Team awayTeam;
 
 	@OneToMany(mappedBy = "match")
 	private List<MatchPosition> matchpositions;
-
-	@OneToMany(mappedBy = "match")
-	private List<Match> matches;
-
-	@OneToMany(mappedBy = "match")
-	private List<Team> teams;
 
 	public Match() {
 
@@ -54,8 +48,9 @@ public class Match {
 	//  away_team_id INT NOT NULL,
 	//  PRIMARY KEY (match_id),
 	//  FOREIGN KEY (season_id) REFERENCES SEASON(season_id),
-	//  FOREIGN KEY (location_id) REFERENCES LOCATION(location_id),
 	//  FOREIGN KEY (home_team_id) REFERENCES TEAM(team_id),
 	//  FOREIGN KEY (away_team_id) REFERENCES TEAM(team_id)
+	//  FOREIGN KEY (location_id) REFERENCES LOCATION(location_id),
+
 
 }

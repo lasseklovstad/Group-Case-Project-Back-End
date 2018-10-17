@@ -3,7 +3,9 @@ package com.experisproject.experisproject.models.helpClasses;
 import com.experisproject.experisproject.models.entities.Match;
 import com.experisproject.experisproject.models.entities.Team;
 
-public class ResultId {
+import java.io.Serializable;
+
+public class ResultId implements Serializable {
 	private int matchId;
 	private int teamId;
 

@@ -12,11 +12,11 @@ import javax.persistence.OneToOne;
 public class GoalType {
 	@Id
 	@GeneratedValue
-	private Long goalTypeId;
+	private int goalTypeId;
 
 	private String type;
 
-	@OneToOne(mappedBy = "goaltype")
+	@OneToOne(mappedBy = "goalType")
 	private MatchGoal matchGoal;
 
 

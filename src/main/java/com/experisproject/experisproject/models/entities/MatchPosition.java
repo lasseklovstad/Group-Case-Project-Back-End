@@ -15,11 +15,11 @@ public class MatchPosition {
 	private String position;
 
 	@ManyToOne
-	@JoinColumn(name = "matchId")
+	@JoinColumn(name = "matchId", updatable = false, insertable = false)
 	private Match match;
 
 	@OneToOne
-	@JoinColumn(name = "playerId")
+	@JoinColumn(name = "playerId", updatable = false, insertable = false)
 	private Player player;
 
 	public MatchPosition() {

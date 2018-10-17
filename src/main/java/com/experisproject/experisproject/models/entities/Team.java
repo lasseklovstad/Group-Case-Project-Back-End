@@ -19,8 +19,11 @@ public class Team {
 	@JoinColumn(name = "associationId")
 	private Association association;
 
-	@OneToMany(mappedBy = "team")
-	private List<Match> matches; //check relation to Match (home and away team)
+	@OneToMany(mappedBy = "homeTeam")
+	private List<Match> homeMatches;
+
+	@OneToMany(mappedBy = "awayTeam")
+	private List<Match> awayMatches;
 
 	@OneToOne
 	@JoinColumn(name = "ownerId")
