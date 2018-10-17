@@ -8,7 +8,7 @@ import javax.persistence.*;
 @IdClass(MatchPositionId.class)
 public class MatchPosition {
 
-	@Id private int playerId; //maybe need to get from approprate class as well?????
+	@Id private int playerId; //maybe need to get from appropriate class as well?????
 	@Id private int matchId; // google on how to set primary keys from other classes
 	private String position;
 
