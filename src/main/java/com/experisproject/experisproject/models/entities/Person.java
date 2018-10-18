@@ -16,21 +16,22 @@ public class Person {
 	private String lastName;
 	private LocalDate dateOfBirth;
 
-	@OneToOne(mappedBy ="person", cascade = CascadeType.ALL)//if a person is deleted and is a coach, no longer a coach
-	private Coach coach;
-
-	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL) //if a person is deleted and is a player, no longer a player
-	private Player player;
-
-	@OneToOne(mappedBy = "person")
-	private Contact contact;
-
-	@OneToOne(mappedBy = "person")
-	private Owner owner;
-
 	@ManyToOne
 	@JoinColumn(name = "addressId") //referencedColumnName =""?
 	private Address address;
+
+	/*  Unnecessary for now to map the entities bidirectional
+	@OneToOne(mappedBy ="person", cascade = CascadeType.ALL)//if a person is deleted and is a coach, no longer a coach
+	private Coach coach;
+	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL) //if a person is deleted and is a player, no longer a player
+	private Player player;
+	@OneToOne(mappedBy = "person")
+	private Contact contact;
+	@OneToOne(mappedBy = "person")
+	private Owner owner;
+	*/
+
+
 
 	public Person() {
 	}

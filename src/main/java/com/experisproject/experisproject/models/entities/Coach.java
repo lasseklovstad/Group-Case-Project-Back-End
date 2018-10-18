@@ -12,12 +12,12 @@ public class Coach {
 	private int coachId;
 
 	@OneToOne
-	//@MapsId("personID") //smør på flesk?
 	@JoinColumn(name = "personId")
 	private Person person;
 
+	/*  Unnecessary for now to map the entities bidirectional
 	@OneToOne(mappedBy = "coach")
-	private Team team;
+	private Team team;*/
 
 	public Coach() {
 	}

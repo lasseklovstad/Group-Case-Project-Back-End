@@ -10,6 +10,7 @@ public class MatchPositionId implements Serializable {
 	private int playerId;
 
 	public MatchPositionId() {
+		//joincolumns??
 		FootballMatch footballMatch = new FootballMatch();
 		Player player = new Player();
 		this.matchId = footballMatch.getFootballMatchId();

@@ -11,22 +11,25 @@ public class Player {
 	@Id
 	@GeneratedValue
 	private int playerId;
-	@OneToOne
-	@JoinColumn(name = "personId")
-	private Person person;
 
 	private String number;
 	private String normalPosition;
+
+	@OneToOne
+	@JoinColumn(name = "personId")
+	private Person person;
 
 	@ManyToOne
 	@JoinColumn(name = "teamId")
 	private Team team;
 
+	/*  Unnecessary for now to map the entities bidirectional
 	@OneToOne(mappedBy = "player")
 	private MatchPosition matchposition;
 
 	@OneToMany(mappedBy = "player")
 	private List<MatchGoal> matchGoals;
+	*/
 
 	public Player() {
 	}

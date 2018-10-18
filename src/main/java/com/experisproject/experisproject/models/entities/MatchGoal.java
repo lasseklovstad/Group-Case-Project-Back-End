@@ -10,6 +10,7 @@ public class MatchGoal {
 	@Id
 	@GeneratedValue
 	private int matchGoalId;
+
 	private String description;
 
 	@OneToOne
@@ -17,7 +18,7 @@ public class MatchGoal {
 	private GoalType goalType;
 
 	@ManyToOne
-	@JoinColumn(name = "matchId")
+	@JoinColumn(name = "footballMatchId")
 	private FootballMatch footballMatch;
 
 	@ManyToOne

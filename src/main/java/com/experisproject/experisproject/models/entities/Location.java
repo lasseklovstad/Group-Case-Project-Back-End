@@ -19,11 +19,13 @@ public class Location {
 	@JoinColumn(name = "addressId")
 	private Address address;
 
+	/*  Unnecessary for now to map the entities bidirectional
 	@OneToMany(mappedBy = "location")
 	private List<FootballMatch> footballMatches;
 
 	@OneToOne(mappedBy = "location")
 	private Team team;
+	*/
 
 	public Location() {
 	}

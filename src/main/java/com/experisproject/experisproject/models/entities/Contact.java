@@ -15,7 +15,7 @@ public class Contact {
 	private String contactDetail;
 
 	@OneToOne
-	@JoinColumn(name = "contactId")
+	@JoinColumn(name = "personId")
 	private Person person;
 
 	public Contact() {

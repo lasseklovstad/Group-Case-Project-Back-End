@@ -12,18 +12,12 @@ public class Team {
 	@GeneratedValue
 	private int teamId;
 
-	@OneToMany(mappedBy = "team")
-	private List<Player> players;
+	@Column(unique = true)
+	private String name;
 
 	@ManyToOne
 	@JoinColumn(name = "associationId")
 	private Association association;
-
-	@OneToMany(mappedBy = "homeTeam")
-	private List<FootballMatch> homeFootballMatches;
-
-	@OneToMany(mappedBy = "awayTeam")
-	private List<FootballMatch> awayFootballMatches;
 
 	@OneToOne
 	@JoinColumn(name = "ownerId")
@@ -36,6 +30,15 @@ public class Team {
 	@OneToOne
 	@JoinColumn(name = "locationId")
 	private Location location;
+
+	/*  Unnecessary for now to map the entities bidirectional
+	@OneToMany(mappedBy = "team")
+	private List<Player> players;
+	@OneToMany(mappedBy = "homeTeam")
+	private List<FootballMatch> homeFootballMatches;
+	@OneToMany(mappedBy = "awayTeam")
+	private List<FootballMatch> awayFootballMatches;
+	*/
 
 	public Team() {
 	}

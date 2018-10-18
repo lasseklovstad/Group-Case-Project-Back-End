@@ -15,8 +15,10 @@ public class Owner {
 	@JoinColumn(name = "personId")
 	private Person person;
 
+	/* Unnecessary for now to map the entities bidirectional
 	@OneToOne(mappedBy = "owner", cascade = CascadeType.ALL)//doesnt exist without owner
 	private Team team;
+	*/
 
 	public Owner() {
 	}

@@ -31,9 +31,10 @@ public class FootballMatch {
 	@JoinColumn(name = "teamId", updatable = false, insertable = false)
 	private Team awayTeam;
 
+	/*  Unnecessary for now to map the entities bidirectional
 	@OneToMany(mappedBy = "footballMatch")
 	private List<MatchPosition> matchpositions;
-
+	*/
 	public FootballMatch() {
 
 	}

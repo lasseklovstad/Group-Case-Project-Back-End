@@ -16,9 +16,10 @@ public class GoalType {
 
 	private String type;
 
+	/*  Unnecessary for now to map the entities bidirectional
 	@OneToOne(mappedBy = "goalType")
 	private MatchGoal matchGoal;
-
+	*/
 
 	public GoalType() {
 	}
