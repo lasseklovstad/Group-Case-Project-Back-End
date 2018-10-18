@@ -20,5 +20,8 @@ public class TeamService {
         teamRepository.save(team);
     }
 
+    public Team findById(int id){
+        return teamRepository.findById(id).get();
+    }
 
 }
