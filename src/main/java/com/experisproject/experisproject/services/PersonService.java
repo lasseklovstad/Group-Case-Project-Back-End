@@ -1,6 +1,6 @@
 package com.experisproject.experisproject.services;
 
-import com.experisproject.experisproject.models.entities.PersonTest;
+import com.experisproject.experisproject.models.entities.Person;
 import com.experisproject.experisproject.models.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -24,14 +24,20 @@ public class PersonService implements CommandLineRunner {
 
     }
 
-    public List<PersonTest> getAll(){
-        Iterable<PersonTest> persons = this.repository.findAll();
-        List<PersonTest> result = new ArrayList<>();
-        for (PersonTest person : persons) {
+    public List<Person> findAll(){
+        Iterable<Person> persons = this.repository.findAll();
+        List<Person> result = new ArrayList<>();
+
+        for (Person person : persons) {
             result.add(person);
         }
 
         return result;
     }
-
+    public Person findById(Long id){
+        return repository.findById(id).get();
+    }
+    public void save(Person person){
+        repository.save(person);
+    }
 }
