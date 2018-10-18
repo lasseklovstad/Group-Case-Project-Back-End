@@ -3,8 +3,12 @@ package com.experisproject.experisproject.models.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -13,34 +17,40 @@ public class FootballMatch {
 	@GeneratedValue
 	private int footballMatchId;
 
-	private LocalDate matchDate;
+	@NotNull private LocalDate matchDate;
 
 	@ManyToOne
 	@JoinColumn(name = "seasonId")
-	private Season season;
+	@NotNull private Season season;
 
 	@ManyToOne
 	@JoinColumn(name = "locationId")
-	private Location location;
+	@NotNull private Location location;
 
 	@ManyToOne
 	@JoinColumn(name = "teamId")
-	private Team homeTeam;
+	@NotNull private Team homeTeam;
 
 	@ManyToOne
 	@JoinColumn(name = "teamId", updatable = false, insertable = false)
-	private Team awayTeam;
+	@NotNull private Team awayTeam;
 
-	/*  Unnecessary for now to map the entities bidirectional
-	@OneToMany(mappedBy = "footballMatch")
-	private List<MatchPosition> matchpositions;
-	*/
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable( name = "matchPosition",
+			joinColumns = {@JoinColumn(name = "footballMatchId")},
+			inverseJoinColumns = {@JoinColumn(name = "playerId")}
+	)
+	private Set<Player> players = new HashSet<>();
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable( name = "result",
+			joinColumns = {@JoinColumn(name = "footballMatchId")},
+			inverseJoinColumns = {@JoinColumn(name = "teamId")}
+	)
+	private Set<Team> teams = new HashSet<>();
+
 	public FootballMatch() {
 
-	}
-
-	public int getFootballMatchId() {
-		return footballMatchId;
 	}
 
 	//  season_id INT NOT NULL,

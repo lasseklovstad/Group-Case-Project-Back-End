@@ -3,6 +3,7 @@ package com.experisproject.experisproject.models.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -12,9 +13,9 @@ public class Person {
 	@GeneratedValue
 	private int personId;
 
-	private String firstName;
-	private String lastName;
-	private LocalDate dateOfBirth;
+	@NotNull private String firstName;
+	@NotNull private String lastName;
+	@NotNull private LocalDate dateOfBirth;
 
 	@ManyToOne
 	@JoinColumn(name = "addressId") //referencedColumnName =""?
@@ -31,9 +32,14 @@ public class Person {
 	private Owner owner;
 	*/
 
-
-
 	public Person() {
+	}
+
+	public Person(@NotNull String firstName, @NotNull String lastName, @NotNull LocalDate dateOfBirth, Address address) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
+		this.address = address;
 	}
 
 	//addressId as foreign key, reference address(addressId)

@@ -3,6 +3,7 @@ package com.experisproject.experisproject.models.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -13,23 +14,23 @@ public class Team {
 	private int teamId;
 
 	@Column(unique = true)
-	private String name;
+	@NotNull private String name;
 
 	@ManyToOne
 	@JoinColumn(name = "associationId")
-	private Association association;
+	@NotNull private Association association;
 
 	@OneToOne
 	@JoinColumn(name = "ownerId")
-	private Owner owner;
+	@NotNull private Owner owner;
 
 	@OneToOne
 	@JoinColumn(name = "coachId")
-	private Coach coach;
+	@NotNull private Coach coach;
 
 	@OneToOne
 	@JoinColumn(name = "locationId")
-	private Location location;
+	@NotNull private Location location;
 
 	/*  Unnecessary for now to map the entities bidirectional
 	@OneToMany(mappedBy = "team")
@@ -43,8 +44,12 @@ public class Team {
 	public Team() {
 	}
 
-	public int getTeamId() {
-		return teamId;
+	public Team(@NotNull String name, @NotNull Association association, @NotNull Owner owner, @NotNull Coach coach, @NotNull Location location) {
+		this.name = name;
+		this.association = association;
+		this.owner = owner;
+		this.coach = coach;
+		this.location = location;
 	}
 
 	//  owner_id INT NOT NULL,

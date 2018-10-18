@@ -3,6 +3,7 @@ package com.experisproject.experisproject.models.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -13,7 +14,7 @@ public class Coach {
 
 	@OneToOne
 	@JoinColumn(name = "personId")
-	private Person person;
+	@NotNull private Person person;
 
 	/*  Unnecessary for now to map the entities bidirectional
 	@OneToOne(mappedBy = "coach")
@@ -22,6 +23,9 @@ public class Coach {
 	public Coach() {
 	}
 
+	public Coach(@NotNull Person person) {
+		this.person = person;
+	}
 	//personId as foreign key, references Person(personId)
 	//  coach_id INT NOT NULL,
 	//  person_id INT NOT NULL,

@@ -3,7 +3,11 @@ package com.experisproject.experisproject.models.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -17,16 +21,18 @@ public class Player {
 
 	@OneToOne
 	@JoinColumn(name = "personId")
-	private Person person;
+	@NotNull private Person person;
 
 	@ManyToOne
 	@JoinColumn(name = "teamId")
-	private Team team;
+	@NotNull private Team team;
 
+	@ManyToMany(mappedBy = "players")
+	private Set<FootballMatch> footballPosMatches = new HashSet<>();
+
+	@ManyToMany(mappedBy = "teams")
+	private Set<FootballMatch> footballResMatches = new HashSet<>();
 	/*  Unnecessary for now to map the entities bidirectional
-	@OneToOne(mappedBy = "player")
-	private MatchPosition matchposition;
-
 	@OneToMany(mappedBy = "player")
 	private List<MatchGoal> matchGoals;
 	*/
@@ -34,8 +40,11 @@ public class Player {
 	public Player() {
 	}
 
-	public int getPlayerId() {
-		return playerId;
+	public Player(String number, String normalPosition, @NotNull Person person, @NotNull Team team) {
+		this.number = number;
+		this.normalPosition = normalPosition;
+		this.person = person;
+		this.team = team;
 	}
 
 	//  player_id INT NOT NULL,

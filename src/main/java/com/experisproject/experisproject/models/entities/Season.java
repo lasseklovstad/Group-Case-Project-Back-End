@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,9 +17,9 @@ public class Season {
 	@GeneratedValue
 	private int seasonId;
 
-	private String name;
-	private LocalDate startDate;
-	private LocalDate endDate;
+	@NotNull private String name;
+	@NotNull private LocalDate startDate;
+	@NotNull private LocalDate endDate;
 	private String description;
 
 	/*  Unnecessary for now to map the entitities bidirectional
@@ -29,4 +30,10 @@ public class Season {
 	public Season() {
 	}
 
+	public Season(@NotNull String name, @NotNull LocalDate startDate, @NotNull LocalDate endDate, String description) {
+		this.name = name;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.description = description;
+	}
 }

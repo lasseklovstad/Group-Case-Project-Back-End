@@ -3,6 +3,7 @@ package com.experisproject.experisproject.models.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -13,8 +14,8 @@ public class Association {
 	private int associationId;
 
 	@Column(unique = true)
-	private String name;
-	private String description;
+	@NotNull private String name;
+	@NotNull private String description;
 
 	/*  Unnecessary for now to map the entities bidirectional
 	@OneToMany(mappedBy = "association")
@@ -23,4 +24,8 @@ public class Association {
 	public Association() {
 	}
 
+	public Association(@NotNull String name, @NotNull String description) {
+		this.name = name;
+		this.description = description;
+	}
 }
