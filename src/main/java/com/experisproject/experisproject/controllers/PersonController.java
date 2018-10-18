@@ -21,7 +21,7 @@ public class PersonController {
     private PersonService personService;
 
     @RequestMapping(value="/all" , method=RequestMethod.GET)
-    public List<Person> getall(){
+    public List<Person> getAll(){
         List<Person> personList = personService.findAll();
         return personList;
     }

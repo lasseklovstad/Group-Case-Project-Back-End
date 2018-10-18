@@ -14,9 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+
 
 @RestController
 @RequestMapping(value="/api/player")
@@ -33,7 +31,7 @@ public class PlayerController {
     private TeamService teamService;
 
     @RequestMapping(value="/all" , method=RequestMethod.GET)
-    public void getall(){
+    public void getAll(){
 
     }
 
