@@ -8,6 +8,7 @@ import com.experisproject.experisproject.models.forms.PlayerForm;
 import com.experisproject.experisproject.services.AddressService;
 import com.experisproject.experisproject.services.PersonService;
 import com.experisproject.experisproject.services.PlayerService;
+import com.experisproject.experisproject.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,8 @@ public class PlayerController {
     private PlayerService playerService;
     @Autowired
     private AddressService addressService;
+    @Autowired
+    private TeamService teamService;
 
     @RequestMapping(value="/all" , method=RequestMethod.GET)
     public void getall(){
@@ -51,6 +54,7 @@ public class PlayerController {
         Team team = new Team();
         Player player = new Player(form.getNumber(),form.getNormalPosition(),person,team,null);
 
+        teamService.save(team);
         addressService.save(address);
         personService.save(person);
         playerService.save(player);
