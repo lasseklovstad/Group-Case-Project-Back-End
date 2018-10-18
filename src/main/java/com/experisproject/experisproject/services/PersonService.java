@@ -34,7 +34,7 @@ public class PersonService implements CommandLineRunner {
 
         return result;
     }
-    public Person findById(Long id){
+    public Person findById(int id){
         return repository.findById(id).get();
     }
     public void save(Person person){

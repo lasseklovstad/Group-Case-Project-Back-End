@@ -13,7 +13,7 @@ public class CorsConfig {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/person").allowedOrigins("http://experis-fotball-manager.herokuapp.com");
+                registry.addMapping("/api/**").allowedOrigins("*");
                 //registry.addMapping("/api/person").allowedOrigins("http://localhost:3000");
             }
         };

@@ -24,7 +24,7 @@ public class PersonController {
     }
 
     @RequestMapping(value="/{id}" , method=RequestMethod.GET)
-    public Person getById(@PathVariable Long id){
+    public Person getById(@PathVariable int id){
         return personService.findById(id);
     }
 
