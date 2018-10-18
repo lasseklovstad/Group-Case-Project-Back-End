@@ -4,11 +4,13 @@ import com.experisproject.experisproject.models.entities.Person;
 import com.experisproject.experisproject.models.entities.Player;
 import com.experisproject.experisproject.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value="/api/player")
@@ -29,7 +31,10 @@ public class PlayerController {
     }
 
     @RequestMapping(value = "/" , method = RequestMethod.POST)
-    public void create(){
+    @ResponseStatus(HttpStatus.OK)
+    public void create(
+            @RequestBody Map<String, Object> form
+    ){
 
 
         //playerService.save(person);
