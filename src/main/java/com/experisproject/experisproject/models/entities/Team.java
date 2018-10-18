@@ -16,23 +16,28 @@ public class Team {
 	private int teamId;
 
 	@Column(unique = true)
-	@NotNull private String name;
+	@NotNull
+	private String name;
 
 	@ManyToOne
 	@JoinColumn(name = "associationId")
-	@NotNull private Association association;
+	@NotNull
+	private Association association;
 
 	@OneToOne
 	@JoinColumn(name = "ownerId")
-	@NotNull private Owner owner;
+	@NotNull
+	private Owner owner;
 
 	@OneToOne
 	@JoinColumn(name = "coachId")
-	@NotNull private Coach coach;
+	@NotNull
+	private Coach coach;
 
 	@OneToOne
 	@JoinColumn(name = "locationId")
-	@NotNull private Location location;
+	@NotNull
+	private Location location;
 
 	@ManyToMany(mappedBy = "teams") //NotNull annotation???
 	private Set<FootballMatch> footballMatches = new HashSet<>();

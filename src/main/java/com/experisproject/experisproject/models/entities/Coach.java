@@ -14,7 +14,8 @@ public class Coach {
 
 	@OneToOne
 	@JoinColumn(name = "personId")
-	@NotNull private Person person;
+	@NotNull
+	private Person person;
 
 	/*  Unnecessary for now to map the entities bidirectional
 	@OneToOne(mappedBy = "coach")

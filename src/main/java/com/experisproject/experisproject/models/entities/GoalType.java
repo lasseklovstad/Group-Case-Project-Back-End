@@ -15,7 +15,8 @@ public class GoalType {
 	@GeneratedValue
 	private int goalTypeId;
 
-	@NotNull private String type;
+	@NotNull
+	private String type;
 
 	/*  Unnecessary for now to map the entities bidirectional
 	@OneToOne(mappedBy = "goalType")

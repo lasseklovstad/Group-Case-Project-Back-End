@@ -13,9 +13,12 @@ public class Person {
 	@GeneratedValue
 	private int personId;
 
-	@NotNull private String firstName;
-	@NotNull private String lastName;
-	@NotNull private LocalDate dateOfBirth;
+	@NotNull
+	private String firstName;
+	@NotNull
+	private String lastName;
+	@NotNull
+	private LocalDate dateOfBirth;
 
 	@ManyToOne
 	@JoinColumn(name = "addressId") //referencedColumnName =""?

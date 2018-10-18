@@ -16,15 +16,18 @@ public class MatchGoal {
 
 	@OneToOne
 	@JoinColumn(name = "goalTypeId")
-	@NotNull private GoalType goalType;
+	@NotNull
+	private GoalType goalType;
 
 	@ManyToOne
 	@JoinColumn(name = "footballMatchId")
-	@NotNull private FootballMatch footballMatch;
+	@NotNull
+	private FootballMatch footballMatch;
 
 	@ManyToOne
 	@JoinColumn(name = "playerId")
-	@NotNull private Player player;
+	@NotNull
+	private Player player;
 
 	public MatchGoal() {
 	}

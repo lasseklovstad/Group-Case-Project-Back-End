@@ -13,12 +13,16 @@ public class Address {
 	@GeneratedValue
 	private int addressId;
 
-	@NotNull private String addressLine1;
+	@NotNull
+	private String addressLine1;
 	private String addressLine2;
 	private String addressLine3;
-	@NotNull private String city;
-	@NotNull private String postalCode;
-	@NotNull private String country;
+	@NotNull
+	private String city;
+	@NotNull
+	private String postalCode;
+	@NotNull
+	private String country;
 
 	/* Unnecessary for now to map the entities bidirectional
 	@OneToMany(mappedBy = "address")

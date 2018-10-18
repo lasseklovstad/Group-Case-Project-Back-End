@@ -13,12 +13,14 @@ public class Location {
 	@GeneratedValue
 	private Long locationId;
 
-	@NotNull private String name;
+	@NotNull
+	private String name;
 	private String description;
 
 	@OneToOne
 	@JoinColumn(name = "addressId")
-	@NotNull private Address address;
+	@NotNull
+	private Address address;
 
 	/*  Unnecessary for now to map the entities bidirectional
 	@OneToMany(mappedBy = "location")

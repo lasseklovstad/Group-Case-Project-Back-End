@@ -17,33 +17,38 @@ public class FootballMatch {
 	@GeneratedValue
 	private int footballMatchId;
 
-	@NotNull private LocalDate matchDate;
+	@NotNull
+	private LocalDate matchDate;
 
 	@ManyToOne
 	@JoinColumn(name = "seasonId")
-	@NotNull private Season season;
+	@NotNull
+	private Season season;
 
 	@ManyToOne
 	@JoinColumn(name = "locationId")
-	@NotNull private Location location;
+	@NotNull
+	private Location location;
 
 	@ManyToOne
 	@JoinColumn(name = "teamId")
-	@NotNull private Team homeTeam;
+	@NotNull
+	private Team homeTeam;
 
 	@ManyToOne
 	@JoinColumn(name = "teamId", updatable = false, insertable = false)
-	@NotNull private Team awayTeam;
+	@NotNull
+	private Team awayTeam;
 
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable( name = "matchPosition",
+	@JoinTable(name = "matchPosition",
 			joinColumns = {@JoinColumn(name = "footballMatchId")},
 			inverseJoinColumns = {@JoinColumn(name = "playerId")}
 	)
 	private Set<Player> players = new HashSet<>(); //NotNull annotation?
 
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable( name = "result",
+	@JoinTable(name = "result",
 			joinColumns = {@JoinColumn(name = "footballMatchId")},
 			inverseJoinColumns = {@JoinColumn(name = "teamId")}
 	)

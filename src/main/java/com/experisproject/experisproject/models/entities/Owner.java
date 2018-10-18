@@ -14,7 +14,8 @@ public class Owner {
 
 	@OneToOne
 	@JoinColumn(name = "personId")
-	@NotNull private Person person;
+	@NotNull
+	private Person person;
 
 	/* Unnecessary for now to map the entities bidirectional
 	@OneToOne(mappedBy = "owner", cascade = CascadeType.ALL)//doesnt exist without owner

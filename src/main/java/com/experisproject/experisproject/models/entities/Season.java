@@ -17,9 +17,12 @@ public class Season {
 	@GeneratedValue
 	private int seasonId;
 
-	@NotNull private String name;
-	@NotNull private LocalDate startDate;
-	@NotNull private LocalDate endDate;
+	@NotNull
+	private String name;
+	@NotNull
+	private LocalDate startDate;
+	@NotNull
+	private LocalDate endDate;
 	private String description;
 
 	/*  Unnecessary for now to map the entitities bidirectional

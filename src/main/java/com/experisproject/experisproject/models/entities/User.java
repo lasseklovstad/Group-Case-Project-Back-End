@@ -11,19 +11,19 @@ public class User {
 	@GeneratedValue
 	private int userId;
 
-	@NotNull private String userName;
-	@NotNull private String email;
-	@NotNull private String password;
-	@NotNull private boolean isAdmin;
+	@NotNull
+	private String userName;
+	@NotNull
+	private String email;
+	@NotNull
+	private String password;
+	@NotNull
+	private boolean isAdmin;
 
 	public User(@NotNull String userName, @NotNull String email, @NotNull String password, @NotNull boolean isAdmin) {
 		this.userName = userName;
 		this.email = email;
 		this.password = password;
 		this.isAdmin = isAdmin;
-
-		if (userName.equals("admin")){
-			this.isAdmin = true;
-		}
 	}
 }

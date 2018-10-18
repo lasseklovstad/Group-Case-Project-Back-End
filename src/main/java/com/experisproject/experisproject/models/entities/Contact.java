@@ -12,17 +12,20 @@ public class Contact {
 	@GeneratedValue
 	private int contactId;
 
-	@NotNull private String contactType;
-	@NotNull private String contactDetail;
+	@NotNull
+	private String contactType;
+	@NotNull
+	private String contactDetail;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "personId")
-	@NotNull private Person person;
+	@NotNull
+	private Person person;
 
 	public Contact() {
 	}
 
-	public Contact(@NotNull String contactType, @NotNull String contactDetail,@NotNull Person person) {
+	public Contact(@NotNull String contactType, @NotNull String contactDetail, @NotNull Person person) {
 		this.contactType = contactType;
 		this.contactDetail = contactDetail;
 		this.person = person;

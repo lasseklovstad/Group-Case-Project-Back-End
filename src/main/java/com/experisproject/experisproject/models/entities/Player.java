@@ -19,11 +19,13 @@ public class Player {
 
 	@OneToOne
 	@JoinColumn(name = "personId")
-	@NotNull private Person person;
+	@NotNull
+	private Person person;
 
 	@ManyToOne
 	@JoinColumn(name = "teamId")
-	@NotNull private Team team;
+	@NotNull
+	private Team team;
 
 	@ManyToMany(mappedBy = "players") //NotNull annotation???
 	private Set<FootballMatch> footballMatches = new HashSet<>();

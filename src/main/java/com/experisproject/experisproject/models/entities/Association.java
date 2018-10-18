@@ -14,8 +14,10 @@ public class Association {
 	private int associationId;
 
 	@Column(unique = true)
-	@NotNull private String name;
-	@NotNull private String description;
+	@NotNull
+	private String name;
+	@NotNull
+	private String description;
 
 	/*  Unnecessary for now to map the entities bidirectional
 	@OneToMany(mappedBy = "association")
