@@ -3,6 +3,7 @@ package com.experisproject.experisproject.models.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -12,27 +13,33 @@ public class Person {
 	@GeneratedValue
 	private int personId;
 
-	private String firstName;
-	private String lastName;
-	private LocalDate dateOfBirth;
-
-	@OneToOne(mappedBy ="person", cascade = CascadeType.ALL)//if a person is deleted and is a coach, no longer a coach
-	private Coach coach;
-
-	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL) //if a person is deleted and is a player, no longer a player
-	private Player player;
-
-	@OneToOne(mappedBy = "person")
-	private Contact contact;
-
-	@OneToOne(mappedBy = "person")
-	private Owner owner;
+	@NotNull private String firstName;
+	@NotNull private String lastName;
+	@NotNull private LocalDate dateOfBirth;
 
 	@ManyToOne
 	@JoinColumn(name = "addressId") //referencedColumnName =""?
 	private Address address;
 
+	/*  Unnecessary for now to map the entities bidirectional
+	@OneToOne(mappedBy ="person", cascade = CascadeType.ALL)//if a person is deleted and is a coach, no longer a coach
+	private Coach coach;
+	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL) //if a person is deleted and is a player, no longer a player
+	private Player player;
+	@OneToOne(mappedBy = "person")
+	private Contact contact;
+	@OneToOne(mappedBy = "person")
+	private Owner owner;
+	*/
+
 	public Person() {
+	}
+
+	public Person(@NotNull String firstName, @NotNull String lastName, @NotNull LocalDate dateOfBirth, Address address) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
+		this.address = address;
 	}
 
 	//addressId as foreign key, reference address(addressId)

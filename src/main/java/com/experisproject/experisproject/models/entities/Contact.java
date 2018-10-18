@@ -3,6 +3,7 @@ package com.experisproject.experisproject.models.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -11,14 +12,20 @@ public class Contact {
 	@GeneratedValue
 	private int contactId;
 
-	private String contactType;
-	private String contactDetail;
+	@NotNull private String contactType;
+	@NotNull private String contactDetail;
 
 	@OneToOne
-	@JoinColumn(name = "contactId")
-	private Person person;
+	@JoinColumn(name = "personId")
+	@NotNull private Person person;
 
 	public Contact() {
+	}
+
+	public Contact(@NotNull String contactType, @NotNull String contactDetail,@NotNull Person person) {
+		this.contactType = contactType;
+		this.contactDetail = contactDetail;
+		this.person = person;
 	}
 
 	// FOREIGN KEY (person_id) REFERENCES PERSON(person_id)
@@ -28,5 +35,4 @@ public class Contact {
 	//  person_id INT NOT NULL,
 	//  PRIMARY KEY (contact_id),
 	//  FOREIGN KEY (person_id) REFERENCES PERSON(person_id)
-
 }

@@ -3,7 +3,10 @@ package com.experisproject.experisproject.models.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -12,36 +15,47 @@ public class Team {
 	@GeneratedValue
 	private int teamId;
 
-	@OneToMany(mappedBy = "team")
-	private List<Player> players;
+	@Column(unique = true)
+	@NotNull private String name;
 
 	@ManyToOne
 	@JoinColumn(name = "associationId")
-	private Association association;
-
-	@OneToMany(mappedBy = "homeTeam")
-	private List<FootballMatch> homeFootballMatches;
-
-	@OneToMany(mappedBy = "awayTeam")
-	private List<FootballMatch> awayFootballMatches;
+	@NotNull private Association association;
 
 	@OneToOne
 	@JoinColumn(name = "ownerId")
-	private Owner owner;
+	@NotNull private Owner owner;
 
 	@OneToOne
 	@JoinColumn(name = "coachId")
-	private Coach coach;
+	@NotNull private Coach coach;
 
 	@OneToOne
 	@JoinColumn(name = "locationId")
-	private Location location;
+	@NotNull private Location location;
+
+	@ManyToMany(mappedBy = "teams") //NotNull annotation???
+	private Set<FootballMatch> footballMatches = new HashSet<>();
+
+	/*  Unnecessary for now to map the entities bidirectional
+	@OneToMany(mappedBy = "team")
+	private List<Player> players;
+	@OneToMany(mappedBy = "homeTeam")
+	private List<FootballMatch> homeFootballMatches;
+	@OneToMany(mappedBy = "awayTeam")
+	private List<FootballMatch> awayFootballMatches;
+	*/
 
 	public Team() {
 	}
 
-	public int getTeamId() {
-		return teamId;
+	public Team(@NotNull String name, @NotNull Association association, @NotNull Owner owner, @NotNull Coach coach, @NotNull Location location, Set<FootballMatch> footballMatches) {
+		this.name = name;
+		this.association = association;
+		this.owner = owner;
+		this.coach = coach;
+		this.location = location;
+		this.footballMatches = footballMatches;
 	}
 
 	//  owner_id INT NOT NULL,

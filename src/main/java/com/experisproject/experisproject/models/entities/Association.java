@@ -2,10 +2,8 @@ package com.experisproject.experisproject.models.entities;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -15,13 +13,19 @@ public class Association {
 	@GeneratedValue
 	private int associationId;
 
-	private String name;
-	private String description;
+	@Column(unique = true)
+	@NotNull private String name;
+	@NotNull private String description;
 
+	/*  Unnecessary for now to map the entities bidirectional
 	@OneToMany(mappedBy = "association")
-	private List<Team> teams;
+	private List<Team> teams;*/
 
 	public Association() {
 	}
 
+	public Association(@NotNull String name, @NotNull String description) {
+		this.name = name;
+		this.description = description;
+	}
 }

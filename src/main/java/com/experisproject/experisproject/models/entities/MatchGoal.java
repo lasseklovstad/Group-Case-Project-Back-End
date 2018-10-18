@@ -3,6 +3,7 @@ package com.experisproject.experisproject.models.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -10,21 +11,29 @@ public class MatchGoal {
 	@Id
 	@GeneratedValue
 	private int matchGoalId;
+
 	private String description;
 
 	@OneToOne
 	@JoinColumn(name = "goalTypeId")
-	private GoalType goalType;
+	@NotNull private GoalType goalType;
 
 	@ManyToOne
-	@JoinColumn(name = "matchId")
-	private FootballMatch footballMatch;
+	@JoinColumn(name = "footballMatchId")
+	@NotNull private FootballMatch footballMatch;
 
 	@ManyToOne
 	@JoinColumn(name = "playerId")
-	private Player player;
+	@NotNull private Player player;
 
 	public MatchGoal() {
+	}
+
+	public MatchGoal(String description, @NotNull GoalType goalType, @NotNull FootballMatch footballMatch, @NotNull Player player) {
+		this.description = description;
+		this.goalType = goalType;
+		this.footballMatch = footballMatch;
+		this.player = player;
 	}
 
 	// goal_id INT NOT NULL,
