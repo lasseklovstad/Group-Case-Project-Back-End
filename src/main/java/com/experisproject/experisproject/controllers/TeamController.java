@@ -25,6 +25,8 @@ public class TeamController implements CommandLineRunner {
     PersonService personService;
     @Autowired
     AddressService addressService;
+    @Autowired
+    AssociationService associationService;
 
 
     @Override
@@ -33,7 +35,7 @@ public class TeamController implements CommandLineRunner {
         LocalDate bursdag = LocalDate.of(1992,10,17);
         Address address = new Address("Soleveien 56","","","Sandefjord","3209","Norge");
         Person person = new Person("Karoline","Rykkelid",bursdag,address);
-        associationSer
+        associationService.save(association);
         addressService.save(address);
         personService.save(person);
 
