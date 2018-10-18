@@ -40,17 +40,27 @@ public class FootballMatch {
 			joinColumns = {@JoinColumn(name = "footballMatchId")},
 			inverseJoinColumns = {@JoinColumn(name = "playerId")}
 	)
-	private Set<Player> players = new HashSet<>();
+	private Set<Player> players = new HashSet<>(); //NotNull annotation?
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable( name = "result",
 			joinColumns = {@JoinColumn(name = "footballMatchId")},
 			inverseJoinColumns = {@JoinColumn(name = "teamId")}
 	)
-	private Set<Team> teams = new HashSet<>();
+	private Set<Team> teams = new HashSet<>(); //Not Null annotation?
 
 	public FootballMatch() {
 
+	}
+
+	public FootballMatch(@NotNull LocalDate matchDate, @NotNull Season season, @NotNull Location location, @NotNull Team homeTeam, @NotNull Team awayTeam, Set<Player> players, Set<Team> teams) {
+		this.matchDate = matchDate;
+		this.season = season;
+		this.location = location;
+		this.homeTeam = homeTeam;
+		this.awayTeam = awayTeam;
+		this.players = players;
+		this.teams = teams;
 	}
 
 	//  season_id INT NOT NULL,
@@ -62,6 +72,4 @@ public class FootballMatch {
 	//  FOREIGN KEY (home_team_id) REFERENCES TEAM(team_id),
 	//  FOREIGN KEY (away_team_id) REFERENCES TEAM(team_id)
 	//  FOREIGN KEY (location_id) REFERENCES LOCATION(location_id),
-
-
 }

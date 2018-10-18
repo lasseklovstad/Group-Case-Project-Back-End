@@ -4,9 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,11 +25,9 @@ public class Player {
 	@JoinColumn(name = "teamId")
 	@NotNull private Team team;
 
-	@ManyToMany(mappedBy = "players")
-	private Set<FootballMatch> footballPosMatches = new HashSet<>();
+	@ManyToMany(mappedBy = "players") //NotNull annotation???
+	private Set<FootballMatch> footballMatches = new HashSet<>();
 
-	@ManyToMany(mappedBy = "teams")
-	private Set<FootballMatch> footballResMatches = new HashSet<>();
 	/*  Unnecessary for now to map the entities bidirectional
 	@OneToMany(mappedBy = "player")
 	private List<MatchGoal> matchGoals;
@@ -40,14 +36,15 @@ public class Player {
 	public Player() {
 	}
 
-	public Player(String number, String normalPosition, @NotNull Person person, @NotNull Team team) {
+	public Player(String number, String normalPosition, @NotNull Person person, @NotNull Team team, Set<FootballMatch> footballMatches) {
 		this.number = number;
 		this.normalPosition = normalPosition;
 		this.person = person;
 		this.team = team;
+		this.footballMatches = footballMatches;
 	}
 
-	//  player_id INT NOT NULL,
+//  player_id INT NOT NULL,
 	//  normal_position VARCHAR(64),
 	//  number VARCHAR(8), (int????)
 	//  person_id INT NOT NULL,

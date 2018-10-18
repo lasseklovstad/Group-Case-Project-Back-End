@@ -4,7 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -32,6 +34,9 @@ public class Team {
 	@JoinColumn(name = "locationId")
 	@NotNull private Location location;
 
+	@ManyToMany(mappedBy = "teams") //NotNull annotation???
+	private Set<FootballMatch> footballMatches = new HashSet<>();
+
 	/*  Unnecessary for now to map the entities bidirectional
 	@OneToMany(mappedBy = "team")
 	private List<Player> players;
@@ -44,12 +49,13 @@ public class Team {
 	public Team() {
 	}
 
-	public Team(@NotNull String name, @NotNull Association association, @NotNull Owner owner, @NotNull Coach coach, @NotNull Location location) {
+	public Team(@NotNull String name, @NotNull Association association, @NotNull Owner owner, @NotNull Coach coach, @NotNull Location location, Set<FootballMatch> footballMatches) {
 		this.name = name;
 		this.association = association;
 		this.owner = owner;
 		this.coach = coach;
 		this.location = location;
+		this.footballMatches = footballMatches;
 	}
 
 	//  owner_id INT NOT NULL,
