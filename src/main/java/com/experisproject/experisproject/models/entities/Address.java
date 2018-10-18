@@ -17,7 +17,7 @@ public class Address {
 	private String addressLine2;
 	private String addressLine3;
 	@NotNull private String city;
-	@NotNull private int postalCode;
+	@NotNull private String postalCode;
 	@NotNull private String country;
 
 	/* Unnecessary for now to map the entities bidirectional
@@ -30,7 +30,7 @@ public class Address {
 	public Address() {
 	}
 
-	public Address(@NotNull String addressLine1, String addressLine2, String addressLine3, @NotNull String city, @NotNull int postalCode, @NotNull String country) {
+	public Address(@NotNull String addressLine1, String addressLine2, String addressLine3, @NotNull String city, @NotNull String postalCode, @NotNull String country) {
 		this.addressLine1 = addressLine1;
 		this.addressLine2 = addressLine2;
 		this.addressLine3 = addressLine3;
