@@ -13,7 +13,7 @@ public class UserService {
 	private UserRepository userRepository;
 
 	@Autowired
-	public UserRepository UserService(UserRepository userRepository) {
+	public UserRepository userRepository(UserRepository userRepository) {
 		return this.userRepository = userRepository;
 	}
 
@@ -24,8 +24,11 @@ public class UserService {
 		for (User user : users) {
 			result.add(user);
 		}
-
 		return result;
+	}
+
+	public User findById(int id) {
+		return userRepository.findById(id).get();
 	}
 
 	public void save(User user) {
@@ -35,5 +38,6 @@ public class UserService {
 	public void deleteAll() {
 		userRepository.deleteAll();
 	}
+
 
 }

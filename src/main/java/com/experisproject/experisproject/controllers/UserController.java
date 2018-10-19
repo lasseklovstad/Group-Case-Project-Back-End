@@ -23,7 +23,13 @@ public class UserController {
 		return userList;
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public User getUserById(@PathVariable int id) {
+		return userService.findById(id);
+	}
+
+
+	@RequestMapping(value = "", method = RequestMethod.POST)
 	//@ResponseStatus(code = HttpStatus.OK)
 	public void create(@RequestBody UserForm form, HttpServletResponse response) {
 		if (form.getUserName().equals("admin")) {
@@ -32,10 +38,10 @@ public class UserController {
 			form.setAdmin(false);
 		}
 		User user = new User(form.getUserName(), form.getEmail(), form.getPassword(), form.isAdmin());
+	//	System.out.println(user.toString());
 		userService.save(user);
 		response.setStatus(HttpStatus.OK.value());
 	}
-
 
 	@RequestMapping("*")
 	@ResponseBody

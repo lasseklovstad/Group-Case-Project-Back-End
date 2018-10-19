@@ -17,11 +17,11 @@ public class PersonService implements CommandLineRunner {
 
     private PersonRepository personRepository;
 
+	@Autowired
+	public PersonRepository personRepository(PersonRepository personRepository){
+		return this.personRepository =personRepository;
+	}
 
-    @Autowired
-    public PersonRepository personRepository(PersonRepository personRepository){
-        return this.personRepository =personRepository;
-    }
 
     @Override
     public void run(String... args) throws Exception {
