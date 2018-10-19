@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -22,17 +23,17 @@ public class UserController {
 		return userList;
 	}
 
-	@RequestMapping(method = {RequestMethod.POST, RequestMethod.GET})
-	@ResponseStatus(code = HttpStatus.OK)
-	public void create(@RequestBody UserForm form) {
+	@RequestMapping(method = RequestMethod.POST)
+	//@ResponseStatus(code = HttpStatus.OK)
+	public void create(@RequestBody UserForm form, HttpServletResponse response) {
 		if (form.getUserName().equals("admin")) {
 			form.setAdmin(true);
 		} else {
 			form.setAdmin(false);
 		}
 		User user = new User(form.getUserName(), form.getEmail(), form.getPassword(), form.isAdmin());
-
 		userService.save(user);
+		response.setStatus(HttpStatus.OK.value());
 	}
 
 
