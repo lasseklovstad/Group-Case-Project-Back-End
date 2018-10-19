@@ -2,6 +2,7 @@ package com.experisproject.experisproject.models.entities;
 
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,6 +16,7 @@ public class User {
 	private int userId;
 
 	@NotNull
+	@Column(unique = true)
 	private String userName;
 	@NotNull
 	private String email;
