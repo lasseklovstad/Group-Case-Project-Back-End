@@ -75,7 +75,7 @@ public class LoadDataFromApi {
         Location venue = new Location("Venue",null,locationAddress);
 
         for(PlayerData player:team.getSquad()){
-            
+
         }
 
 
