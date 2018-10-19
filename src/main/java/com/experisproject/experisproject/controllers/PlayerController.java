@@ -34,7 +34,7 @@ public class PlayerController {
 
     @RequestMapping(value="/all" , method=RequestMethod.GET)
     public void getAll(HttpServletRequest req,HttpServletResponse res){
-        
+
     }
 
     @RequestMapping(value="/{id}" , method=RequestMethod.GET)
@@ -43,7 +43,6 @@ public class PlayerController {
     }
 
     @RequestMapping(value = "" , method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
     public void create(
             @RequestBody PlayerForm form,
             HttpServletResponse response
