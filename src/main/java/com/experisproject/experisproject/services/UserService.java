@@ -13,11 +13,11 @@ public class UserService {
 	private UserRepository userRepository;
 
 	@Autowired
-	public UserService(UserRepository userRepository){
-		this.userRepository = userRepository;
+	public UserRepository UserService(UserRepository userRepository) {
+		return this.userRepository = userRepository;
 	}
 
-	public List<User> findAll(){
+	public List<User> findAll() {
 		Iterable<User> users = this.userRepository.findAll();
 		List<User> result = new ArrayList<>();
 
@@ -28,9 +28,12 @@ public class UserService {
 		return result;
 	}
 
-	public void save(User user){
+	public void save(User user) {
 		userRepository.save(user);
 	}
-	public void deleteAll(){userRepository.deleteAll();}
+
+	public void deleteAll() {
+		userRepository.deleteAll();
+	}
 
 }

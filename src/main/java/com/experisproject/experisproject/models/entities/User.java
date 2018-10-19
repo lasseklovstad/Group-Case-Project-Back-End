@@ -20,6 +20,7 @@ public class User {
 	@NotNull
 	private boolean isAdmin;
 
+
 	public User(@NotNull String userName, @NotNull String email, @NotNull String password, @NotNull boolean isAdmin) {
 		this.userName = userName;
 		this.email = email;
