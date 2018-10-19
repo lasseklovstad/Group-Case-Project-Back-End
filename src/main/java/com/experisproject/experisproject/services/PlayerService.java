@@ -5,6 +5,8 @@ import com.experisproject.experisproject.models.repositories.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PlayerService {
     private PlayerRepository playerRepository;
@@ -18,4 +20,6 @@ public class PlayerService {
         playerRepository.save(player);
     }
     public void deleteAll(){playerRepository.deleteAll();}
+    public Player findById(int id){return playerRepository.findById(id).get();}
+
 }
