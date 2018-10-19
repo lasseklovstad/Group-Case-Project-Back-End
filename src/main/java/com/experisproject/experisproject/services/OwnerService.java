@@ -20,7 +20,7 @@ public class OwnerService {
     }
 
 	public List<Owner> findAll(Person person){
-		Iterable<Owner> owners = this.ownerRepository.findByPerson(Person person);
+		Iterable<Owner> owners = this.ownerRepository.findByPerson(person);
 		List<Owner> result = new ArrayList<>();
 
 		for (Owner owner : owners) {
