@@ -25,7 +25,6 @@ public class Team {
 
 	@OneToOne
 	@JoinColumn(name = "ownerId")
-	@NotNull
 	private Owner owner;
 
 	@OneToOne
@@ -53,7 +52,7 @@ public class Team {
 	public Team() {
 	}
 
-	public Team(@NotNull String name, @NotNull Association association, @NotNull Owner owner, @NotNull Coach coach, @NotNull Location location, Set<FootballMatch> footballMatches) {
+	public Team(@NotNull String name, @NotNull Association association, Owner owner, @NotNull Coach coach, @NotNull Location location, Set<FootballMatch> footballMatches) {
 		this.name = name;
 		this.association = association;
 		this.owner = owner;
