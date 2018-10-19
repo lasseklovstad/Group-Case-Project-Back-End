@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class UserService {
-	private UserRepository userRepository;
+	UserRepository userRepository;
 
 	@Autowired
 	public UserRepository userRepository(UserRepository userRepository) {
