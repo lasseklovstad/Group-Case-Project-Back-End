@@ -15,4 +15,5 @@ public class CoachService {
     public void save(Coach coach){
         coachRepository.save(coach);
     }
+    public void deleteAll(){coachRepository.deleteAll();}
 }

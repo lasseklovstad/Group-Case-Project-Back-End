@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 
 
@@ -31,8 +33,8 @@ public class PlayerController {
     private TeamService teamService;
 
     @RequestMapping(value="/all" , method=RequestMethod.GET)
-    public void getAll(){
-
+    public void getAll(HttpServletRequest req,HttpServletResponse res){
+        
     }
 
     @RequestMapping(value="/{id}" , method=RequestMethod.GET)
@@ -43,9 +45,11 @@ public class PlayerController {
     @RequestMapping(value = "" , method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void create(
-            @RequestBody PlayerForm form
+            @RequestBody PlayerForm form,
+            HttpServletResponse response
     ){
 
+        //Create new player
         Address address = new Address(form.getAddressLine1(),form.getAddressLine2(),form.getAddressLine3(),form.getCity(),form.getPostalCode(),form.getCountry());
         LocalDate dateOfBirth = LocalDate.of(form.getYear(),form.getMonth(),form.getDay());
         Person person = new Person(form.getFirstName(),form.getLastName(),dateOfBirth,address);
@@ -57,6 +61,7 @@ public class PlayerController {
         personService.save(person);
         playerService.save(player);
         //playerService.save(person);
+        response.setStatus(HttpStatus.OK.value());
     }
 
 }

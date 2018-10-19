@@ -15,4 +15,5 @@ public class AssociationService {
     public void save(Association association){
         associationRepository.save(association);
     }
+    public void deleteAll(){associationRepository.deleteAll();}
 }

@@ -17,4 +17,7 @@ public class OwnerService {
     public void save(Owner owner){
         ownerRepository.save(owner);
     }
+    public void deleteAll(){
+        ownerRepository.deleteAll();
+    }
 }

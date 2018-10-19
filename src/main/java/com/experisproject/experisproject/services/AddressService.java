@@ -18,4 +18,6 @@ public class AddressService {
         addressRepository.save(address);
     }
 
+    public void deleteAll(){addressRepository.deleteAll();}
+
 }

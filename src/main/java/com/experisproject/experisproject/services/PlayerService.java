@@ -17,4 +17,5 @@ public class PlayerService {
     public void save(Player player){
         playerRepository.save(player);
     }
+    public void deleteAll(){playerRepository.deleteAll();}
 }

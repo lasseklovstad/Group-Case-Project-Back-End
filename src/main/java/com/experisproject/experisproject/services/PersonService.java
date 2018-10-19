@@ -45,4 +45,5 @@ public class PersonService implements CommandLineRunner {
     public void save(Person person){
         personRepository.save(person);
     }
+    public void deleteAll(){personRepository.deleteAll();}
 }

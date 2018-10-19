@@ -23,5 +23,6 @@ public class TeamService {
     public Team findById(int id){
         return teamRepository.findById(id).get();
     }
+    public void deleteAll(){teamRepository.deleteAll();}
 
 }
