@@ -38,10 +38,15 @@ public class UserController {
 		} else {
 			form.setAdmin(false);
 		}
-		User user = new User(form.getUserName(), form.getEmail(), form.getPassword(), form.isAdmin());
-	//	System.out.println(user.toString());
-		userService.save(user);
-		response.setStatus(HttpStatus.OK.value());
+		try{
+			User user = new User(form.getUserName(), form.getEmail(), form.getPassword(), form.isAdmin());
+			userService.save(user);
+			response.setStatus(HttpStatus.OK.value());
+		}
+		catch (Exception e){
+			  e.printStackTrace();
+			  response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
 	}
 
 	@RequestMapping("*")
