@@ -42,54 +42,16 @@ public class TeamController implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        playerService.deleteAll();
-        teamService.deleteAll();
-        coachService.deleteAll();
-        ownerService.deleteAll();
-        locationService.deleteAll();
-        associationService.deleteAll();
+//        playerService.deleteAll();
+//        teamService.deleteAll();
+//        coachService.deleteAll();
+//        ownerService.deleteAll();
+//        locationService.deleteAll();
+//        associationService.deleteAll();
+//        personService.deleteAll();
+//        addressService.deleteAll();
 
 
 
-
-
-        personService.deleteAll();
-
-        addressService.deleteAll();
-
-
-
-
-//
-//
-//
-//
-//
-//        Association association = new Association("NFF","Norges Fotballforbund (stiftet 30. april 1902) er et særidrettsforbund for fotball i Norge");
-//        associationService.save(association);
-//
-//        LocalDate date = LocalDate.of(1967,2,10);
-//        Address address = new Address("Karsevegen 50","","","Trondheim","7050","Norge");
-//        Person person = new Person("Rini","Coolen",date,address);
-//        addressService.save(address);
-//        personService.save(person);
-//        Coach coach = new Coach(person);
-//        coachService.save(coach);
-//
-//        date = LocalDate.of(1959,8,22);
-//        address = new Address("Karsevegen 50","","","Trondheim","7050","Norge");
-//        person = new Person("Rini","Coolen",date,address);
-//        addressService.save(address);
-//        personService.save(person);
-//        Owner owner = new Owner(person);
-//        ownerService.save(owner);
-//
-//        address = new Address("Klæbuveien 125","","","Trondheim","7031","Norge");
-//
-//        Location location = new Location("Lerkendal Stadion","fotball",address);
-//        locationService.save(location);
-//
-//        Team team = new Team("Rosenborg",association,owner,coach,location,null);
-//        teamService.save(team);
     }
 }
