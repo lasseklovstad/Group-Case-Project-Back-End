@@ -42,14 +42,20 @@ public class TeamController implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        playerService.deleteAll();
-//        teamService.deleteAll();
-//        associationService.deleteAll();
-//        ownerService.deleteAll();
-//        coachService.deleteAll();
-//        personService.deleteAll();
-//        locationService.deleteAll();
-//        addressService.deleteAll();
+        playerService.deleteAll();
+        teamService.deleteAll();
+        coachService.deleteAll();
+        ownerService.deleteAll();
+        locationService.deleteAll();
+        associationService.deleteAll();
+
+
+
+
+
+        personService.deleteAll();
+
+        addressService.deleteAll();
 
 
 
