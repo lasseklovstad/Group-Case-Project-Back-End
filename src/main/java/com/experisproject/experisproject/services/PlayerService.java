@@ -18,16 +18,8 @@ public class PlayerService {
     }
 
     public List<Player> findAll(){
-        Iterable<Player> players = this.playerRepository.findAll();
         List<Player> result = new ArrayList<>();
-        int i = 0;
-        for (Player player : players) {
-            i++;
-            result.add(player);
-            if(i>10){
-                break;
-            }
-        }
+        playerRepository.findAll().forEach(player->result.add(player));
         return result;
     }
     public void save(Player player){
