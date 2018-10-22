@@ -10,26 +10,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/owner")
+@RequestMapping(value = "/api/owner")
 @CrossOrigin
 public class OwnerController {
 
 	@Autowired
 	private OwnerService ownerService;
-	@Autowired
-	private PersonService personService;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public void getAll(){
-	//	List<Owner> ownerList = ownerService.findAll();
-
+	public List<Owner> findAll(){
+		List<Owner> ownerList = ownerService.findAll();
+		return ownerList;
 	}
-
+/*
 	@RequestMapping(value = "/{id}")
-	public Person getOwnerById(@PathVariable int id){
-		//Owner owner = ownerService.findById(id);
-		return new Person(); //going to fix
+	public Owner findOwnerById(@PathVariable int id){
+		Owner owner = ownerService.findOwnerByPersonId(id);
+		return owner; //going to fix
 	}
-
+*/
 
 }

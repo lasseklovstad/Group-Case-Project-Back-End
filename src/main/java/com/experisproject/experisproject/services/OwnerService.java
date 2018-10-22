@@ -19,8 +19,8 @@ public class OwnerService {
         return this.ownerRepository=ownerRepository;
     }
 
-	public List<Owner> findAll(Person person){
-		Iterable<Owner> owners = this.ownerRepository.findByPerson(person);
+	public List<Owner> findAll(){
+		Iterable<Owner> owners = this.ownerRepository.findAll();
 		List<Owner> result = new ArrayList<>();
 
 		for (Owner owner : owners) {
@@ -28,10 +28,6 @@ public class OwnerService {
 		}
 
 		return result;
-	}
-
-	public Owner findById(int id) {
-		return ownerRepository.findById(id).get();
 	}
 
     public void save(Owner owner){
