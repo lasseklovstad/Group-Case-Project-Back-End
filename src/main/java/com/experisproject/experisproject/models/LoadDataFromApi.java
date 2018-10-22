@@ -1,7 +1,6 @@
 package com.experisproject.experisproject.models;
 
-import com.experisproject.experisproject.models.entities.Address;
-import com.experisproject.experisproject.models.entities.Location;
+import com.experisproject.experisproject.models.entities.*;
 import com.experisproject.experisproject.services.*;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,7 +16,10 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 @Component
 public class LoadDataFromApi {
@@ -48,6 +50,13 @@ public class LoadDataFromApi {
 
     @Scheduled(cron = "*/10 * * * * *")
     public void getData() throws IOException {
+
+        Random r = new Random();
+        int Low = 1;
+        int High = 4637;
+        teamNumber = r.nextInt(High-Low) + Low;
+        System.out.print(teamNumber);
+
         System.out.println("Sending request");
         String url = "http://api.football-data.org/v2/teams/"+teamNumber;
 
@@ -65,26 +74,71 @@ public class LoadDataFromApi {
         LocationData[] locationData = new ObjectMapper().readValue(addressResponse.getBody(),LocationData[].class);
         Address locationAddress = new Address(locationData[0].getAddress().getRoad(),locationData[0].getAddress().getHouse_number(),"",locationData[0].getAddress().getCity(),locationData[0].getAddress().getPostcode(),locationData[0].getAddress().getCountry());
 
+
+        //Save address
         try{
             addressService.save(locationAddress);
-            System.out.println("Valid venue");
+            Location venue = new Location("Venue",null,locationAddress);
+            locationService.save(venue);
+            Association association = new Association(locationData[0].getAddress().getCountry()+"Football Assocation","");
+            associationService.save(association);
+
+
+            Person person;
+            String [] name;
+            LocalDate date;
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssX");
+            dtf=dtf.withLocale(Locale.US);
+            Team teamObject;
+
+
+
+
+            //Find Coach
+            for(PlayerData coach:team.getSquad()){
+                if(coach.getRole().equals("COACH")){
+                    name = coach.getName().split("\\s+");
+                    date = LocalDate.parse(coach.getDateOfBirth(),dtf);
+                    person= new Person(name[0],name[name.length-1],date,locationAddress);
+                    personService.save(person);
+                    Coach coachObject = new Coach(person);
+                    coachService.save(coachObject);
+                    Owner owner = new Owner(person);
+                    ownerService.save(owner);
+                    teamObject = new Team(team.getName(),association,owner,coachObject,venue,null);
+                    teamService.save(teamObject);
+
+                    Player playerObject;
+                    // Save players
+                    for(PlayerData player:team.getSquad()){
+                        if(player.getRole().equals("PLAYER")){
+                            name = player.getName().split("\\s+");
+                            date = LocalDate.parse(player.getDateOfBirth(),dtf);
+                            person= new Person(name[0],name[name.length-1],date,locationAddress);
+                            personService.save(person);
+                            playerObject = new Player(player.getShirtNumber(),player.getPosition(),person,teamObject,null);
+                            playerService.save(playerObject);
+                        }
+                    }
+                    break;
+
+                }
+            }
+
+
+
+            System.out.println("Team Added");
+
+
         }catch (org.springframework.transaction.TransactionSystemException e){
             System.out.println("Not valid venue");
         }
 
-        Location venue = new Location("Venue",null,locationAddress);
-
-        for(PlayerData player:team.getSquad()){
-            if(player.getRole().equals("COACH")){
-                System.out.println("Coach");
-            }
-        }
 
 
 
 
 
-        teamNumber++;
 
     }
 

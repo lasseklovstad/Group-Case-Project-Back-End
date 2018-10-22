@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @RestController
@@ -33,8 +34,8 @@ public class PlayerController {
     private TeamService teamService;
 
     @RequestMapping(value="/all" , method=RequestMethod.GET)
-    public void getAll(HttpServletRequest req,HttpServletResponse res){
-
+    public List<Player> getAll(HttpServletRequest req, HttpServletResponse res){
+        return playerService.findAll();
     }
 
     @RequestMapping(value="/{id}" , method=RequestMethod.GET)
