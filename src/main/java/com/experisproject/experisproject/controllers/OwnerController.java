@@ -17,11 +17,19 @@ public class OwnerController {
 	@Autowired
 	private OwnerService ownerService;
 
+	@Autowired
+	private PersonService personService;
+
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public List<Owner> findAll(){
-		List<Owner> ownerList = ownerService.findAll();
+	public List<Person> findAllOwners(){
+		List<Person> ownerList = personService.findAll();
 		return ownerList;
+
+		//personOwnerList.add(personService.findPersonByOwner(ownerList.get(i)))
 	}
+
+
+
 
 
 /*

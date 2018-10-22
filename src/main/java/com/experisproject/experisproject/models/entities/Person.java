@@ -61,5 +61,4 @@ public class Person {
 	//  address_id VARCHAR(64),
 	//  PRIMARY KEY (person_id),
 	//  FOREIGN KEY (address_id) REFERENCES ADDRESS(address_id)
-
 }
