@@ -17,27 +17,16 @@ public class OwnerController {
 	@Autowired
 	private OwnerService ownerService;
 
-	@Autowired
-	private PersonService personService;
-
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public List<Person> findAllOwners(){
-		List<Person> ownerList = personService.findAll();
+	public List<Owner> findAllOwners(){
+		List<Owner> ownerList = ownerService.findAll();
 		return ownerList;
-
-		//personOwnerList.add(personService.findPersonByOwner(ownerList.get(i)))
 	}
 
-
-
-
-
-/*
 	@RequestMapping(value = "/{id}")
 	public Owner findOwnerById(@PathVariable int id){
-		Owner owner = ownerService.findOwnerByPersonId(id);
-		return owner; //going to fix
+		Owner owner = ownerService.findById(id);
+		return owner;
 	}
-*/
 
 }

@@ -30,6 +30,10 @@ public class OwnerService {
 		return result;
 	}
 
+	public Owner findById(int id){
+    	return ownerRepository.getOne(id);
+	}
+
     public void save(Owner owner){
         ownerRepository.save(owner);
     }
