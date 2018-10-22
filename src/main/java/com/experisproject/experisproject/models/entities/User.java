@@ -32,6 +32,7 @@ public class User {
 	public User() {
 	}
 
+
 	public User(@NotNull String userName, @NotNull String email, @NotNull String password, @NotNull boolean isAdmin) {
 		this.userName = userName;
 		this.email = email;

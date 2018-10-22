@@ -22,6 +22,8 @@ public class OwnerController {
 		List<Owner> ownerList = ownerService.findAll();
 		return ownerList;
 	}
+
+
 /*
 	@RequestMapping(value = "/{id}")
 	public Owner findOwnerById(@PathVariable int id){

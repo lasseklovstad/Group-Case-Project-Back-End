@@ -2,10 +2,7 @@ package com.experisproject.experisproject.models.entities;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
@@ -18,6 +15,7 @@ public class Season {
 	private int seasonId;
 
 	@NotNull
+	@Column(unique = true)
 	private String name;
 	@NotNull
 	private LocalDate startDate;
