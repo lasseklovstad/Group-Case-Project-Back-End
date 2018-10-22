@@ -19,7 +19,7 @@ public class PlayerService {
 
     public List<Player> findAll(){
         List<Player> result = new ArrayList<>();
-        playerRepository.findAll().forEach(team->result.add(team));
+        playerRepository.findAll().forEach(player->result.add(player));
         return result;
     }
     public void save(Player player){
