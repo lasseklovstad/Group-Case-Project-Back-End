@@ -24,6 +24,9 @@ public class Person {
 	@JoinColumn(name = "addressId") //referencedColumnName =""?
 	private Address address;
 
+	@OneToOne(mappedBy = "person")
+	private Owner owner;
+
 	/*  Unnecessary for now to map the entities bidirectional
 	@OneToOne(mappedBy ="person", cascade = CascadeType.ALL)//if a person is deleted and is a coach, no longer a coach
 	private Coach coach;
@@ -31,8 +34,7 @@ public class Person {
 	private Player player;
 	@OneToOne(mappedBy = "person")
 	private Contact contact;
-	@OneToOne(mappedBy = "person")
-	private Owner owner;
+
 	*/
 
 	public Person() {

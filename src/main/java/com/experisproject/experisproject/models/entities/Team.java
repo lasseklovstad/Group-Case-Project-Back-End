@@ -37,9 +37,6 @@ public class Team {
 	@NotNull
 	private Location location;
 
-	@ManyToMany(mappedBy = "teams") //NotNull annotation???
-	private Set<FootballMatch> footballMatches = new HashSet<>();
-
 	/*  Unnecessary for now to map the entities bidirectional
 	@OneToMany(mappedBy = "team")
 	private List<Player> players;
@@ -52,13 +49,12 @@ public class Team {
 	public Team() {
 	}
 
-	public Team(@NotNull String name, @NotNull Association association, Owner owner, @NotNull Coach coach, @NotNull Location location, Set<FootballMatch> footballMatches) {
+	public Team(@NotNull String name, @NotNull Association association, Owner owner, @NotNull Coach coach, @NotNull Location location) {
 		this.name = name;
 		this.association = association;
 		this.owner = owner;
 		this.coach = coach;
 		this.location = location;
-		this.footballMatches = footballMatches;
 	}
 
 	//  owner_id INT NOT NULL,

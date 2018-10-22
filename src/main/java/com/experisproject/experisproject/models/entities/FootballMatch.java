@@ -47,13 +47,6 @@ public class FootballMatch {
 	)
 	private Set<Player> players = new HashSet<>(); //NotNull annotation?
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "result",
-			joinColumns = {@JoinColumn(name = "footballMatchId")},
-			inverseJoinColumns = {@JoinColumn(name = "teamId")}
-	)
-	private Set<Team> teams = new HashSet<>(); //Not Null annotation?
-
 	public FootballMatch() {
 
 	}
@@ -65,7 +58,6 @@ public class FootballMatch {
 		this.homeTeam = homeTeam;
 		this.awayTeam = awayTeam;
 		this.players = players;
-		this.teams = teams;
 	}
 
 	//  season_id INT NOT NULL,
