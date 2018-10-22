@@ -40,7 +40,7 @@ public class PlayerController {
 
     @RequestMapping(value="/{id}" , method=RequestMethod.GET)
     public Player getById(@PathVariable int id){
-        return new Player();
+        return playerService.findById(id);
     }
 
     @RequestMapping(value = "" , method = RequestMethod.POST)
