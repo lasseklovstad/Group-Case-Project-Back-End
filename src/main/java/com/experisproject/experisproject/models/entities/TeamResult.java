@@ -7,32 +7,32 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
-public class Result {
+public class TeamResult {
 	@Id
 	@GeneratedValue
-	private int resultId;
+	private int teamResultId;
 
 	@NotNull
-	private int score;
+	private int goals;
 
 	@NotNull
 	private String result;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "footballMatchId")
-	private Math match;
+	private FootballMatch footballMatch;
 
 	@ManyToOne
 	@JoinColumn(name = "teamId")
 	private Team team;
 
-	public Result() {
+	public TeamResult() {
 	}
 
-	public Result(@NotNull int score, @NotNull String result, Math match, Team team) {
-		this.score = score;
+	public TeamResult(@NotNull int goals, @NotNull String result, FootballMatch footballMatch, Team team) {
+		this.goals = goals;
 		this.result = result;
-		this.match = match;
+		this.footballMatch = footballMatch;
 		this.team = team;
 	}
 }
