@@ -18,7 +18,7 @@ public class TeamResult {
 	@NotNull
 	private String result;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "footballMatchId")
 	private FootballMatch footballMatch;
 

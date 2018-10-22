@@ -27,7 +27,7 @@ public class Player {
 	@NotNull
 	private Team team;
 
-	@ManyToMany(mappedBy = "players") //NotNull annotation???
+	@ManyToMany(mappedBy = "players")
 	private Set<FootballMatch> footballMatches = new HashSet<>();
 
 	/*  Unnecessary for now to map the entities bidirectional

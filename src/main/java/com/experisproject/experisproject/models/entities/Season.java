@@ -23,7 +23,7 @@ public class Season {
 	private LocalDate endDate;
 	private String description;
 
-	/*  Unnecessary for now to map the entitities bidirectional
+	/*  Unnecessary for now to map the entities bidirectional
 	@OneToMany(mappedBy = "season")
 	private List<FootballMatch> footballMatches;
 	*/

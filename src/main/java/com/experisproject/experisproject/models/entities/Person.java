@@ -22,12 +22,16 @@ public class Person {
 	private LocalDate dateOfBirth;
 
 	@ManyToOne
-	@JoinColumn(name = "addressId") //referencedColumnName =""?
+	@JoinColumn(name = "addressId")
 	private Address address;
 
-	@OneToOne(mappedBy = "person")
+	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Owner owner;
+
+	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private Coach coach;
 
 	/*  Unnecessary for now to map the entities bidirectional
 	@OneToOne(mappedBy ="person", cascade = CascadeType.ALL)//if a person is deleted and is a coach, no longer a coach
