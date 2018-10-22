@@ -114,7 +114,7 @@ public class LoadDataFromApi {
                         coachService.save(coachObject);
                         Owner owner = new Owner(person);
                         ownerService.save(owner);
-                        teamObject = new Team(team.getName(),association,owner,coachObject,venue,null);
+                        teamObject = new Team(team.getName(),association,owner,coachObject,venue);
                         teamService.save(teamObject);
 
                         Player playerObject;
