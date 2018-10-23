@@ -18,18 +18,15 @@ public class OwnerController {
 	private OwnerService ownerService;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public List<Owner> findAll(){
+	public List<Owner> findAllOwners(){
 		List<Owner> ownerList = ownerService.findAll();
 		return ownerList;
 	}
 
-
-/*
 	@RequestMapping(value = "/{id}")
 	public Owner findOwnerById(@PathVariable int id){
-		Owner owner = ownerService.findOwnerByPersonId(id);
-		return owner; //going to fix
+		Owner owner = ownerService.findById(id);
+		return owner;
 	}
-*/
 
 }
