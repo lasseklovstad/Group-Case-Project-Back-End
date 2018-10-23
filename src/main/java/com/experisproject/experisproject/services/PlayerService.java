@@ -24,7 +24,7 @@ public class PlayerService {
     }
 
     public List<Player> findPlayerByTeamName(String teamName){
-		return playerRepository.findPlayerByTeam_Name(teamName);
+		return playerRepository.findPlayerByTeam_NameContaining(teamName);
 	}
 
 	public List<Player> getPlayersIdNameAndTeam(){
