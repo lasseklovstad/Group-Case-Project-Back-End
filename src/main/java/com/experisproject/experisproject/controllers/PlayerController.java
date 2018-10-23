@@ -33,7 +33,7 @@ public class PlayerController {
 	@Autowired
 	private TeamService teamService;
 
-	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
 	public List<Player> getAll(HttpServletRequest req, HttpServletResponse res) {
 		return playerService.findAll();
 	}
@@ -43,6 +43,10 @@ public class PlayerController {
 		return playerService.findPlayerByTeamName(teamName);
 	}
 
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public List<Object> getAllPlayersName(){
+		return playerService.getPlayersName();
+	}
 
 
     @RequestMapping(value="/{id}" , method=RequestMethod.GET)

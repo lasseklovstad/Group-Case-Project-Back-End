@@ -27,6 +27,10 @@ public class PlayerService {
 		return playerRepository.findPlayerByTeam_Name(teamName);
 	}
 
+	public List<Object> getPlayersName(){
+    	return playerRepository.getPlayerName();
+	}
+
     public void save(Player player){
         playerRepository.save(player);
     }
