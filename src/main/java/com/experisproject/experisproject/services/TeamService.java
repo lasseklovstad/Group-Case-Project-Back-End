@@ -13,6 +13,7 @@ import java.util.List;
 @Service
 public class TeamService {
     private TeamRepository teamRepository;
+
     @Autowired
     public TeamRepository teamRepository(TeamRepository teamRepository){
         return this.teamRepository=teamRepository;
