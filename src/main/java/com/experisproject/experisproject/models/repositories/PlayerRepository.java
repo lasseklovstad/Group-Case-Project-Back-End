@@ -12,7 +12,7 @@ public interface PlayerRepository extends JpaRepository<Player, Integer> {
 
 	List<Player> findPlayerByTeam_Name(String teamName);
 
-	@Query("select p.name from Player p")
+	@Query("select person.firstName, person.lastName from Player pl, Person person where pl.personId = person.personId")
 	List<Object> getPlayerName();
 
 

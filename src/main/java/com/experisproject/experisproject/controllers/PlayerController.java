@@ -38,7 +38,7 @@ public class PlayerController {
 		return playerService.findAll();
 	}
 
-	@RequestMapping(value = "/{teamName}", method = RequestMethod.GET)
+	@RequestMapping(value = "/byTeamName/{teamName}", method = RequestMethod.GET)
 	public List<Player> getPlayersByTeamName(@PathVariable String teamName){
 		return playerService.findPlayerByTeamName(teamName);
 	}
