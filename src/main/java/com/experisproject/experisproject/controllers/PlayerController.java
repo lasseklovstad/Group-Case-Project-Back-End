@@ -41,7 +41,7 @@ public class PlayerController {
 	@RequestMapping(value = "/byTeamName/{teamName}", method = RequestMethod.GET)
 	public List<Player> getPlayersByTeamName(@PathVariable String teamName){
 		return playerService.findPlayerByTeamName(teamName);
-	}
+}
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public List<Object> getAllPlayersName(){
