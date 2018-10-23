@@ -1,6 +1,7 @@
 package com.experisproject.experisproject.controllers;
 
 import com.experisproject.experisproject.models.entities.*;
+import com.experisproject.experisproject.projections.TeamLimited;
 import com.experisproject.experisproject.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -32,8 +33,8 @@ public class TeamController implements CommandLineRunner {
     PlayerService playerService;
 
     @RequestMapping(value = "/all",method = RequestMethod.GET)
-    public List<Team> getAll(){
-        return teamService.findAll();
+    public List<TeamLimited> getAll(){
+        return teamService.findAllLimited();
     }
 
     @RequestMapping(value = "/byName/{name}", method = RequestMethod.GET)
