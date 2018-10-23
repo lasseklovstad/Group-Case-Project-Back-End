@@ -4,10 +4,7 @@ import com.experisproject.experisproject.models.entities.*;
 import com.experisproject.experisproject.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -39,6 +36,10 @@ public class TeamController implements CommandLineRunner {
         return teamService.findAll();
     }
 
+    @RequestMapping(value = "/byName/{name}", method = RequestMethod.GET)
+    public List<Team> getTeamsByName(@PathVariable String name){
+        return teamService.findAllByNameContaining(name);
+    }
 
     @Override
     public void run(String... args) throws Exception {

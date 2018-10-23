@@ -31,5 +31,8 @@ public class TeamService {
         teamRepository.findAll().forEach(team->result.add(team));
         return result;
     }
+    public List <Team> findAllByNameContaining(String name){
+        return findAllByNameContaining(name);
+    }
 
 }
