@@ -48,7 +48,7 @@ public class LoadDataFromApi {
     @Autowired
     PlayerService playerService;
 
-    @Scheduled(cron = "*/10 * * * * *")
+    //@Scheduled(cron = "*/10 * * * * *")
     public void getData() throws IOException {
 
         Random r = new Random();
