@@ -24,19 +24,26 @@ import java.util.List;
 @CrossOrigin
 public class PlayerController {
 
-    @Autowired
-    private PersonService personService;
-    @Autowired
-    private PlayerService playerService;
-    @Autowired
-    private AddressService addressService;
-    @Autowired
-    private TeamService teamService;
+	@Autowired
+	private PersonService personService;
+	@Autowired
+	private PlayerService playerService;
+	@Autowired
+	private AddressService addressService;
+	@Autowired
+	private TeamService teamService;
 
-    @RequestMapping(value="/all" , method=RequestMethod.GET)
-    public List<Player> getAll(HttpServletRequest req, HttpServletResponse res){
-        return playerService.findAll();
-    }
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public List<Player> getAll(HttpServletRequest req, HttpServletResponse res) {
+		return playerService.findAll();
+	}
+
+	@RequestMapping(value = "/{teamName}", method = RequestMethod.GET)
+	public List<Player> getPlayersByTeamName(@PathVariable String teamName){
+		return playerService.findPlayerByTeamName(teamName);
+	}
+
+
 
     @RequestMapping(value="/{id}" , method=RequestMethod.GET)
     public Player getById(@PathVariable int id){

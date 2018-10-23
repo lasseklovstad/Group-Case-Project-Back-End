@@ -22,6 +22,11 @@ public class PlayerService {
         playerRepository.findAll().forEach(player->result.add(player));
         return result;
     }
+
+    public List<Player> findPlayerByTeamName(String teamName){
+		return playerRepository.findPlayerByTeam_Name(teamName);
+	}
+
     public void save(Player player){
         playerRepository.save(player);
     }
