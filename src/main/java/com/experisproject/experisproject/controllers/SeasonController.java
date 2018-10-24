@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/api/seasons")
+@RequestMapping(value = "/api/season")
 public class SeasonController {
 
     @Autowired

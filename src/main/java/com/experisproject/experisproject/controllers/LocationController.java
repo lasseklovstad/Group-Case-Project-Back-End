@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/locations")
+@RequestMapping(value = "api/location")
 @CrossOrigin
 public class LocationController {
     @Autowired
