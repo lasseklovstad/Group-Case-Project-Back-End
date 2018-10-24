@@ -4,7 +4,6 @@ import com.experisproject.experisproject.models.entities.Player;
 import com.experisproject.experisproject.projections.PlayerLimited;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 

@@ -2,6 +2,7 @@ package com.experisproject.experisproject.services;
 
 import com.experisproject.experisproject.models.entities.Coach;
 import com.experisproject.experisproject.models.repositories.CoachRepository;
+import com.experisproject.experisproject.projections.CoachLimited;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,11 @@ public class CoachService {
 		 return result;
 	}
 
-    public void save(Coach coach){
+	public List<CoachLimited> findAllLimited(){
+    	return coachRepository.findAllLimited();
+	}
+
+	public void save(Coach coach){
         coachRepository.save(coach);
     }
     public void deleteAll(){coachRepository.deleteAll();}

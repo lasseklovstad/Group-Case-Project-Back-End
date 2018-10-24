@@ -1,5 +1,6 @@
 package com.experisproject.experisproject.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,10 +18,10 @@ public class Owner {
 	@NotNull
 	private Person person;
 
-	/* Unnecessary for now to map the entities bidirectional
 	@OneToOne(mappedBy = "owner", cascade = CascadeType.ALL)//doesnt exist without owner
+	@JsonIgnore
 	private Team team;
-	*/
+
 
 	public Owner() {
 	}

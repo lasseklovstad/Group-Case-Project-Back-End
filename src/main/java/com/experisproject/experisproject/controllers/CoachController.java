@@ -1,6 +1,7 @@
 package com.experisproject.experisproject.controllers;
 
 import com.experisproject.experisproject.models.entities.Coach;
+import com.experisproject.experisproject.projections.CoachLimited;
 import com.experisproject.experisproject.services.CoachService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,9 +19,14 @@ public class CoachController {
 	@Autowired
 	private CoachService coachService;
 
-	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
 	public List<Coach>  findAllCoaches(){
 		return coachService.findAll();
+	}
+
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public List<CoachLimited> getCoachesLimitedInfo(){
+		return coachService.findAllLimited();
 	}
 
 
