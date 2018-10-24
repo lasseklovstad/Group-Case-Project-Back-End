@@ -18,6 +18,6 @@ public class SeasonService {
     }
 
     public List<SeasonLimited> findAllLimited(){
-        return findAllLimited();
+        return seasonRepository.findAllLimited();
     }
 }

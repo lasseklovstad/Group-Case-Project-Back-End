@@ -10,5 +10,5 @@ import java.util.List;
 public interface SeasonRepository extends JpaRepository<Season,Integer> {
 
     @Query(value = "SELECT s FROM Season s")
-    List<SeasonLimited> findAllSeasonsLimited();
+    List<SeasonLimited> findAllLimited();
 }

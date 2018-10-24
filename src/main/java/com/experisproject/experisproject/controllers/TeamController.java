@@ -39,10 +39,7 @@ public class TeamController implements CommandLineRunner {
 
     }
 
-    @RequestMapping(value = "/all",method = RequestMethod.GET)
-    public List<String> getAllNames(){
-        return teamService.findAllNames();
-    }
+
 
     @RequestMapping(value = "/byName/{name}", method = RequestMethod.GET)
     public List<Team> getTeamsByName(@PathVariable String name){

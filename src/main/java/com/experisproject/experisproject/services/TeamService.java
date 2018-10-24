@@ -37,9 +37,6 @@ public class TeamService {
         return teamRepository.findAllByNameContaining(name);
     }
 
-    public List<String> findAllNames(){
-        return teamRepository.findAllNames();
-    }
 
     public List<TeamLimited> findAllLimited(){
         return teamRepository.findAllRemodelTeams();

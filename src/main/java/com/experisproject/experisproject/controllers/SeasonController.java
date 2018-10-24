@@ -19,7 +19,7 @@ public class SeasonController {
     private SeasonService seasonService;
 
     @RequestMapping(value = "/all",method = RequestMethod.GET)
-    public List<SeasonLimited> getAll(){
+    public List<SeasonLimited> getAllLimited(){
         return seasonService.findAllLimited();
     }
 }
