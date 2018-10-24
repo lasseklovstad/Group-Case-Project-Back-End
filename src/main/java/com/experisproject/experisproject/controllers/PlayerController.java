@@ -44,8 +44,8 @@ public class PlayerController {
 }
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public List<Object> getAllPlayersName(){
-		return playerService.getPlayersName();
+	public List<Player> getAllPlayersIdNameAndTeam(){
+		return playerService.getPlayersIdNameAndTeam();
 	}
 
 

@@ -2,6 +2,7 @@ package com.experisproject.experisproject.services;
 
 import com.experisproject.experisproject.models.entities.*;
 import com.experisproject.experisproject.models.repositories.TeamRepository;
+import com.experisproject.experisproject.projections.TeamLimited;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,10 @@ public class TeamService {
 
     public List<String> findAllNames(){
         return teamRepository.findAllNames();
+    }
+
+    public List<TeamLimited> findAllLimited(){
+        return teamRepository.findAllRemodelTeams();
     }
 
 }
