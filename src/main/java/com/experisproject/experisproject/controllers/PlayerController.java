@@ -45,12 +45,19 @@ public class PlayerController {
 }
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public List<PlayerLimited> getAllPlayersIdNameAndTeam(){
+	public List<Player> getAllPlayersIdNameAndTeam(){
+		return 	playerService.findPlayerShortInfo();
+	}
+
+	@RequestMapping(value = "limitedInfo", method = RequestMethod.GET)
+	public 	List<PlayerLimited> getPlayersLimitedInfo(){
 		return playerService.findAllLimited();
 	}
 
 
-    @RequestMapping(value="/{id}" , method=RequestMethod.GET)
+
+
+	@RequestMapping(value="/{id}" , method=RequestMethod.GET)
     public Player getById(@PathVariable int id){
         return playerService.findById(id);
     }
