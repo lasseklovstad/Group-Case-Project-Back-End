@@ -4,10 +4,7 @@ import com.experisproject.experisproject.models.entities.Coach;
 import com.experisproject.experisproject.projections.CoachLimited;
 import com.experisproject.experisproject.services.CoachService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,7 +17,7 @@ public class CoachController {
 	private CoachService coachService;
 
 	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
-	public List<Coach>  findAllCoaches(){
+	public List<Coach>  getAllCoaches(){
 		return coachService.findAll();
 	}
 
@@ -29,6 +26,11 @@ public class CoachController {
 		return coachService.findAllLimited();
 	}
 
+	@RequestMapping(value = "/{id}")
+	public Coach getCoachById(@PathVariable int id){
+		Coach coach = coachService.findById(id);
+		return coach;
+	}
 
 
 

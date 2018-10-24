@@ -28,6 +28,11 @@ public class CoachService {
     	return coachRepository.findAllLimited();
 	}
 
+	public Coach findById(int id){
+		return coachRepository.getOne(id);
+	}
+
+
 	public void save(Coach coach){
         coachRepository.save(coach);
     }

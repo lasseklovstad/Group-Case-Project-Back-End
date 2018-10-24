@@ -4,6 +4,7 @@ package com.experisproject.experisproject.services;
 import com.experisproject.experisproject.models.entities.Owner;
 import com.experisproject.experisproject.models.entities.Person;
 import com.experisproject.experisproject.models.repositories.OwnerRepository;
+import com.experisproject.experisproject.projections.OwnerLimited;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +21,13 @@ public class OwnerService {
     }
 
 	public List<Owner> findAll(){
-		Iterable<Owner> owners = this.ownerRepository.findAll();
 		List<Owner> result = new ArrayList<>();
-
-		for (Owner owner : owners) {
-			result.add(owner);
-		}
-
+		ownerRepository.findAll().forEach(owner -> result.add(owner));
 		return result;
+	}
+
+	public 	List<OwnerLimited> findAllLimited(){
+    	return ownerRepository.findAllLimited();
 	}
 
 	public Owner findById(int id){
