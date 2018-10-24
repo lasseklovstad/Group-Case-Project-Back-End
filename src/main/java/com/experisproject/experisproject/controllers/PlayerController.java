@@ -5,6 +5,7 @@ import com.experisproject.experisproject.models.entities.Person;
 import com.experisproject.experisproject.models.entities.Player;
 import com.experisproject.experisproject.models.entities.Team;
 import com.experisproject.experisproject.models.forms.PlayerForm;
+import com.experisproject.experisproject.projections.PlayerLimited;
 import com.experisproject.experisproject.services.AddressService;
 import com.experisproject.experisproject.services.PersonService;
 import com.experisproject.experisproject.services.PlayerService;
@@ -44,8 +45,8 @@ public class PlayerController {
 }
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public List<Player> getAllPlayersIdNameAndTeam(){
-		return playerService.getPlayersIdNameAndTeam();
+	public List<PlayerLimited> getAllPlayersIdNameAndTeam(){
+		return playerService.findAllLimited();
 	}
 
 
