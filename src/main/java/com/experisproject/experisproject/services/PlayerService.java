@@ -34,7 +34,7 @@ public class PlayerService {
 	}
 
 	public List<PlayerLimited> findAllLimited(){
-    	return playerRepository.findAllLimited();
+    	return playerRepository.findAllProjectedBy();
 	}
 
     public void save(Player player){
