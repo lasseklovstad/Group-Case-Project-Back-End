@@ -22,4 +22,6 @@ public class SeasonController {
     public List<SeasonLimited> getAllLimited(){
         return seasonService.findAllLimited();
     }
+
+    @RequestMapping
 }
