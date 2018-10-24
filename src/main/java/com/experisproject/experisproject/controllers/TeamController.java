@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "api/teams")
+@RequestMapping(value = "api/team")
 public class TeamController implements CommandLineRunner {
 
     @Autowired

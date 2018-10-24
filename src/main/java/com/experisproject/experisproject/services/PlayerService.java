@@ -3,6 +3,7 @@ package com.experisproject.experisproject.services;
 import com.experisproject.experisproject.models.entities.Player;
 import com.experisproject.experisproject.models.entities.Team;
 import com.experisproject.experisproject.models.repositories.PlayerRepository;
+import com.experisproject.experisproject.projections.PlayerLimited;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Service
 public class PlayerService {
     private PlayerRepository playerRepository;
+
     @Autowired
     public PlayerRepository playerRepository(PlayerRepository playerRepository){
         return this.playerRepository=playerRepository;
@@ -27,8 +29,8 @@ public class PlayerService {
 		return playerRepository.findPlayerByTeam_NameContaining(teamName);
 	}
 
-	public List<Player> getPlayersIdNameAndTeam(){
-    	return playerRepository.getPlayerIdNameAndTeam();
+	public List<PlayerLimited> findAllLimited(){
+    	return playerRepository.findAllLimited();
 	}
 
     public void save(Player player){
