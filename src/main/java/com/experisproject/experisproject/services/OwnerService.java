@@ -34,7 +34,12 @@ public class OwnerService {
     	return ownerRepository.findById(id).get();
 	}
 
-    public void save(Owner owner){
+	public List<Owner> findOwnersIdNameAndTeam(){
+    	return ownerRepository.findOwnersIdNameAndTeam();
+	}
+
+
+	public void save(Owner owner){
         ownerRepository.save(owner);
     }
     public void deleteAll(){

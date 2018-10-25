@@ -30,7 +30,13 @@ public class OwnerController {
 		return owner;
 	}
 
-	@RequestMapping(value = "/all")
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public List<Owner> getOwnersIdNameAndTeam(){
+		return ownerService.findOwnersIdNameAndTeam();
+	}
+
+
+		@RequestMapping(value = "/limitedInfo", method = RequestMethod.GET)
 	public 	List<OwnerLimited> getOwnersLimitedInfo(){
 		return ownerService.findAllLimited();
 	}

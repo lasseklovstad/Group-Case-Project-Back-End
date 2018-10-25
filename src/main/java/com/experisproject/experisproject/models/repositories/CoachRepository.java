@@ -10,7 +10,7 @@ import java.util.List;
 public interface CoachRepository extends JpaRepository<Coach,Integer> {
 
 	@Query(value = "SELECT  c.coachId, CONCAT(c.person.firstName,' ',c.person.lastName), c.team.name FROM Coach c")
-	List<Coach> findCoachesNameAndTeam();
+	List<Coach> findCoachesIdNameAndTeam();
 
 	@Query(value = "SELECT c FROM Coach c")
 	List<CoachLimited> findAllLimited();

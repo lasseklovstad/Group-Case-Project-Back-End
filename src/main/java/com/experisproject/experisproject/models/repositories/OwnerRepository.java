@@ -10,6 +10,9 @@ import java.util.List;
 
 public interface OwnerRepository extends JpaRepository<Owner,Integer> {
 
+	@Query(value = "SELECT  o.ownerId, CONCAT(o.person.firstName,' ',o.person.lastName), o.team.name FROM Owner o")
+	List<Owner> findOwnersIdNameAndTeam();
+
 	@Query("SELECT o FROM Owner o")
 	List<OwnerLimited> findAllLimited();
 }

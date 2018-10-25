@@ -22,8 +22,8 @@ public class CoachController {
 	}
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public List<Coach> getCoachesNameAndTeam(){
-		return coachService.findCoachesNameAndTeam();
+	public List<Coach> getCoachesIdNameAndTeam(){
+		return coachService.findCoachesIdNameAndTeam();
 	}
 
 	@RequestMapping(value = "/limitedInfo", method = RequestMethod.GET)

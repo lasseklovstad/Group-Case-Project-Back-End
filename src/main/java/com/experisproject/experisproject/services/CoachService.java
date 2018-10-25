@@ -24,8 +24,8 @@ public class CoachService {
 		 return result;
 	}
 
-	public List<Coach> findCoachesNameAndTeam(){
-    	return coachRepository.findCoachesNameAndTeam();
+	public List<Coach> findCoachesIdNameAndTeam(){
+    	return coachRepository.findCoachesIdNameAndTeam();
 	}
 
 	public List<CoachLimited> findAllLimited(){
