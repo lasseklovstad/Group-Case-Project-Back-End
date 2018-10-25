@@ -14,7 +14,7 @@ public interface PlayerRepository extends JpaRepository<Player, Integer> {
 	@Query(value = "SELECT p.playerId as playerId, p.person.firstName as firstName, p.person.lastName as lastName, p.team.name as team FROM Player p")
 	List<Player> findPlayerShortInfo();
 
-//	@Query(value = "SELECT p FROM Player p")
-	List<PlayerLimited> findAllProjectedBy(); //works exactly the same
+	@Query(value = "SELECT pl FROM Player pl, Person pers, Team team where pl.person.personId = pers.personId AND p.team.teamId = team.teamId")
+	List<PlayerLimited> findAllLimited(); //works exactly the same
 
 }
