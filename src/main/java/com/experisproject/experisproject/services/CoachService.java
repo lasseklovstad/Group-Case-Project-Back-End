@@ -29,7 +29,7 @@ public class CoachService {
 	}
 
 	public Coach findById(int id){
-		return coachRepository.getOne(id);
+		return coachRepository.findById(id).get();
 	}
 
 
