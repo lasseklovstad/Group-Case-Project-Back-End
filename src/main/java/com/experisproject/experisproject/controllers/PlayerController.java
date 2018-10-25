@@ -55,8 +55,6 @@ public class PlayerController {
 	}
 
 
-
-
 	@RequestMapping(value="/{id}" , method=RequestMethod.GET)
     public Player getById(@PathVariable int id){
         return playerService.findById(id);
