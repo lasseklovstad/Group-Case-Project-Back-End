@@ -26,7 +26,7 @@ public class CoachController {
 		return coachService.findAllLimited();
 	}
 
-	@RequestMapping(value = "/{id}")
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Coach getCoachById(@PathVariable int id){
 		Coach coach = coachService.findById(id);
 		return coach;

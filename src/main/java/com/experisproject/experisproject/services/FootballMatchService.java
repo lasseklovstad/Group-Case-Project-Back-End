@@ -2,6 +2,7 @@ package com.experisproject.experisproject.services;
 
 import com.experisproject.experisproject.models.entities.FootballMatch;
 import com.experisproject.experisproject.models.repositories.FootballMatchRepository;
+import com.experisproject.experisproject.pojos.FootballMatchResultsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,11 +27,11 @@ public class FootballMatchService {
 	public FootballMatch findById(int id){
 		return footballMatchRepository.getOne(id);
 	}
-/*
-	public 	List<FootballMatch> findFootballMatchesResult(){
+
+	public 	List<FootballMatchResultsInfo> findFootballMatchesResult(){
 		return footballMatchRepository.findFootballMatchesResult();
 	}
-*/
+
 
 	public void save(FootballMatch footballMatch){
 		footballMatchRepository.save(footballMatch);
