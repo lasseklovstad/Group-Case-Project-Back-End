@@ -28,7 +28,7 @@ public class FootballMatchService {
 		return footballMatchRepository.getOne(id);
 	}
 
-	public 	List<FootballMatchResultsInfo> findFootballMatchesResult(){
+	public 	List<FootballMatch> findFootballMatchesResult(){
 		return footballMatchRepository.findFootballMatchesResult();
 	}
 
