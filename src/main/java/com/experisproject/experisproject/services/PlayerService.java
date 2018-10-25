@@ -24,8 +24,9 @@ public class PlayerService {
         playerRepository.findAll().forEach(player->result.add(player));
         return result;
     }
+	public Player findById(int id){return playerRepository.findById(id).get();}
 
-    public List<Player> findPlayerByTeamName(String teamName){
+	public List<Player> findPlayerByTeamName(String teamName){
 		return playerRepository.findPlayerByTeam_NameContaining(teamName);
 	}
 
@@ -34,14 +35,13 @@ public class PlayerService {
 	}
 
 	public List<PlayerLimited> findAllLimited(){
-    	return playerRepository.findAllProjectedBy();
+    	return playerRepository.findAllLimited();
 	}
 
     public void save(Player player){
         playerRepository.save(player);
     }
     public void deleteAll(){playerRepository.deleteAll();}
-    public Player findById(int id){return playerRepository.findById(id).get();}
 
 
 }
