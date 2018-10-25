@@ -12,18 +12,18 @@ import java.util.List;
 @RequestMapping(value = "api/location")
 @CrossOrigin
 public class LocationController {
-    @Autowired
-    LocationService locationService;
+	@Autowired
+	LocationService locationService;
 
-    @RequestMapping(value = "/all",method = RequestMethod.GET)
-    public List<LocationLimited> getAllLimited(){
-        return locationService.findAllLimited();
-    }
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public List<LocationLimited> getAllLimited() {
+		return locationService.findAllLimited();
+	}
 
-    @RequestMapping(value = "/{id}")
-	public Location getLocation(@PathVariable int id){
-    	Location location = locationService.findById(id);
-    	return location;
+	@RequestMapping(value = "/{id}")
+	public Location getLocation(@PathVariable int id) {
+		Location location = locationService.findById(id);
+		return location;
 	}
 
 }

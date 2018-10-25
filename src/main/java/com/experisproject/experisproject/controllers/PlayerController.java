@@ -21,7 +21,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value="/api/player")
+@RequestMapping(value = "/api/player")
 @CrossOrigin
 public class PlayerController {
 
@@ -40,45 +40,45 @@ public class PlayerController {
 	}
 
 	@RequestMapping(value = "/byTeamName/{teamName}", method = RequestMethod.GET)
-	public List<Player> getPlayersByTeamName(@PathVariable String teamName){
+	public List<Player> getPlayersByTeamName(@PathVariable String teamName) {
 		return playerService.findPlayerByTeamName(teamName);
-}
+	}
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public List<Player> getAllPlayersIdNameAndTeam(){
-		return 	playerService.findPlayerShortInfo();
+	public List<Player> getAllPlayersIdNameAndTeam() {
+		return playerService.findPlayerShortInfo();
 	}
 
 	@RequestMapping(value = "limitedInfo", method = RequestMethod.GET)
-	public 	List<PlayerLimited> getPlayersLimitedInfo(){
+	public List<PlayerLimited> getPlayersLimitedInfo() {
 		return playerService.findAllLimited();
 	}
 
 
-	@RequestMapping(value="/{id}" , method=RequestMethod.GET)
-    public Player getById(@PathVariable int id){
-        return playerService.findById(id);
-    }
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Player getById(@PathVariable int id) {
+		return playerService.findById(id);
+	}
 
-    @RequestMapping(value = "" , method = RequestMethod.POST)
-    public void create(
-            @RequestBody PlayerForm form,
-            HttpServletResponse response
-    ){
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public void create(
+			@RequestBody PlayerForm form,
+			HttpServletResponse response
+	) {
 
-        //Create new player
-        Address address = new Address(form.getAddressLine1(),form.getAddressLine2(),form.getAddressLine3(),form.getCity(),form.getPostalCode(),form.getCountry());
-        LocalDate dateOfBirth = LocalDate.of(form.getYear(),form.getMonth(),form.getDay());
-        Person person = new Person(form.getFirstName(),form.getLastName(),dateOfBirth,address);
-        Team team = new Team();
-        Player player = new Player(form.getNumber(),form.getNormalPosition(),person,team,null);
+		//Create new player
+		Address address = new Address(form.getAddressLine1(), form.getAddressLine2(), form.getAddressLine3(), form.getCity(), form.getPostalCode(), form.getCountry());
+		LocalDate dateOfBirth = LocalDate.of(form.getYear(), form.getMonth(), form.getDay());
+		Person person = new Person(form.getFirstName(), form.getLastName(), dateOfBirth, address);
+		Team team = new Team();
+		Player player = new Player(form.getNumber(), form.getNormalPosition(), person, team, null);
 
-        teamService.save(team);
-        addressService.save(address);
-        personService.save(person);
-        playerService.save(player);
-        //playerService.save(person);
-        response.setStatus(HttpStatus.OK.value());
-    }
+		teamService.save(team);
+		addressService.save(address);
+		personService.save(person);
+		playerService.save(player);
+		//playerService.save(person);
+		response.setStatus(HttpStatus.OK.value());
+	}
 
 }

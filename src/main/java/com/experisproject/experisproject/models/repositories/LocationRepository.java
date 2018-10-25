@@ -8,8 +8,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface LocationRepository extends JpaRepository<Location,Integer> {
+public interface LocationRepository extends JpaRepository<Location, Integer> {
 
-    @Query(value = "SELECT l FROM Location l")
-    List<LocationLimited> findAllLimited();
+	@Query(value = "SELECT l FROM Location l")
+	List<LocationLimited> findAllLimited();
 }

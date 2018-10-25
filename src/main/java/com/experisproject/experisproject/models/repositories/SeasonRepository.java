@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface SeasonRepository extends JpaRepository<Season,Integer> {
+public interface SeasonRepository extends JpaRepository<Season, Integer> {
 
-    @Query(value = "SELECT s FROM Season s")
-    List<SeasonLimited> findAllLimited();
+	@Query(value = "SELECT s FROM Season s")
+	List<SeasonLimited> findAllLimited();
 }

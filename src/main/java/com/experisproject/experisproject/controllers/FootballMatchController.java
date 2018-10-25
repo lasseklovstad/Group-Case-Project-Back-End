@@ -16,13 +16,13 @@ public class FootballMatchController {
 	@Autowired
 	private FootballMatchService footballMatchService;
 
-	@RequestMapping(value = "/allInfo", method = RequestMethod.GET )
-	public List<FootballMatch> getFootballMatchesInfo(){
+	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
+	public List<FootballMatch> getFootballMatchesInfo() {
 		return footballMatchService.findAll();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public FootballMatch getFootballMatchById(@PathVariable int id){
+	public FootballMatch getFootballMatchById(@PathVariable int id) {
 		return footballMatchService.findById(id);
 	}
 
@@ -36,8 +36,6 @@ public class FootballMatchController {
 	//            @RequestBody FootballMatchForm form,
 	//            HttpServletResponse response
 	//    ){//create new match -> save()}
-
-
 
 
 }

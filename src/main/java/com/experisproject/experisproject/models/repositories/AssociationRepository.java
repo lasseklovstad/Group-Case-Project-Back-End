@@ -1,9 +1,8 @@
 package com.experisproject.experisproject.models.repositories;
 
 import com.experisproject.experisproject.models.entities.Association;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 
-
-public interface AssociationRepository extends CrudRepository<Association,Integer> {
+public interface AssociationRepository extends JpaRepository<Association, Integer> {
 }
