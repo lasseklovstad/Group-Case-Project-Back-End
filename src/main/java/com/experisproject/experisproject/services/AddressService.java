@@ -5,6 +5,8 @@ import com.experisproject.experisproject.models.repositories.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AddressService {
     private AddressRepository addressRepository;
@@ -20,4 +22,7 @@ public class AddressService {
 
     public void deleteAll(){addressRepository.deleteAll();}
 
+    public List<Address> getAllShortInfo(){
+        return this.addressRepository.findAllShortInfo();
+    }
 }
