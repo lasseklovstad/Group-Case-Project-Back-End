@@ -19,19 +19,25 @@ public class OwnerController {
 	private OwnerService ownerService;
 
 	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
-	public List<Owner> getAllOwners(){
+	public List<Owner> getAllOwners() {
 		List<Owner> ownerList = ownerService.findAll();
 		return ownerList;
 	}
 
-	@RequestMapping(value = "/{id}")
-	public Owner getOwnerById(@PathVariable int id){
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Owner getOwnerById(@PathVariable int id) {
 		Owner owner = ownerService.findById(id);
 		return owner;
 	}
 
-	@RequestMapping(value = "/all")
-	public 	List<OwnerLimited> getOwnersLimitedInfo(){
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public List<Owner> getOwnersIdNameAndTeam() {
+		return ownerService.findOwnersIdNameAndTeam();
+	}
+
+
+	@RequestMapping(value = "/limitedInfo", method = RequestMethod.GET)
+	public List<OwnerLimited> getOwnersLimitedInfo() {
 		return ownerService.findAllLimited();
 	}
 

@@ -13,33 +13,42 @@ import java.util.List;
 
 @Service
 public class TeamService {
-    private TeamRepository teamRepository;
+	private TeamRepository teamRepository;
 
-    @Autowired
-    public TeamRepository teamRepository(TeamRepository teamRepository){
-        return this.teamRepository=teamRepository;
-    }
-
-    public void save(Team team){
-        teamRepository.save(team);
-    }
-
-    public Team findById(int id){
-        return teamRepository.findById(id).get();
-    }
-    public void deleteAll(){teamRepository.deleteAll();}
-    public List<Team> findAll(){
-        List<Team> result = new ArrayList<>();
-        teamRepository.findAll().forEach(team->result.add(team));
-        return result;
-    }
-    public List<Team> findAllByName(String name){
-        return teamRepository.findAllByNameContaining(name);
-    }
+	@Autowired
+	public TeamRepository teamRepository(TeamRepository teamRepository) {
+		return this.teamRepository = teamRepository;
+	}
 
 
-    public List<TeamLimited> findAllLimited(){
-        return teamRepository.findAllRemodelTeams();
-    }
+	public Team findById(int id) {
+		return teamRepository.findById(id).get();
+	}
+
+	public List<Team> findAllByName(String name) {
+		return teamRepository.findAllByNameContaining(name);
+	}
+
+	public List<Team> findTeamsIdsNameCoachLocation(){
+		return teamRepository.findTeamsIdsNameCoachLocation();
+	}
+
+	public List<TeamLimited> findAllLimited() {
+		return teamRepository.findAllRemodelTeams();
+	}
+
+	public List<Team> findAll() {
+		List<Team> result = new ArrayList<>();
+		teamRepository.findAll().forEach(team -> result.add(team));
+		return result;
+	}
+
+	public void save(Team team) {
+		teamRepository.save(team);
+	}
+
+	public void deleteAll() {
+		teamRepository.deleteAll();
+	}
 
 }

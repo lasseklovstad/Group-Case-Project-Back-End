@@ -31,10 +31,15 @@ public class OwnerService {
 	}
 
 	public Owner findById(int id){
-    	return ownerRepository.getOne(id);
+    	return ownerRepository.findById(id).get();
 	}
 
-    public void save(Owner owner){
+	public List<Owner> findOwnersIdNameAndTeam(){
+    	return ownerRepository.findOwnersIdNameAndTeam();
+	}
+
+
+	public void save(Owner owner){
         ownerRepository.save(owner);
     }
     public void deleteAll(){

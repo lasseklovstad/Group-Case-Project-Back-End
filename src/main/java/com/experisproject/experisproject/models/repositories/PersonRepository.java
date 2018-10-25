@@ -10,7 +10,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 
-public interface PersonRepository extends JpaRepository<Person,Integer> {
+public interface PersonRepository extends JpaRepository<Person, Integer> {
 	Person findPersonByOwner(Owner owner);
 
 	@Query(value = "SELECT p FROM Person p")

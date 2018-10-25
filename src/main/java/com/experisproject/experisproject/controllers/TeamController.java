@@ -15,39 +15,49 @@ import java.util.List;
 @RequestMapping(value = "api/team")
 public class TeamController implements CommandLineRunner {
 
-    @Autowired
-    TeamService teamService;
-    @Autowired
-    OwnerService ownerService;
-    @Autowired
-    LocationService locationService;
-    @Autowired
-    CoachService coachService;
-    @Autowired
-    PersonService personService;
-    @Autowired
-    AddressService addressService;
-    @Autowired
-    AssociationService associationService;
-    @Autowired
-    PlayerService playerService;
+	@Autowired
+	TeamService teamService;
+	@Autowired
+	OwnerService ownerService;
+	@Autowired
+	LocationService locationService;
+	@Autowired
+	CoachService coachService;
+	@Autowired
+	PersonService personService;
+	@Autowired
+	AddressService addressService;
+	@Autowired
+	AssociationService associationService;
+	@Autowired
+	PlayerService playerService;
 
 
-    @RequestMapping(value = "/all",method = RequestMethod.GET)
-    public List<TeamLimited> getAll(){
-        return teamService.findAllLimited();
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public List<Team> getTeamsIdsNameCoachLocation() {
+		return teamService.findTeamsIdsNameCoachLocation();
+	}
 
-    }
+	@RequestMapping(value = "/limitedInfo", method = RequestMethod.GET)
+	public List<TeamLimited> getAllLimited() {
+		return teamService.findAllLimited();
+
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Team getTeamById(@PathVariable int id) {
+		Team team = teamService.findById(id);
+		return team;
+	}
 
 
+	@RequestMapping(value = "/byName/{name}", method = RequestMethod.GET)
+	public List<Team> getTeamsByName(@PathVariable String name) {
+		return teamService.findAllByName(name);
+	}
 
-    @RequestMapping(value = "/byName/{name}", method = RequestMethod.GET)
-    public List<Team> getTeamsByName(@PathVariable String name){
-        return teamService.findAllByName(name);
-    }
-
-    @Override
-    public void run(String... args) throws Exception {
+	@Override
+	public void run(String... args) throws Exception {
 //        playerService.deleteAll();
 //        teamService.deleteAll();
 //        coachService.deleteAll();
@@ -58,6 +68,5 @@ public class TeamController implements CommandLineRunner {
 //        addressService.deleteAll();
 
 
-
-    }
+	}
 }

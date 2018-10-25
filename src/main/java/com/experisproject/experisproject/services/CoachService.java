@@ -24,12 +24,16 @@ public class CoachService {
 		 return result;
 	}
 
+	public List<Coach> findCoachesIdNameAndTeam(){
+    	return coachRepository.findCoachesIdNameAndTeam();
+	}
+
 	public List<CoachLimited> findAllLimited(){
     	return coachRepository.findAllLimited();
 	}
 
 	public Coach findById(int id){
-		return coachRepository.getOne(id);
+		return coachRepository.findById(id).get();
 	}
 
 

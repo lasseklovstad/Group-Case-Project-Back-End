@@ -18,7 +18,11 @@ public class LocationService {
 	}
 
 	public Location findById(int id) {
-		return locationRepository.getOne(id);
+		return locationRepository.findById(id).get();
+	}
+
+	public 	List<Location> findLocationIdNameDescriptionAddress(){
+		return locationRepository.findLocationIdNameDescriptionAddress();
 	}
 
 	public List<LocationLimited> findAllLimited() {

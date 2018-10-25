@@ -17,21 +17,25 @@ public class CoachController {
 	private CoachService coachService;
 
 	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
-	public List<Coach>  getAllCoaches(){
+	public List<Coach> getAllCoaches() {
 		return coachService.findAll();
 	}
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public List<CoachLimited> getCoachesLimitedInfo(){
+	public List<Coach> getCoachesIdNameAndTeam() {
+		return coachService.findCoachesIdNameAndTeam();
+	}
+
+	@RequestMapping(value = "/limitedInfo", method = RequestMethod.GET)
+	public List<CoachLimited> getCoachesLimitedInfo() {
 		return coachService.findAllLimited();
 	}
 
-	@RequestMapping(value = "/{id}")
-	public Coach getCoachById(@PathVariable int id){
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Coach getCoachById(@PathVariable int id) {
 		Coach coach = coachService.findById(id);
 		return coach;
 	}
-
 
 
 }
