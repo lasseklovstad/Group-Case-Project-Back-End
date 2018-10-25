@@ -18,7 +18,7 @@ public class LocationService {
 	}
 
 	public Location findById(int id) {
-		return locationRepository.getOne(id);
+		return locationRepository.findById(id).get();
 	}
 
 	public List<LocationLimited> findAllLimited() {
