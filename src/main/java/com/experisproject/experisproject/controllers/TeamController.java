@@ -34,7 +34,12 @@ public class TeamController implements CommandLineRunner {
 
 
     @RequestMapping(value = "/all",method = RequestMethod.GET)
-    public List<TeamLimited> getAll(){
+	public List<Team> getTeamsIdsNameCoachLocation() {
+    	return teamService.findTeamsIdsNameCoachLocation();
+	}
+
+		@RequestMapping(value = "/limitedInfo", method = RequestMethod.GET)
+    public List<TeamLimited> getAllLimited(){
         return teamService.findAllLimited();
 
     }

@@ -13,6 +13,9 @@ public interface TeamRepository extends JpaRepository<Team,Integer> {
     List<Team> findAllByNameContaining(String name);
 
 
+	@Query(value = "SELECT  t.teamId, t.name, t.coach.coachId, CONCAT(t.coach.person.firstName,' ',t.coach.person.lastName), t.location.locationId, t.location.name FROM Team t")
+	List<Team> findTeamsIdsNameCoachLocation();
+
     @Query(value = "SELECT team FROM Team team")
     List<TeamLimited> findAllRemodelTeams();
 
