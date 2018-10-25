@@ -4,6 +4,7 @@ import com.experisproject.experisproject.models.entities.Location;
 import com.experisproject.experisproject.projections.LocationLimited;
 import com.experisproject.experisproject.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,11 @@ public class LocationController {
 	LocationService locationService;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public List<Location> getLocationIdNameAndDescription() {
+		return locationService.findLocationIdNameDescriptionAddress();
+	}
+
+	@RequestMapping(value = "/limitedInfo", method = RequestMethod.GET)
 	public List<LocationLimited> getAllLimited() {
 		return locationService.findAllLimited();
 	}
