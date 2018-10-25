@@ -24,7 +24,7 @@ public class OwnerController {
 		return ownerList;
 	}
 
-	@RequestMapping(value = "/{id}")
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Owner getOwnerById(@PathVariable int id){
 		Owner owner = ownerService.findById(id);
 		return owner;
