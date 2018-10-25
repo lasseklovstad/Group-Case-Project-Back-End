@@ -39,9 +39,15 @@ public class TeamController implements CommandLineRunner {
 
     }
 
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Team getTeamById(@PathVariable int id){
+		Team team = teamService.findById(id);
+		return team;
+	}
 
 
-    @RequestMapping(value = "/byName/{name}", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/byName/{name}", method = RequestMethod.GET)
     public List<Team> getTeamsByName(@PathVariable String name){
         return teamService.findAllByName(name);
     }
