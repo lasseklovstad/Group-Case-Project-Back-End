@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -33,15 +34,14 @@ public class Person {
 	@JsonIgnore
 	private Coach coach;
 
-	/*  Unnecessary for now to map the entities bidirectional
-	@OneToOne(mappedBy ="person", cascade = CascadeType.ALL)//if a person is deleted and is a coach, no longer a coach
-	private Coach coach;
 	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL) //if a person is deleted and is a player, no longer a player
+	@JsonIgnore
 	private Player player;
-	@OneToOne(mappedBy = "person")
-	private Contact contact;
 
-	*/
+	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<Contact> contacts;
+
 
 	public Person() {
 	}

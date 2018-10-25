@@ -1,9 +1,11 @@
 package com.experisproject.experisproject.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Data
@@ -34,6 +36,10 @@ public class Team {
 	@JoinColumn(name = "locationId")
 	@NotNull
 	private Location location;
+
+	@OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<TeamResult> teamResults;
 
 	/*  Unnecessary for now to map the entities bidirectional
 	@OneToMany(mappedBy = "team")

@@ -18,7 +18,6 @@ public class Coach {
 	@NotNull
 	private Person person;
 
-
 	@OneToOne(mappedBy = "coach", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Team team;
