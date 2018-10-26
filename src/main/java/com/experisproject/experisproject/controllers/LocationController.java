@@ -52,7 +52,7 @@ public class LocationController {
 		}
 	}
 
-	@RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
 	public void deleteLocationById(@PathVariable int id, HttpServletResponse response) {
 		try {
 			locationService.deleteById(id);
@@ -64,7 +64,7 @@ public class LocationController {
 		}
 	}
 
-	@RequestMapping(value = "delete/all", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/all/delete", method = RequestMethod.DELETE)
 	public void deleteAllLocations(HttpServletResponse response) {
 		try {
 			locationService.deleteAll();

@@ -32,7 +32,7 @@ public class AssociationController {
 		}
 	}
 
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
 	public void deleteAssociationById(@PathVariable int id, HttpServletResponse response){
 		try {
 			associationService.deleteById(id);
@@ -44,9 +44,16 @@ public class AssociationController {
 		}
 	}
 
-	@RequestMapping(value = "/delete/all", method = RequestMethod.DELETE)
-	public void deleteAllAssociations(){
-		associationService.deleteAll();
+	@RequestMapping(value = "/all/delete", method = RequestMethod.DELETE)
+	public void deleteAllAssociations(HttpServletResponse response){
+		try {
+			associationService.deleteAll();
+			response.setStatus(HttpServletResponse.SC_OK);
+
+		}catch (Exception e){
+			e.getStackTrace();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
 	}
 
 }
