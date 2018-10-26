@@ -39,7 +39,7 @@ public class LocationController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void createNewLocation(@RequestBody LocationForm form, HttpServletResponse response) {
+	public void createLocation(@RequestBody LocationForm form, HttpServletResponse response) {
 		try {
 			Address address;
 			address = addressService.findById(form.getAddressId());
