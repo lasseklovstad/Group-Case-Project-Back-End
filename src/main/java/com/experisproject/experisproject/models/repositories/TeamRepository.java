@@ -10,8 +10,8 @@ import java.util.List;
 
 
 public interface TeamRepository extends JpaRepository<Team, Integer> {
-	List<Team> findAllByNameContaining(String name);
 
+	List<Team> findAllByNameContaining(String name);
 
 	@Query(value = "SELECT  t.teamId, t.name, t.coach.coachId, CONCAT(t.coach.person.firstName,' ',t.coach.person.lastName), t.location.locationId, t.location.name, t.location.address.country FROM Team t")
 	List<Team> findTeamsIdsNameCoachLocation();
