@@ -20,13 +20,14 @@ public class AddressService {
     	return addressRepository.findById(id).get();
 	}
 
+	public List<Address> findAddressesShortInfo(){
+		return this.addressRepository.findAddressesShortInfo();
+	}
     public void save(Address address){
         addressRepository.save(address);
     }
 
     public void deleteAll(){addressRepository.deleteAll();}
 
-    public List<Address> getAllShortInfo(){
-        return this.addressRepository.findAllShortInfo();
-    }
+
 }
