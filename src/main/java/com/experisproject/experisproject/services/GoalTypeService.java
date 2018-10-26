@@ -23,6 +23,11 @@ public class GoalTypeService {
 		return goalTypeRepository.findById(id).get();
 	}
 
+	public List<GoalType> findGoalTypes(){
+		return goalTypeRepository.findGoalTypes();
+	}
+
+
 	public List<GoalType> findAll() {
 		List<GoalType> result = new ArrayList<>();
 		goalTypeRepository.findAll().forEach(goalType -> result.add(goalType));

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -35,11 +36,19 @@ public class SeasonController {
 
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void createNew(@RequestBody SeasonForm form) {
+	public void createNew(@RequestBody SeasonForm form, HttpServletResponse response) {
 
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		dtf = dtf.withLocale(Locale.US);
-		Season season = new Season(form.getName(), LocalDate.parse(form.getStartDate(), dtf), LocalDate.parse(form.getEndDate(), dtf), form.getDescription());
-		seasonService.save(season);
+		try {
+			Season season = new Season(form.getName(), LocalDate.parse(form.getStartDate(), dtf), LocalDate.parse(form.getEndDate(), dtf), form.getDescription());
+			seasonService.save(season);
+			response.setStatus(HttpServletResponse.SC_CREATED);
+
+		} catch (Exception e){
+			e.getCause();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
+
 	}
 }
