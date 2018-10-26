@@ -21,6 +21,12 @@ public class AssociationController {
 		return associationService.findAssociationsIdNameDescription();
 	}
 
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Association getAssociationById(@PathVariable int id) {
+		Association association = associationService.findById(id);
+		return association;
+	}
+
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public void createNewAssociation(@RequestBody Association association, HttpServletResponse response) {
 		try {

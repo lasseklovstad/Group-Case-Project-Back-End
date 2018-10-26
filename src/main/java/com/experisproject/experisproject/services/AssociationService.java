@@ -19,6 +19,9 @@ public class AssociationService {
 	public List<Association> findAssociationsIdNameDescription(){
 		return associationRepository.findAssociationsIdNameDescription();
 	}
+	public Association findById(int id) {
+		return associationRepository.findById(id).get();
+	}
 
 	public void save(Association association) {
 		associationRepository.save(association);
