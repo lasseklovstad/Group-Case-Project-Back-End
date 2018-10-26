@@ -21,7 +21,7 @@ public class MatchGoalController {
 	GoalTypeService goalTypeService;
 
 
-	@RequestMapping(value = "/goalType/all", method = RequestMethod.GET)
+	@RequestMapping(value = "/goalType/allInfo", method = RequestMethod.GET)
 	public List<GoalType> getGoalTypes(){
 		return goalTypeService.findAll();
 	}
