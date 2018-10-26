@@ -20,7 +20,14 @@ public class AssociationController {
 		return associationService.findAssociationsIdNameDescription();
 	}
 
-	@RequestMapping(value = "/delete/{id}")
-	public void deleteOneAssociation(@PathVariable )
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+	public void deleteOneAssociation(@PathVariable int id){
+		associationService.deleteById(id);
+	}
+
+	@RequestMapping(value = "/delete/all", method = RequestMethod.DELETE)
+	public void deleteAllAssociations(){
+		associationService.deleteAll();
+	}
 
 }

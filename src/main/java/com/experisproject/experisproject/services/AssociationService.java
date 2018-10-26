@@ -24,6 +24,9 @@ public class AssociationService {
 		associationRepository.save(association);
 	}
 
+	public void deleteById(int id){
+		associationRepository.deleteById(id);
+	}
 	public void deleteAll() {
 		associationRepository.deleteAll();
 	}
