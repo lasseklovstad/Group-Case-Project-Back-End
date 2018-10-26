@@ -24,12 +24,12 @@ public class UserController {
 		return userList;
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/findById/{id}", method = RequestMethod.GET)
 	public User getUserById(@PathVariable int id) {
 		return userService.findById(id);
 	}
 
-	@RequestMapping(value = "/{email}", method = RequestMethod.GET)
+	@RequestMapping(value = "/findByEmail/{email}", method = RequestMethod.GET)
 	public User getByEmail(@PathVariable String email){
 		return userService.findByEmail(email);
 	}
