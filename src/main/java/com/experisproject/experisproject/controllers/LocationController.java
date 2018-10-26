@@ -2,12 +2,11 @@ package com.experisproject.experisproject.controllers;
 
 import com.experisproject.experisproject.models.entities.Address;
 import com.experisproject.experisproject.models.entities.Location;
-import com.experisproject.experisproject.models.forms.AssociationForm;
+import com.experisproject.experisproject.models.forms.LocationForm;
 import com.experisproject.experisproject.projections.LocationLimited;
 import com.experisproject.experisproject.services.AddressService;
 import com.experisproject.experisproject.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +39,7 @@ public class LocationController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void createNewLocation(@RequestBody AssociationForm form, HttpServletResponse response){
+	public void createNewLocation(@RequestBody LocationForm form, HttpServletResponse response){
 		try{
 			Address address;
 			address = addressService.findById(form.getAddressId());
@@ -49,6 +48,7 @@ public class LocationController {
 			response.setStatus(HttpStatus.OK.value());
 		}
 		catch (Exception e){
+			e.getStackTrace();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
 	}

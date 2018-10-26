@@ -1,6 +1,6 @@
 package com.experisproject.experisproject.models.forms;
 
-public class AssociationForm {
+public class LocationForm {
 
 	private String name;
 	private String description;
