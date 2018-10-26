@@ -32,10 +32,14 @@ public class MatchGoalController {
 	}
 
 
-	@RequestMapping(value = "/goalType", method = RequestMethod.POST)
-	public void create(@RequestParam String goalType, HttpServletResponse response){
-		GoalType newGoalType = new GoalType(goalType);
-		goalTypeService.save(newGoalType);
+	@RequestMapping(value = "goalType/all", method = RequestMethod.GET)
+	public List<GoalType> findGoalTypes(){
+		return goalTypeService.findGoalTypes();
+	}
+
+		@RequestMapping(value = "/goalType", method = RequestMethod.POST)
+	public void create(@RequestParam GoalType goalType, HttpServletResponse response){
+		goalTypeService.save(goalType);
 		response.setStatus(HttpStatus.OK.value());
 	}
 
