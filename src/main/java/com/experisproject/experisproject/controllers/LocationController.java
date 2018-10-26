@@ -40,7 +40,7 @@ public class LocationController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void createNewAssociation(@RequestBody AssociationForm form, HttpServletResponse response){
+	public void createNewLocation(@RequestBody AssociationForm form, HttpServletResponse response){
 		try{
 			Address address;
 			address = addressService.findById(form.getAddressId());
