@@ -33,10 +33,9 @@ public class MatchGoalController {
 
 
 	@RequestMapping(value = "/goalType", method = RequestMethod.POST)
-	public void create(@RequestParam String goalType, HttpServletResponse response){
-		GoalType newGoalType = new GoalType(goalType);
-		goalTypeService.save(newGoalType);
-		response.setStatus(HttpStatus.OK.value());
+	public void create(@RequestBody GoalType goalType, HttpServletResponse response){
+		goalTypeService.save(goalType);
+		response.setStatus(HttpStatus.CREATED.value());
 	}
 
 	//@RequestMapping(value = "/goalType", method = RequestMethod.PUT)

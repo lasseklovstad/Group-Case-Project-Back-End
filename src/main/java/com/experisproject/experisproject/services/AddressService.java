@@ -21,7 +21,7 @@ public class AddressService {
 	}
 
 	public List<Address> findAddressesShortInfo(){
-		return this.addressRepository.findAddressesShortInfo();
+		return this.addressRepository.findAddressesInfo();
 	}
     public void save(Address address){
         addressRepository.save(address);
