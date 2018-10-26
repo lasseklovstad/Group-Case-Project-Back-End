@@ -54,14 +54,13 @@ public class LocationController {
 
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
 	public void deleteLocationById(@PathVariable int id, HttpServletResponse response) {
-
 		try {
 			locationService.deleteById(id);
 			response.setStatus(HttpServletResponse.SC_OK);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			e.getStackTrace();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-
 		}
 	}
 
