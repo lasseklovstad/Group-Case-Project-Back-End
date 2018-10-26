@@ -29,6 +29,10 @@ public class UserController {
 		return userService.findById(id);
 	}
 
+	@RequestMapping(value = "/{email}", method = RequestMethod.GET)
+	public User getByEmail(@PathVariable String email){
+		return userService.findByEmail(email);
+	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	//@ResponseStatus(code = HttpStatus.OK)
