@@ -38,9 +38,14 @@ public class MatchGoalController {
 	}
 
 		@RequestMapping(value = "/goalType", method = RequestMethod.POST)
-	public void create(@RequestBody GoalType goalType, HttpServletResponse response){
-		goalTypeService.save(goalType);
-		response.setStatus(HttpStatus.OK.value());
+	public void createGoalType(@RequestBody GoalType goalType, HttpServletResponse response){
+			try {
+				goalTypeService.save(goalType);
+				response.setStatus(HttpServletResponse.SC_CREATED);
+			} catch (Exception e) {
+				e.getStackTrace();
+				response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			}
 	}
 
 	//@RequestMapping(value = "/goalType", method = RequestMethod.PUT)
