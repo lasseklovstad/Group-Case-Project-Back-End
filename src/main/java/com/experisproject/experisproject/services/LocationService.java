@@ -33,6 +33,10 @@ public class LocationService {
 		locationRepository.save(location);
 	}
 
+	public void deleteById(int id){
+		locationRepository.deleteById(id);
+	}
+
 	public void deleteAll() {
 		locationRepository.deleteAll();
 	}

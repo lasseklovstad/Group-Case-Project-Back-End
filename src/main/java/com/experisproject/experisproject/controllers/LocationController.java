@@ -39,18 +39,43 @@ public class LocationController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void createNewLocation(@RequestBody LocationForm form, HttpServletResponse response){
-		try{
+	public void createNewLocation(@RequestBody LocationForm form, HttpServletResponse response) {
+		try {
 			Address address;
 			address = addressService.findById(form.getAddressId());
-			Location location = new Location(form.getName(),form.getDescription(),address);
+			Location location = new Location(form.getName(), form.getDescription(), address);
 			locationService.save(location);
-			response.setStatus(HttpStatus.OK.value());
-		}
-		catch (Exception e){
+			response.setStatus(HttpServletResponse.SC_CREATED);
+		} catch (Exception e) {
 			e.getStackTrace();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
+	}
+
+	@RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
+	public void deleteLocationById(@PathVariable int id, HttpServletResponse response) {
+
+		try {
+			locationService.deleteById(id);
+			response.setStatus(HttpServletResponse.SC_OK);
+		} catch (Exception e) {
+			e.getStackTrace();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+
+		}
+	}
+
+	@RequestMapping(value = "delete/all", method = RequestMethod.DELETE)
+	public void deleteAllLocations(HttpServletResponse response) {
+		try {
+			locationService.deleteAll();
+			response.setStatus(HttpServletResponse.SC_OK);
+		} catch (Exception e) {
+			e.getStackTrace();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+
+		}
+
 	}
 
 }
