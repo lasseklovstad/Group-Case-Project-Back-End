@@ -16,6 +16,10 @@ public class AddressService {
         return this.addressRepository=addressRepository;
     }
 
+    public Address findById(int id){
+    	return addressRepository.findById(id).get();
+	}
+
     public void save(Address address){
         addressRepository.save(address);
     }
