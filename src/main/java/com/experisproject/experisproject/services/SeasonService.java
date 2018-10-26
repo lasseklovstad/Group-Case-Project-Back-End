@@ -17,6 +17,10 @@ public class SeasonService {
     SeasonRepository seasonRepository(SeasonRepository seasonRepository){
         return this.seasonRepository=seasonRepository;
     }
+	public List<Season> findSeasonsIdNameDatesDescription(){
+    	return seasonRepository.findSeasonsIdNameDatesDescription();
+	}
+
 
     public void save(Season season){
         seasonRepository.save(season);

@@ -5,6 +5,7 @@ import com.experisproject.experisproject.models.forms.SeasonForm;
 import com.experisproject.experisproject.projections.SeasonLimited;
 import com.experisproject.experisproject.services.SeasonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -21,9 +22,17 @@ public class SeasonController {
 	private SeasonService seasonService;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public 	List<Season> getSeasonsIdNameDatesDescription(){
+		return seasonService.findSeasonsIdNameDatesDescription();
+	}
+
+
+	@RequestMapping(value = "/limitedInfo", method = RequestMethod.GET)
 	public List<SeasonLimited> getAllLimited() {
 		return seasonService.findAllLimited();
 	}
+
+
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public void createNew(@RequestBody SeasonForm form) {

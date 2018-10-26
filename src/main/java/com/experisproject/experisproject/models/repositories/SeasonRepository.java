@@ -11,6 +11,9 @@ import java.util.List;
 @Repository
 public interface SeasonRepository extends JpaRepository<Season, Integer> {
 
+	@Query(value = "SELECT s.seasonId, s.name, s.startDate, s.endDate, s.description FROM Season s")
+	List<Season> findSeasonsIdNameDatesDescription();
+
 	@Query(value = "SELECT s FROM Season s")
 	List<SeasonLimited> findAllLimited();
 }
