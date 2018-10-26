@@ -5,6 +5,7 @@ import com.experisproject.experisproject.services.AssociationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -18,6 +19,17 @@ public class AssociationController {
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public List<Association> getAssociationsIdNameDescription(){
 		return associationService.findAssociationsIdNameDescription();
+	}
+
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public void createNewAssociation(@RequestBody Association association, HttpServletResponse response) {
+		try {
+			associationService.save(association);
+			response.setStatus(HttpServletResponse.SC_CREATED);
+		} catch (Exception e) {
+			e.getStackTrace();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
