@@ -6,6 +6,7 @@ import com.experisproject.experisproject.services.CoachService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -37,5 +38,14 @@ public class CoachController {
 		return coach;
 	}
 
+	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
+	public void deleteCoachById(@PathVariable int id, HttpServletResponse response){
+		try {
+			coachService.deleteById(id);
+			response.setStatus(HttpServletResponse.SC_OK);
+		} catch (Exception e) {
+			e.getStackTrace();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 
+		}	}
 }

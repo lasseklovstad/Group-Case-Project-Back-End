@@ -40,5 +40,10 @@ public class CoachService {
 	public void save(Coach coach){
         coachRepository.save(coach);
     }
-    public void deleteAll(){coachRepository.deleteAll();}
+
+    public void deleteById(int id){
+		coachRepository.deleteById(id);
+	}
+
+	public void deleteAll(){coachRepository.deleteAll();}
 }
