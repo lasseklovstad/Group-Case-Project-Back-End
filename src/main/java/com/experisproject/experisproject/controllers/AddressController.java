@@ -41,7 +41,7 @@ public class AddressController {
 	@RequestMapping(value = "", method = RequestMethod.PUT)
 	public void updateAddress(@RequestBody Address address, HttpServletResponse response){
 		try {
-			addressService.save(address);
+			addressService.updateAddress(address);
 			response.setStatus(HttpServletResponse.SC_OK);
 
 		}catch (Exception e){

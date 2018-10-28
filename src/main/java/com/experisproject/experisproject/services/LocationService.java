@@ -29,6 +29,9 @@ public class LocationService {
 		return locationRepository.findAllLimited();
 	}
 
+	public void updateLocation(Location location){
+		locationRepository.save(location);
+	}
 	public void save(Location location) {
 		locationRepository.save(location);
 	}

@@ -24,10 +24,10 @@ public class AddressService {
 		return this.addressRepository.findAddressesInfo();
 	}
 
-	/*
+
 	public void updateAddress(Address address){
-    	//addressRepository.updateAddress(address)
-	}*/
+    	addressRepository.save(address);
+	}
 
     public void save(Address address){
         addressRepository.save(address);
