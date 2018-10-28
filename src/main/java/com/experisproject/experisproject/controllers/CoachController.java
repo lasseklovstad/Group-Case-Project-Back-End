@@ -61,7 +61,7 @@ public class CoachController {
 	@RequestMapping(value = "", method = RequestMethod.PUT)
 	public void updateCoach(@RequestBody CoachForm form, HttpServletResponse response) {
 		try {
-			//make sure
+			//does it make any sense to do this???
 			Person person = personService.findById(form.getPersonId());
 			personService.updatePerson(person);
 			response.setStatus(HttpServletResponse.SC_OK);

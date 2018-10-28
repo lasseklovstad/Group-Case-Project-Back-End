@@ -6,6 +6,7 @@ import com.experisproject.experisproject.services.FootballMatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -37,5 +38,17 @@ public class FootballMatchController {
 	//            HttpServletResponse response
 	//    ){//create new match -> save()}
 
+
+
+	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
+	public void deleteFootballMatchById(@PathVariable int id, HttpServletResponse response){
+		try {
+			footballMatchService.deleteById(id);
+			response.setStatus(HttpServletResponse.SC_OK);
+		}catch (Exception ex){
+			ex.getCause();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
+	}
 
 }

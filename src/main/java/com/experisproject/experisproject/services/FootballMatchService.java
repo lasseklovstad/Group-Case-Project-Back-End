@@ -37,6 +37,9 @@ public class FootballMatchService {
 		footballMatchRepository.save(footballMatch);
 	}
 
+	public void deleteById(int id) {
+		footballMatchRepository.deleteById(id);
+	}
 	public void deleteAll(){
 		footballMatchRepository.deleteAll();
 	}

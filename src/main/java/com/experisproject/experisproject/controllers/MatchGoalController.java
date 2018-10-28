@@ -1,6 +1,7 @@
 package com.experisproject.experisproject.controllers;
 
 import com.experisproject.experisproject.models.entities.GoalType;
+import com.experisproject.experisproject.models.entities.MatchGoal;
 import com.experisproject.experisproject.services.GoalTypeService;
 import com.experisproject.experisproject.services.MatchGoalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,50 @@ import java.util.List;
 @RequestMapping(value = "/api/matchGoal")
 @CrossOrigin
 public class MatchGoalController {
+
 	@Autowired
 	MatchGoalService matchGoalService;
-
 	@Autowired
 	GoalTypeService goalTypeService;
 
+	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
+	public List<MatchGoal> getAllMatchGoals(){
+		return matchGoalService.findAll();
+	}
 
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public List<MatchGoal> getMatchGoals(){
+		return matchGoalService.findMatchGoalIdDescriptionGoalTypeMatchPlayer();
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public MatchGoal getMatchGoalById(@PathVariable int id, HttpServletResponse response){
+		return matchGoalService.findById(id);
+	}
+
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public void createMatchGoal(){
+		//edit method
+	}
+
+	@RequestMapping(value = "", method = RequestMethod.PUT)
+	public void updateMatchGoal(){
+		//edit method
+	}
+
+	@RequestMapping(value = "{id}/delete", method = RequestMethod.DELETE)
+	public void deleteMatchGoalById(@PathVariable int id, HttpServletResponse response){
+		try {
+			matchGoalService.deleteById(id);
+			response.setStatus(HttpServletResponse.SC_OK);
+		}catch (Exception ex){
+			ex.getCause();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
+	}
+
+
+	/* GOALTYPE MAPPING AND REQUEST METHODS */
 	@RequestMapping(value = "/goalType/allInfo", method = RequestMethod.GET)
 	public List<GoalType> getGoalTypes(){
 		return goalTypeService.findAll();
@@ -31,27 +69,34 @@ public class MatchGoalController {
 		return goalTypeService.findById(id);
 	}
 
-
 	@RequestMapping(value = "goalType/all", method = RequestMethod.GET)
 	public List<GoalType> findGoalTypes(){
 		return goalTypeService.findGoalTypes();
 	}
 
-		@RequestMapping(value = "/goalType", method = RequestMethod.POST)
-	public void createGoalType(@RequestBody GoalType goalType, HttpServletResponse response){
-			try {
-				goalTypeService.save(goalType);
-				response.setStatus(HttpServletResponse.SC_CREATED);
-			} catch (Exception e) {
-				e.getStackTrace();
-				response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-			}
+	@RequestMapping(value = "/goalType", method = RequestMethod.POST)
+	public void createGoalType(@RequestBody GoalType goalType, HttpServletResponse response) {
+		try {
+			goalTypeService.save(goalType);
+			response.setStatus(HttpServletResponse.SC_CREATED);
+		} catch (Exception e) {
+			e.getStackTrace();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
 	}
 
-	//@RequestMapping(value = "/goalType", method = RequestMethod.PUT)
+	@RequestMapping(value = "/goalType", method = RequestMethod.PUT)
+	public void updateGoalType(@RequestBody GoalType goalType, HttpServletResponse response) {
+		try {
+			goalTypeService.updateGoalType(goalType);
+			response.setStatus(HttpServletResponse.SC_OK);
+		} catch (Exception e) {
+			e.getStackTrace();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
+	}
 
-
-	@RequestMapping(value = "/goalType/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/goalType/{id}/delete", method = RequestMethod.DELETE)
 	public void deleteGoalTypeById(@PathVariable int id, HttpServletResponse response) {
 		 goalTypeService.deleteById(id);
 		 response.setStatus(HttpStatus.OK.value());

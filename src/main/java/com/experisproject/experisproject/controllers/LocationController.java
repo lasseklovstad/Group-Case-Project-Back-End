@@ -89,9 +89,7 @@ public class LocationController {
 		} catch (Exception e) {
 			e.getStackTrace();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-
 		}
-
 	}
 
 }

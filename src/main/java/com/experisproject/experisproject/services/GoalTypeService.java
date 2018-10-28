@@ -11,7 +11,6 @@ import java.util.List;
 @Service
 public class GoalTypeService {
 
-
 	private GoalTypeRepository goalTypeRepository;
 
 	@Autowired
@@ -27,11 +26,14 @@ public class GoalTypeService {
 		return goalTypeRepository.findGoalTypes();
 	}
 
-
 	public List<GoalType> findAll() {
 		List<GoalType> result = new ArrayList<>();
 		goalTypeRepository.findAll().forEach(goalType -> result.add(goalType));
 		return result;
+	}
+
+	public void updateGoalType(GoalType goalType){
+		goalTypeRepository.save(goalType);
 	}
 
 	public void save(GoalType goalType) {
