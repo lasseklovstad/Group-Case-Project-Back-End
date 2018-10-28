@@ -58,6 +58,19 @@ public class CoachController {
 		}
 	}
 
+	@RequestMapping(value = "", method = RequestMethod.PUT)
+	public void updateCoach(@RequestBody CoachForm form, HttpServletResponse response) {
+		try {
+			//make sure
+			Person person = personService.findById(form.getPersonId());
+			personService.updatePerson(person);
+			response.setStatus(HttpServletResponse.SC_OK);
+		} catch (Exception ex) {
+			ex.getCause();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
+	}
+
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
 	public void deleteCoachById(@PathVariable int id, HttpServletResponse response) {
 		try {

@@ -43,7 +43,6 @@ public class AddressController {
 		try {
 			addressService.updateAddress(address);
 			response.setStatus(HttpServletResponse.SC_OK);
-
 		}catch (Exception e){
 			e.getCause();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);

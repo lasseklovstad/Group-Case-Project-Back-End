@@ -38,6 +38,19 @@ public class AssociationController {
 		}
 	}
 
+	@RequestMapping(value = "", method = RequestMethod.PUT)
+	public void updateAssociation(@RequestBody Association association, HttpServletResponse response) {
+		try {
+			associationService.updateAssociation(association);
+			response.setStatus(HttpServletResponse.SC_OK);
+		} catch (Exception e) {
+			e.getStackTrace();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
+	}
+
+
+
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
 	public void deleteAssociationById(@PathVariable int id, HttpServletResponse response){
 		try {

@@ -47,6 +47,11 @@ public class PersonService implements CommandLineRunner {
     public Person findById(int id){
         return personRepository.findById(id).get();
     }
+
+    public void updatePerson(Person person){
+		personRepository.save(person);
+	}
+
     public void save(Person person){
         personRepository.save(person);
     }

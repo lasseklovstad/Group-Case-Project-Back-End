@@ -59,4 +59,17 @@ public class OwnerController {
 		}
 	}
 
+	@RequestMapping(value = "", method = RequestMethod.PUT)
+	public void updateOwner(@RequestBody OwnerForm form, HttpServletResponse response){
+		try {
+			Person person = personService.findById(form.getPersonId());
+			personService.updatePerson(person);
+			response.setStatus(HttpServletResponse.SC_OK);
+
+		}catch (Exception ex){
+			ex.getCause();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
+	}
+
 }
