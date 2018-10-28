@@ -49,6 +49,20 @@ public class SeasonController {
 			e.getCause();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
-
 	}
+
+	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
+	public void deleteSeasonById(@PathVariable int id, HttpServletResponse response){
+		try {
+			seasonService.deleteById(id);
+			response.setStatus(HttpServletResponse.SC_OK);
+		} catch (Exception ex) {
+			ex.getStackTrace();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
+	}
+
+
+
+
 }

@@ -29,4 +29,10 @@ public class SeasonService {
     public List<SeasonLimited> findAllLimited(){
         return seasonRepository.findAllLimited();
     }
+
+	public void deleteById(int id){
+		seasonRepository.deleteById(id);
+
+	}
+
 }
