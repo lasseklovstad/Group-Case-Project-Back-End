@@ -58,7 +58,9 @@ public class MatchGoalController {
 	}
 
 
-	/* GOALTYPE MAPPING AND REQUEST METHODS */
+	/* *********************************************************************************
+	 *                  GOALTYPE MAPPING AND REQUEST METHODS							 *
+	 ***********************************************************************************/
 	@RequestMapping(value = "/goalType/allInfo", method = RequestMethod.GET)
 	public List<GoalType> getGoalTypes(){
 		return goalTypeService.findAll();
