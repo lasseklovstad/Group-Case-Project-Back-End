@@ -28,7 +28,7 @@ public class AssociationController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void createNewAssociation(@RequestBody Association association, HttpServletResponse response) {
+	public void createAssociation(@RequestBody Association association, HttpServletResponse response) {
 		try {
 			associationService.save(association);
 			response.setStatus(HttpServletResponse.SC_CREATED);
