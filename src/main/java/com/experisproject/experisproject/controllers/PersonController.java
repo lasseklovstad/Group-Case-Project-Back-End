@@ -62,7 +62,11 @@ public class PersonController {
 		try {
 			Address address = addressService.findById(form.getAddressId());
 			LocalDate dateOfBirth = LocalDate.of(form.getYear(), form.getMonth(), form.getDay());
-			Person person = new Person(form.getFirstName(), form.getLastName(), dateOfBirth, address);
+			Person person = personService.findById(form.getPersonId());
+			person.setFirstName(form.getFirstName());
+			person.setLastName(form.getLastName());
+			person.setDateOfBirth(dateOfBirth);
+			person.setAddress(address);
 			personService.updatePerson(person);
 			response.setStatus(HttpServletResponse.SC_OK);
 		}catch (Exception ex){
