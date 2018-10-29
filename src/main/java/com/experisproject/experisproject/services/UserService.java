@@ -19,13 +19,13 @@ public class UserService {
 	}
 
 	public List<User> findAll() {
-		Iterable<User> users = this.userRepository.findAll();
 		List<User> result = new ArrayList<>();
-
-		for (User user : users) {
-			result.add(user);
-		}
+		userRepository.findAll().forEach(user -> result.add(user));
 		return result;
+	}
+
+	public List<User> findUsersIdUsernameEmail(){
+		return userRepository.findUsersIdUsernameEmail();
 	}
 
 	public User findByEmail(String email){
