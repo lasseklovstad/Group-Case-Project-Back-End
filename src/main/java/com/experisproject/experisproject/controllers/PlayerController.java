@@ -29,8 +29,6 @@ public class PlayerController {
 	@Autowired
 	private PlayerService playerService;
 	@Autowired
-	private AddressService addressService;
-	@Autowired
 	private TeamService teamService;
 
 	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
@@ -81,6 +79,7 @@ public class PlayerController {
 			//Update player
 			Person person = personService.findById(form.getPersonId());
 			Team team = teamService.findById(form.getTeamId());
+			//get fooballmatches to exactly this playerId, then set in the contructor
 			Player player = new Player(form.getNumber(), form.getNormalPosition(), person, team, null);
 
 			playerService.updatePlayer(player);
