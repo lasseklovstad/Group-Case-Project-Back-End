@@ -1,6 +1,9 @@
 package com.experisproject.experisproject.models.forms;
 
 public class PersonForm {
+
+	private int personId;
+
 	private String firstName;
 	private String lastName;
 
@@ -11,6 +14,12 @@ public class PersonForm {
 
 	private int addressId;
 
+	public PersonForm() {
+	}
+
+	public int getPersonId() {
+		return personId;
+	}
 
 	public String getFirstName() {
 		return firstName;

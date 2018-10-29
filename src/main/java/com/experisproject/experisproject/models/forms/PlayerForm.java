@@ -23,19 +23,4 @@ public class PlayerForm {
 		return teamId;
 	}
 
-	public void setNumber(String number) {
-		this.number = number;
-	}
-
-	public void setNormalPosition(String normalPosition) {
-		this.normalPosition = normalPosition;
-	}
-
-	public void setPersonId(int personId) {
-		this.personId = personId;
-	}
-
-	public void setTeamId(int teamId) {
-		this.teamId = teamId;
-	}
 }
