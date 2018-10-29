@@ -49,6 +49,22 @@ public class ContactController {
 		}
 	}
 
+	@RequestMapping(value = "", method = RequestMethod.PUT)
+	public void updateContact(@RequestBody ContactForm form, HttpServletResponse response) {
+		try {
+			Person person = personService.findById(form.getPersonId());
+			Contact contact = contactService.findById(form.getPersonId());
+			contact.setContactType(form.getContactType());
+			contact.setContactDetail(form.getContactDetail());
+			contact.setPerson(person);
+			contactService.updateContact(contact);
+			response.setStatus(HttpServletResponse.SC_CREATED);
+		} catch (Exception ex) {
+			ex.getCause();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
+	}
+
 
 	/*--------------------------------------------------------------------------------------*
 	 *                                DELETE MAPPING/METHODS                                *

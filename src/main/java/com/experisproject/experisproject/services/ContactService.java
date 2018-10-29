@@ -29,6 +29,10 @@ public class ContactService {
 		return contactRepository.findAll();
 	}
 
+	public void updateContact(Contact contact){
+		save(contact);
+	}
+
 	public void save(Contact contact){
 		contactRepository.save(contact);
 	}
