@@ -45,7 +45,7 @@ public class UserController {
 		try {
 			User user = new User(form.getUserName(), form.getEmail(), form.getPassword(), form.isAdmin());
 			userService.save(user);
-			response.setStatus(HttpStatus.OK.value());
+			response.setStatus(HttpServletResponse.SC_CREATED);
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
