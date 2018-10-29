@@ -14,6 +14,9 @@ import java.util.List;
 public interface PersonRepository extends JpaRepository<Person, Integer> {
 	Person findPersonByOwner(Owner owner);
 
+	@Query(value = "SELECT p.personId, CONCAT(p.firstName,' ', p.lastName) FROM Person p")
+	List<Person> findPersonsIdName();
+
 	@Query(value = "SELECT p FROM Person p")
 	List<PersonLimited> findAllLimited();
 }
