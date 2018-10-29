@@ -30,6 +30,14 @@ public class Owner {
 		this.person = person;
 	}
 
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
+	}
+
 	// PRIMARY KEY (owner_id),
 	// FOREIGN KEY (person_id) REFERENCES PERSON(person_id)
 

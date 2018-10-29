@@ -60,6 +60,30 @@ public class FootballMatch {
 		this.players = players;
 	}
 
+	public void setMatchDate(LocalDate matchDate) {
+		this.matchDate = matchDate;
+	}
+
+	public void setSeason(Season season) {
+		this.season = season;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public void setHomeTeam(Team homeTeam) {
+		this.homeTeam = homeTeam;
+	}
+
+	public void setAwayTeam(Team awayTeam) {
+		this.awayTeam = awayTeam;
+	}
+
+	public void setPlayers(Set<Player> players) {
+		this.players = players;
+	}
+
 	//  season_id INT NOT NULL,
 	//  location_id INT NOT NULL,
 	//  home_team_id INT NOT NULL,

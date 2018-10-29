@@ -39,6 +39,22 @@ public class MatchGoal {
 		this.player = player;
 	}
 
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setGoalType(GoalType goalType) {
+		this.goalType = goalType;
+	}
+
+	public void setFootballMatch(FootballMatch footballMatch) {
+		this.footballMatch = footballMatch;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
 	// goal_id INT NOT NULL,
 	//  description VARCHAR(64),
 	//  goal_type_id INT NOT NULL,

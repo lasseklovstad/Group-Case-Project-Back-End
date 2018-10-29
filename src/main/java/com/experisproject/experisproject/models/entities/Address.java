@@ -42,4 +42,28 @@ public class Address {
 		this.postalCode = postalCode;
 		this.country = country;
 	}
+
+	public void setAddressLine1(String addressLine1) {
+		this.addressLine1 = addressLine1;
+	}
+
+	public void setAddressLine2(String addressLine2) {
+		this.addressLine2 = addressLine2;
+	}
+
+	public void setAddressLine3(String addressLine3) {
+		this.addressLine3 = addressLine3;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
 }

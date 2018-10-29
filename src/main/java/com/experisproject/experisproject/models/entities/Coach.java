@@ -34,4 +34,12 @@ public class Coach {
 	//  PRIMARY KEY (coach_id),
 	//  FOREIGN KEY (person_id) REFERENCES PERSON(person_id)
 
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
+	}
 }

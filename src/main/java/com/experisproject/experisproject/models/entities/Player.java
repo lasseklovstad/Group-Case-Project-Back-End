@@ -46,7 +46,27 @@ public class Player {
 		this.footballMatches = footballMatches;
 	}
 
-//  player_id INT NOT NULL,
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	public void setNormalPosition(String normalPosition) {
+		this.normalPosition = normalPosition;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
+	}
+
+	public void setFootballMatches(Set<FootballMatch> footballMatches) {
+		this.footballMatches = footballMatches;
+	}
+
+	//  player_id INT NOT NULL,
 	//  normal_position VARCHAR(64),
 	//  number VARCHAR(8), (int????)
 	//  person_id INT NOT NULL,

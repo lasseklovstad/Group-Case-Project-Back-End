@@ -39,4 +39,20 @@ public class User {
 		this.password = password;
 		this.isAdmin = isAdmin;
 	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setAdmin(boolean admin) {
+		isAdmin = admin;
+	}
 }
