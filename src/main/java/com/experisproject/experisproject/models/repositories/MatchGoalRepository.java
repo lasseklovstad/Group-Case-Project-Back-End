@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface MatchGoalRepository extends JpaRepository<MatchGoal, Integer> {
 
-	@Query(value = "SELECT mg.matchGoalId, mg.description, mg.goalType, mg.footballMatch.footballMatchId, mg.footballMatch.homeTeam, mg.footballMatch.awayTeam, mg.player.playerId, CONCAT(mg.player.person.firstName,' ', mg.player.person.firstName)  FROM MatchGoal mg")
+	@Query(value = "SELECT mg.matchGoalId, mg.description, mg.goalType.type, mg.footballMatch.footballMatchId, mg.player.playerId, CONCAT(mg.player.person.firstName,' ', mg.player.person.lastName)  FROM MatchGoal mg")
 	List<MatchGoal> findMatchGoalIdDescriptionGoalTypeMatchPlayer();
 }
