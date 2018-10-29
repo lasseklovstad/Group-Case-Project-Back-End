@@ -1,6 +1,7 @@
 package com.experisproject.experisproject.controllers;
 
 import com.experisproject.experisproject.models.entities.FootballMatch;
+import com.experisproject.experisproject.models.forms.FootballMatchForm;
 import com.experisproject.experisproject.pojos.FootballMatchResultsInfo;
 import com.experisproject.experisproject.services.FootballMatchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class FootballMatchController {
 		return footballMatchService.findById(id);
 	}
 
-	@RequestMapping(value = "/all/result")
+	@RequestMapping(value = "/all/result", method = RequestMethod.GET)
 	public List<FootballMatch> getFootballMatchesResult() {
 		return footballMatchService.findFootballMatchesResult();
 	}
@@ -37,6 +38,29 @@ public class FootballMatchController {
 	//            @RequestBody FootballMatchForm form,
 	//            HttpServletResponse response
 	//    ){//create new match -> save()}
+
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public void createFootballMatch(@RequestBody FootballMatchForm form, HttpServletResponse response){
+		try {
+			 response.setStatus(HttpServletResponse.SC_CREATED);
+
+		}catch (Exception e){
+			e.getCause();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
+	}
+
+	@RequestMapping(value = "", method = RequestMethod.PUT)
+	public void updateFootballMatch(@RequestBody FootballMatchForm form, HttpServletResponse response){
+		try {
+
+			response.setStatus(HttpServletResponse.SC_OK);
+		}catch (Exception e){
+			e.getCause();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
+	}
+
 
 
 
