@@ -58,6 +58,7 @@ public class PersonController {
 
 	@RequestMapping(value = "", method = RequestMethod.PUT)
 	public void updatePerson(@RequestBody PersonForm form, HttpServletResponse response){
+		//almost exactly the same as create method createPerson(form,response)
 		try {
 			Address address = addressService.findById(form.getAddressId());
 			LocalDate dateOfBirth = LocalDate.of(form.getYear(), form.getMonth(), form.getDay());
@@ -68,7 +69,20 @@ public class PersonController {
 			ex.getCause();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
+	}
 
+	/*--------------------------------------------------------------------------------------*
+	 *                                DELETE MAPPING/METHODS                                *
+	 * -------------------------------------------------------------------------------------*/
+	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
+	public void deletePersonById(@PathVariable int id, HttpServletResponse response) {
+		try {
+			personService.deleteById(id);
+			response.setStatus(HttpServletResponse.SC_OK);
+		} catch (Exception ex) {
+			ex.getCause();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
 	}
 
 
