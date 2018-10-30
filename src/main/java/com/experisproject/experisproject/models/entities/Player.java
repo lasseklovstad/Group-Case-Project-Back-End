@@ -30,7 +30,7 @@ public class Player {
 	@ManyToMany(mappedBy = "players")
 	private Set<FootballMatch> footballMatches = new HashSet<>();
 
-	/*  Unnecessary for now to map the entities bidirectional
+	/* Unnecessary for now to map the entities bidirectional
 	@OneToMany(mappedBy = "player")
 	private List<MatchGoal> matchGoals;
 	*/

@@ -30,6 +30,10 @@ public class PlayerService {
 		return playerRepository.findPlayerByTeam_NameContaining(teamName);
 	}
 
+	public List<Player> getPlayersByTeamId(int id){
+    	return playerRepository.findByTeamId(id);
+	}
+
 	public List<Player> findPlayerShortInfo(){
 		return playerRepository.findPlayerShortInfo();
 	}
