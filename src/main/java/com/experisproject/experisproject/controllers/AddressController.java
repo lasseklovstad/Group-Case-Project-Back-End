@@ -27,7 +27,7 @@ public class AddressController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void createNewAddress(@RequestBody Address address, HttpServletResponse response){
+	public void createAddress(@RequestBody Address address, HttpServletResponse response){
 		try {
 			addressService.save(address);
 			response.setStatus(HttpServletResponse.SC_CREATED);
