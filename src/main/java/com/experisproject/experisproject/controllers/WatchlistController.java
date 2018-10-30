@@ -33,10 +33,15 @@ public class WatchlistController {
 		return watchlistService.findAll();
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}/watchlist", method = RequestMethod.GET)
 	public Watchlist getWatchlistById(@PathVariable int id) {
 		//if exists
 		return watchlistService.findById(id);
+	}
+
+	@RequestMapping(value = "/{id}/user", method = RequestMethod.GET)
+	public Watchlist getWatchlistByUserId(@PathVariable int id) {
+		return watchlistService.findWatchlistByUserId(id);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
@@ -47,7 +52,7 @@ public class WatchlistController {
 			ArrayList<String> playerIds = new ArrayList<>();
 			ArrayList<String> teamIds = new ArrayList<>();
 
-			Watchlist watchlist = new Watchlist(playerIds,teamIds, user);
+			Watchlist watchlist = new Watchlist(playerIds, teamIds, user);
 			watchlistService.save(watchlist);
 			response.setStatus(HttpServletResponse.SC_CREATED);
 		} catch (Exception e) {
@@ -63,8 +68,13 @@ public class WatchlistController {
 			Watchlist watchlist = watchlistService.findWatchlistByUserId(form.getUserId());
 			ArrayList<String> playerIds = watchlist.getPlayerIds();
 			ArrayList<String> teamIds = watchlist.getTeamIds();
-			playerIds.add(Integer.toString(form.getPlayerId()));
-			teamIds.add(Integer.toString(form.getTeamId()));
+
+			if (form.getPlayerId() != 0) {
+				playerIds.add(Integer.toString(form.getPlayerId()));
+			}
+			else if (form.getTeamId() != 0) {
+				teamIds.add(Integer.toString(form.getTeamId()));
+			}
 
 			watchlist.setPlayerIds(playerIds);
 			watchlist.setTeamIds(teamIds);
