@@ -21,6 +21,7 @@ public class WatchlistService {
 		return watchlistRepository.findWatchlists();
 	}
 
+
 	public List<Watchlist> findAll(){
 		return watchlistRepository.findAll();
 	}
@@ -29,7 +30,12 @@ public class WatchlistService {
 		return watchlistRepository.findById(id).get();
 	}
 
-	public Watchlist findWatchlistByUserId(int userId){
+	public Watchlist findWatchListByUserId(int userId){
+		return watchlistRepository.findWatchListByUserId(userId);
+	}
+
+
+	public Watchlist findWatchlistByUserIdGenerated(int userId){
 		return 	watchlistRepository.findWatchlistByUser_UserId(userId);
 
 	}

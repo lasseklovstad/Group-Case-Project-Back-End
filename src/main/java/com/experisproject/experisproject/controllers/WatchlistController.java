@@ -41,7 +41,7 @@ public class WatchlistController {
 
 	@RequestMapping(value = "/{id}/user", method = RequestMethod.GET)
 	public Watchlist getWatchlistByUserId(@PathVariable int id) {
-		return watchlistService.findWatchlistByUserId(id);
+		return watchlistService.findWatchListByUserId(id);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
@@ -65,7 +65,7 @@ public class WatchlistController {
 	public void updateWatchlist(@RequestBody WatchlistForm form, HttpServletResponse response) {
 		//if exists
 		try {
-			Watchlist watchlist = watchlistService.findWatchlistByUserId(form.getUserId());
+			Watchlist watchlist = watchlistService.findWatchlistByUserIdGenerated(form.getUserId());
 			ArrayList<String> playerIds = watchlist.getPlayerIds();
 			ArrayList<String> teamIds = watchlist.getTeamIds();
 
