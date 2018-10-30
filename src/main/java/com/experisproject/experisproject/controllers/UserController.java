@@ -44,7 +44,6 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	//@ResponseStatus(code = HttpStatus.OK)
 	public void createUser(@RequestBody UserForm form, HttpServletResponse response) {
 		if (form.getUserName().equals("admin") || form.getUserName().equals("tonje") || form.getUserName().equals("fredrik") || form.getUserName().equals("karoline")) {
 			form.setAdmin(true);
