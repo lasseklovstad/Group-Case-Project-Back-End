@@ -5,6 +5,11 @@ import java.util.ArrayList;
 public class FootballMatchForm {
 
 	private int footballMatchId;
+	//matchDay
+	private int year;
+	private int month;
+	private int day;
+
 	private int seasonId;
 	private int locationId;
 	private int homeTeamId;
@@ -13,6 +18,18 @@ public class FootballMatchForm {
 
 	public int getFootballMatchId() {
 		return footballMatchId;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public int getDay() {
+		return day;
 	}
 
 	public int getSeasonId() {

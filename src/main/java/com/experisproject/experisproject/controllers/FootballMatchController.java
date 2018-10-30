@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/footballMatch")
@@ -51,9 +54,14 @@ public class FootballMatchController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public void createFootballMatch(@RequestBody FootballMatchForm form, HttpServletResponse response) {
 		try {
+			Season season = seasonService.findById(form.getSeasonId());
+			Location location = locationService.findById(form.getLocationId());
+			Team homeTeam = teamService.findById(form.getHomeTeamId());
+			Team awayTeam = teamService.findById(form.getAwayTeamId());
+			LocalDate matchDate = LocalDate.of(form.getYear(), form.getMonth(), form.getDay());
+			Set<Player> players = convertIdsToPlayers(form.getPlayerIds());
 
-
-			FootballMatch footballMatch = new FootballMatch();
+			FootballMatch footballMatch = new FootballMatch(matchDate,season,location, homeTeam, awayTeam, players);
 			footballMatchService.save(footballMatch);
 			response.setStatus(HttpServletResponse.SC_CREATED);
 		} catch (Exception e) {
@@ -66,12 +74,13 @@ public class FootballMatchController {
 	public void updateFootballMatch(@RequestBody FootballMatchForm form, HttpServletResponse response) {
 		try {
 			FootballMatch footballMatch = footballMatchService.findById(form.getFootballMatchId());
+			LocalDate matchDate = LocalDate.of(form.getYear(), form.getMonth(), form.getDay());
+			footballMatch.setMatchDate(matchDate);
 			footballMatch.setSeason(seasonService.findById(form.getSeasonId()));
 			footballMatch.setLocation(locationService.findById(form.getLocationId()));
 			footballMatch.setHomeTeam(teamService.findById(form.getHomeTeamId()));
 			footballMatch.setAwayTeam(teamService.findById(form.getAwayTeamId()));
 
-			//
 			//form.getPlayerIds();
 			//footballMatch.setPlayers();
 			footballMatchService.updateFootballMatch(footballMatch);
@@ -80,6 +89,14 @@ public class FootballMatchController {
 			e.getCause();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
+	}
+
+	private Set<Player> convertIdsToPlayers(ArrayList<String> playerIds){
+		Set<Player> players = new HashSet<>();
+		for(String playerId : playerIds) {
+			players.add(playerService.findById(Integer.parseInt(playerId)));
+		}
+		return players;
 	}
 
 
