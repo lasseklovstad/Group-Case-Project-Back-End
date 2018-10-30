@@ -80,9 +80,8 @@ public class FootballMatchController {
 			footballMatch.setLocation(locationService.findById(form.getLocationId()));
 			footballMatch.setHomeTeam(teamService.findById(form.getHomeTeamId()));
 			footballMatch.setAwayTeam(teamService.findById(form.getAwayTeamId()));
-
-			//form.getPlayerIds();
-			//footballMatch.setPlayers();
+			Set<Player> players = convertIdsToPlayers(form.getPlayerIds());
+			footballMatch.setPlayers(players);
 			footballMatchService.updateFootballMatch(footballMatch);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (Exception e) {
