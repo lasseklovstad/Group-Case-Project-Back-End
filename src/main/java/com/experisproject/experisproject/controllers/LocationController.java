@@ -40,8 +40,7 @@ public class LocationController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public void createLocation(@RequestBody LocationForm form, HttpServletResponse response) {
 		try {
-			Address address;
-			address = addressService.findById(form.getAddressId());
+			Address address = addressService.findById(form.getAddressId());
 			Location location = new Location(form.getName(), form.getDescription(), address);
 			locationService.save(location);
 			response.setStatus(HttpServletResponse.SC_CREATED);
