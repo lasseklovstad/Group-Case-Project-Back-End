@@ -67,6 +67,11 @@ public class WatchlistController {
 		}
 	}
 
+
+	/*--------------------------------------------------------------------------------------*
+	 *                                DELETE MAPPING/METHODS                                *
+	 * -------------------------------------------------------------------------------------*/
+
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
 	public void deleteWatchlist(@PathVariable int id) {
 		//check if exists

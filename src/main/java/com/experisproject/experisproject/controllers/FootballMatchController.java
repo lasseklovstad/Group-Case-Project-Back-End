@@ -78,6 +78,9 @@ public class FootballMatchController {
 	}
 
 
+	/*--------------------------------------------------------------------------------------*
+	 *                                DELETE MAPPING/METHODS                                *
+	 * -------------------------------------------------------------------------------------*/
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
 	public void deleteFootballMatchById(@PathVariable int id, HttpServletResponse response) {
 		try {

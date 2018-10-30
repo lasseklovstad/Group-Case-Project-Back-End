@@ -49,6 +49,11 @@ public class AddressController {
 		}
 	}
 
+
+
+	/*--------------------------------------------------------------------------------------*
+	 *                                DELETE MAPPING/METHODS                                *
+	 * -------------------------------------------------------------------------------------*/
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
 	public void deleteAddressById(@PathVariable int id, HttpServletResponse response){
 		try {

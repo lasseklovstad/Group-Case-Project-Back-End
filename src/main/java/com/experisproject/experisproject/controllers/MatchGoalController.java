@@ -128,6 +128,10 @@ public class MatchGoalController {
 		}
 	}
 
+
+	/*--------------------------------------------------------------------------------------*
+	 *                                DELETE MAPPING/METHODS                                *
+	 * -------------------------------------------------------------------------------------*/
 	@RequestMapping(value = "/goalType/{id}/delete", method = RequestMethod.DELETE)
 	public void deleteGoalTypeById(@PathVariable int id, HttpServletResponse response) {
 		goalTypeService.deleteById(id);

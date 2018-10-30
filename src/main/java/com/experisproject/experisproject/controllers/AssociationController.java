@@ -51,7 +51,10 @@ public class AssociationController {
 		}
 	}
 
-	//DELETE METHODS
+
+	/*--------------------------------------------------------------------------------------*
+	 *                                DELETE MAPPING/METHODS                                *
+	 * -------------------------------------------------------------------------------------*/
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
 	public void deleteAssociationById(@PathVariable int id, HttpServletResponse response){
 		try {

@@ -71,6 +71,10 @@ public class CoachController {
 		}
 	}
 
+
+	/*--------------------------------------------------------------------------------------*
+	 *                                DELETE MAPPING/METHODS                                *
+	 * -------------------------------------------------------------------------------------*/
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
 	public void deleteCoachById(@PathVariable int id, HttpServletResponse response) {
 		try {

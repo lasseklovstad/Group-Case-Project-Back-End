@@ -68,7 +68,9 @@ public class LocationController {
 
 
 
-
+	/*--------------------------------------------------------------------------------------*
+	 *                                DELETE MAPPING/METHODS                                *
+	 * -------------------------------------------------------------------------------------*/
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
 	public void deleteLocationById(@PathVariable int id, HttpServletResponse response) {
 		try {
