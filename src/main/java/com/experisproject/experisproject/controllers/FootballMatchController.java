@@ -59,9 +59,11 @@ public class FootballMatchController {
 			Team homeTeam = teamService.findById(form.getHomeTeamId());
 			Team awayTeam = teamService.findById(form.getAwayTeamId());
 			LocalDate matchDate = LocalDate.of(form.getYear(), form.getMonth(), form.getDay());
-			Set<Player> players = convertIdsToPlayers(form.getPlayerIds());
-
-			FootballMatch footballMatch = new FootballMatch(matchDate,season,location, homeTeam, awayTeam, players);
+			Set<Player> players = new HashSet<>();
+			if (form.getPlayerIds() != null) {
+				players = convertIdsToPlayers(form.getPlayerIds());
+			}
+			FootballMatch footballMatch = new FootballMatch(matchDate, season, location, homeTeam, awayTeam, players);
 			footballMatchService.save(footballMatch);
 			response.setStatus(HttpServletResponse.SC_CREATED);
 		} catch (Exception e) {
@@ -80,8 +82,10 @@ public class FootballMatchController {
 			footballMatch.setLocation(locationService.findById(form.getLocationId()));
 			footballMatch.setHomeTeam(teamService.findById(form.getHomeTeamId()));
 			footballMatch.setAwayTeam(teamService.findById(form.getAwayTeamId()));
+			//it's possible to change players for the game to zero
 			Set<Player> players = convertIdsToPlayers(form.getPlayerIds());
 			footballMatch.setPlayers(players);
+
 			footballMatchService.updateFootballMatch(footballMatch);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (Exception e) {
@@ -90,9 +94,9 @@ public class FootballMatchController {
 		}
 	}
 
-	private Set<Player> convertIdsToPlayers(ArrayList<String> playerIds){
+	private Set<Player> convertIdsToPlayers(ArrayList<String> playerIds) {
 		Set<Player> players = new HashSet<>();
-		for(String playerId : playerIds) {
+		for (String playerId : playerIds) {
 			players.add(playerService.findById(Integer.parseInt(playerId)));
 		}
 		return players;
