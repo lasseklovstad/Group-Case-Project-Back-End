@@ -1,5 +1,6 @@
 package com.experisproject.experisproject.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 
@@ -26,6 +27,7 @@ public class User {
 	private boolean isAdmin;
 
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Watchlist watchlist;
 
 	public User() {
