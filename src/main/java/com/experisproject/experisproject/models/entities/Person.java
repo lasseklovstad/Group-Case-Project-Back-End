@@ -53,6 +53,38 @@ public class Person {
 		this.address = address;
 	}
 
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setDateOfBirth(LocalDate dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public void setOwner(Owner owner) {
+		this.owner = owner;
+	}
+
+	public void setCoach(Coach coach) {
+		this.coach = coach;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
+	}
+
 	//addressId as foreign key, reference address(addressId)
 	//  person_id INT NOT NULL,
 	//  first_name VARCHAR(64) NOT NULL,

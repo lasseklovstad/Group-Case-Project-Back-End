@@ -51,18 +51,29 @@
             <scope>test</scope>
         </dependency>
 
-<dependency>
-        <groupId>javax.xml.bind</groupId>
-        <artifactId>jaxb-api</artifactId>
-        <version>2.3.0</version>
-</dependency>
+        <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>2.3.0</version>
+        </dependency>
+
     </dependencies>
+
+
+
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <appName>experis-football-manager-back</appName>
+                    <processTypes>
+                        <web>java $JAVA_OPTS -cp target/classes:target/dependency/* com.experisproject.experisproject.ExperisProjectApplication</web>
+                    </processTypes>
+                </configuration>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>2.0.6</version>
             </plugin>
         </plugins>
     </build>

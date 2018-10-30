@@ -21,6 +21,13 @@ public class SeasonService {
     	return seasonRepository.findSeasonsIdNameDatesDescription();
 	}
 
+	public Season findById(int id){
+    	return seasonRepository.findById(id).get();
+	}
+
+	public void updateSeason(Season season){
+    	save(season);
+	}
 
     public void save(Season season){
         seasonRepository.save(season);
@@ -29,4 +36,10 @@ public class SeasonService {
     public List<SeasonLimited> findAllLimited(){
         return seasonRepository.findAllLimited();
     }
+
+	public void deleteById(int id){
+		seasonRepository.deleteById(id);
+
+	}
+
 }

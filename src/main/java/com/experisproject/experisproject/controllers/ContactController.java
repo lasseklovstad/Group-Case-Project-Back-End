@@ -1,11 +1,9 @@
 package com.experisproject.experisproject.controllers;
 
-import com.experisproject.experisproject.models.entities.Coach;
+import com.experisproject.experisproject.models.entities.Contact;
 import com.experisproject.experisproject.models.entities.Person;
-import com.experisproject.experisproject.models.forms.CoachForm;
-import com.experisproject.experisproject.projections.CoachLimited;
-import com.experisproject.experisproject.services.AddressService;
-import com.experisproject.experisproject.services.CoachService;
+import com.experisproject.experisproject.models.forms.ContactForm;
+import com.experisproject.experisproject.services.ContactService;
 import com.experisproject.experisproject.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,44 +12,37 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/coach")
+@RequestMapping(value = "/api/contact")
 @CrossOrigin
-public class CoachController {
-
+public class ContactController {
 	@Autowired
-	private CoachService coachService;
+	private ContactService contactService;
 	@Autowired
 	private PersonService personService;
 
-	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
-	public List<Coach> getAllCoaches() {
-		return coachService.findAll();
-	}
-
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public List<Coach> getCoachesIdNameAndTeam() {
-		return coachService.findCoachesIdNameAndTeam();
+	public List<Contact> getContactsIdTypeDetailAndName() {
+		return contactService.findContactsIdTypeDetailAndName();
 	}
 
-	@RequestMapping(value = "/limitedInfo", method = RequestMethod.GET)
-	public List<CoachLimited> getCoachesLimitedInfo() {
-		return coachService.findAllLimited();
+	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
+	public List<Contact> getContactsAllInfo() {
+		return contactService.findAll();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Coach getCoachById(@PathVariable int id) {
-		Coach coach = coachService.findById(id);
-		return coach;
+	public Contact getContactById(@PathVariable int id, HttpServletResponse response) {
+		return contactService.findById(id);
+		//response.setStatus(HttpServletResponse.SC_OK);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void createCoach(@RequestBody CoachForm form, HttpServletResponse response) {
+	public void createContact(@RequestBody ContactForm form, HttpServletResponse response) {
 		try {
 			Person person = personService.findById(form.getPersonId());
-			Coach coach = new Coach(person);
-			coachService.save(coach);
+			Contact contact = new Contact(form.getContactType(), form.getContactDetail(), person);
+			contactService.save(contact);
 			response.setStatus(HttpServletResponse.SC_CREATED);
-
 		} catch (Exception ex) {
 			ex.getCause();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
@@ -59,12 +50,15 @@ public class CoachController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.PUT)
-	public void updateCoach(@RequestBody CoachForm form, HttpServletResponse response) {
+	public void updateContact(@RequestBody ContactForm form, HttpServletResponse response) {
 		try {
-			//does it make any sense to do this???
 			Person person = personService.findById(form.getPersonId());
-			personService.updatePerson(person);
-			response.setStatus(HttpServletResponse.SC_OK);
+			Contact contact = contactService.findById(form.getPersonId());
+			contact.setContactType(form.getContactType());
+			contact.setContactDetail(form.getContactDetail());
+			contact.setPerson(person);
+			contactService.updateContact(contact);
+			response.setStatus(HttpServletResponse.SC_CREATED);
 		} catch (Exception ex) {
 			ex.getCause();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
@@ -76,14 +70,14 @@ public class CoachController {
 	 *                                DELETE MAPPING/METHODS                                *
 	 * -------------------------------------------------------------------------------------*/
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
-	public void deleteCoachById(@PathVariable int id, HttpServletResponse response) {
+	public void deleteContactById(@PathVariable int id, HttpServletResponse response) {
 		try {
-			coachService.deleteById(id);
+			contactService.deleteById(id);
 			response.setStatus(HttpServletResponse.SC_OK);
-		} catch (Exception e) {
-			e.getStackTrace();
+		} catch (Exception ex) {
+			ex.getCause();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-
 		}
 	}
+
 }

@@ -61,6 +61,30 @@ public class Team {
 		this.location = location;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setAssociation(Association association) {
+		this.association = association;
+	}
+
+	public void setOwner(Owner owner) {
+		this.owner = owner;
+	}
+
+	public void setCoach(Coach coach) {
+		this.coach = coach;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public void setTeamResults(List<TeamResult> teamResults) {
+		this.teamResults = teamResults;
+	}
+
 	//  owner_id INT NOT NULL,
 	//  association_id INT NOT NULL,
 	//  coach_id INT NOT NULL,

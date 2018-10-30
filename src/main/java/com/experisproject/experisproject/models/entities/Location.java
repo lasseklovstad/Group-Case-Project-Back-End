@@ -38,6 +38,18 @@ public class Location {
 		this.address = address;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 	//  foreign key Address.addressId
 	//  location_id INT NOT NULL,
 	//  name VARCHAR(64) NOT NULL,

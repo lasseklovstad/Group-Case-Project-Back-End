@@ -37,4 +37,20 @@ public class Season {
 		this.endDate = endDate;
 		this.description = description;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
+
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }

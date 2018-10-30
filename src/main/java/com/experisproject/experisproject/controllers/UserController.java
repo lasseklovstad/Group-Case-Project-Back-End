@@ -19,7 +19,12 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public List<User> getAll() {
+	public 	List<User> getUsersIdUsernameEmail(){
+		return userService.findUsersIdUsernameEmail();
+	}
+
+	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
+	public List<User> getAllUsersInfo() {
 		List<User> userList = userService.findAll();
 		return userList;
 	}
@@ -36,7 +41,7 @@ public class UserController {
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	//@ResponseStatus(code = HttpStatus.OK)
-	public void create(@RequestBody UserForm form, HttpServletResponse response) {
+	public void createUser(@RequestBody UserForm form, HttpServletResponse response) {
 		if (form.getUserName().equals("admin")) {
 			form.setAdmin(true);
 		} else {
@@ -45,7 +50,7 @@ public class UserController {
 		try {
 			User user = new User(form.getUserName(), form.getEmail(), form.getPassword(), form.isAdmin());
 			userService.save(user);
-			response.setStatus(HttpStatus.OK.value());
+			response.setStatus(HttpServletResponse.SC_CREATED);
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);

@@ -38,7 +38,11 @@ public class PlayerService {
     	return playerRepository.findAllLimited();
 	}
 
-    public void save(Player player){
+	public void updatePlayer(Player player){
+    	playerRepository.save(player);
+	}
+
+	public void save(Player player){
         playerRepository.save(player);
     }
     public void deleteAll(){playerRepository.deleteAll();}

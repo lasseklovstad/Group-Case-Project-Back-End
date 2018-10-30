@@ -35,4 +35,20 @@ public class TeamResult {
 		this.footballMatch = footballMatch;
 		this.team = team;
 	}
+
+	public void setGoals(int goals) {
+		this.goals = goals;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	public void setFootballMatch(FootballMatch footballMatch) {
+		this.footballMatch = footballMatch;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
+	}
 }

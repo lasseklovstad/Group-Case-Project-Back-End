@@ -32,17 +32,15 @@ public class LocationController {
 		return locationService.findAllLimited();
 	}
 
-	@RequestMapping(value = "/{id}")
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Location getLocation(@PathVariable int id) {
-		Location location = locationService.findById(id);
-		return location;
+		return locationService.findById(id);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void createNewLocation(@RequestBody LocationForm form, HttpServletResponse response) {
+	public void createLocation(@RequestBody LocationForm form, HttpServletResponse response) {
 		try {
-			Address address;
-			address = addressService.findById(form.getAddressId());
+			Address address = addressService.findById(form.getAddressId());
 			Location location = new Location(form.getName(), form.getDescription(), address);
 			locationService.save(location);
 			response.setStatus(HttpServletResponse.SC_CREATED);
@@ -52,6 +50,27 @@ public class LocationController {
 		}
 	}
 
+	@RequestMapping(value = "", method = RequestMethod.PUT)
+	public void updateLocation(@RequestBody LocationForm form, HttpServletResponse response) {
+		try {
+			Address address = addressService.findById(form.getAddressId());
+			Location location = locationService.findById(form.getLocationId());
+			location.setName(form.getName());
+			location.setDescription(form.getDescription());
+			location.setAddress(address);
+			locationService.updateLocation(location); //save(location) is called in service class
+			response.setStatus(HttpServletResponse.SC_OK);
+		} catch (Exception e) {
+			e.getStackTrace();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
+	}
+
+
+
+	/*--------------------------------------------------------------------------------------*
+	 *                                DELETE MAPPING/METHODS                                *
+	 * -------------------------------------------------------------------------------------*/
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
 	public void deleteLocationById(@PathVariable int id, HttpServletResponse response) {
 		try {
@@ -72,9 +91,7 @@ public class LocationController {
 		} catch (Exception e) {
 			e.getStackTrace();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-
 		}
-
 	}
 
 }

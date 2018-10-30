@@ -28,8 +28,9 @@ public class AssociationController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void createNewAssociation(@RequestBody Association association, HttpServletResponse response) {
+	public void createAssociation(@RequestBody Association association, HttpServletResponse response) {
 		try {
+			//if exists??
 			associationService.save(association);
 			response.setStatus(HttpServletResponse.SC_CREATED);
 		} catch (Exception e) {
@@ -38,6 +39,22 @@ public class AssociationController {
 		}
 	}
 
+	@RequestMapping(value = "", method = RequestMethod.PUT)
+	public void updateAssociation(@RequestBody Association association, HttpServletResponse response) {
+		try {
+			//if exists??
+			associationService.updateAssociation(association);
+			response.setStatus(HttpServletResponse.SC_OK);
+		} catch (Exception e) {
+			e.getStackTrace();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
+	}
+
+
+	/*--------------------------------------------------------------------------------------*
+	 *                                DELETE MAPPING/METHODS                                *
+	 * -------------------------------------------------------------------------------------*/
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
 	public void deleteAssociationById(@PathVariable int id, HttpServletResponse response){
 		try {

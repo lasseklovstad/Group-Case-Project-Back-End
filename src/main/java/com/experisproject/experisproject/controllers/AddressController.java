@@ -18,7 +18,7 @@ public class AddressController {
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public List<Address> getAllAddressInfo() {
-		return addressService.findAddressesShortInfo();
+		return addressService.findAddressesInfo();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -38,4 +38,32 @@ public class AddressController {
 		}
 	}
 
+	@RequestMapping(value = "", method = RequestMethod.PUT)
+	public void updateAddress(@RequestBody Address address, HttpServletResponse response){
+		try {//if exists? works automatic
+			addressService.updateAddress(address);
+			response.setStatus(HttpServletResponse.SC_OK);
+		}catch (Exception e){
+			e.getCause();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
+	}
+
+
+
+	/*--------------------------------------------------------------------------------------*
+	 *                                DELETE MAPPING/METHODS                                *
+	 * -------------------------------------------------------------------------------------*/
+	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
+	public void deleteAddressById(@PathVariable int id, HttpServletResponse response){
+		try {
+			addressService.deleteById(id);
+			response.setStatus(HttpServletResponse.SC_OK);
+		} catch (Exception e) {
+			e.getStackTrace();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+
+		}
+
+	}
 }

@@ -45,18 +45,42 @@ public class FootballMatch {
 			joinColumns = {@JoinColumn(name = "footballMatchId")},
 			inverseJoinColumns = {@JoinColumn(name = "playerId")}
 	)
-	private Set<Player> players = new HashSet<>(); //NotNull annotation?
+	private Set<Player> players = new HashSet<>();
 
 	public FootballMatch() {
 
 	}
 
-	public FootballMatch(@NotNull LocalDate matchDate, @NotNull Season season, @NotNull Location location, @NotNull Team homeTeam, @NotNull Team awayTeam, Set<Player> players, Set<Team> teams) {
+	public FootballMatch(@NotNull LocalDate matchDate, @NotNull Season season, @NotNull Location location, @NotNull Team homeTeam, @NotNull Team awayTeam, Set<Player> players) {
 		this.matchDate = matchDate;
 		this.season = season;
 		this.location = location;
 		this.homeTeam = homeTeam;
 		this.awayTeam = awayTeam;
+		this.players = players;
+	}
+
+	public void setMatchDate(LocalDate matchDate) {
+		this.matchDate = matchDate;
+	}
+
+	public void setSeason(Season season) {
+		this.season = season;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public void setHomeTeam(Team homeTeam) {
+		this.homeTeam = homeTeam;
+	}
+
+	public void setAwayTeam(Team awayTeam) {
+		this.awayTeam = awayTeam;
+	}
+
+	public void setPlayers(Set<Player> players) {
 		this.players = players;
 	}
 

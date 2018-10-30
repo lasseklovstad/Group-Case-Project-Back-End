@@ -31,6 +31,8 @@ public class TeamController implements CommandLineRunner {
 	AssociationService associationService;
 	@Autowired
 	PlayerService playerService;
+	@Autowired
+	UserService userService;
 
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -58,6 +60,7 @@ public class TeamController implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		//userService.deleteAll();
 //        playerService.deleteAll();
 //        teamService.deleteAll();
 //        coachService.deleteAll();

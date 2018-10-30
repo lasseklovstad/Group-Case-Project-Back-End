@@ -23,6 +23,9 @@ public class AssociationService {
 		return associationRepository.findById(id).get();
 	}
 
+	public void updateAssociation(Association association){
+		associationRepository.save(association);
+	}
 	public void save(Association association) {
 		associationRepository.save(association);
 	}

@@ -32,11 +32,17 @@ public class FootballMatchService {
 		return footballMatchRepository.findFootballMatchesResult();
 	}
 
+	public void updateFootballMatch(FootballMatch footballMatch){
+		save(footballMatch);
+	}
 
 	public void save(FootballMatch footballMatch){
 		footballMatchRepository.save(footballMatch);
 	}
 
+	public void deleteById(int id) {
+		footballMatchRepository.deleteById(id);
+	}
 	public void deleteAll(){
 		footballMatchRepository.deleteAll();
 	}

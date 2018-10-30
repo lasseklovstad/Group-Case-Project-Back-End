@@ -31,6 +31,18 @@ public class Contact {
 		this.person = person;
 	}
 
+	public void setContactType(String contactType) {
+		this.contactType = contactType;
+	}
+
+	public void setContactDetail(String contactDetail) {
+		this.contactDetail = contactDetail;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
 	// FOREIGN KEY (person_id) REFERENCES PERSON(person_id)
 	//   contact_id INT NOT NULL,
 	//  contact_type VARCHAR(64) NOT NULL,

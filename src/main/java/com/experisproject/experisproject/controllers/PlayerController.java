@@ -11,7 +11,6 @@ import com.experisproject.experisproject.services.PersonService;
 import com.experisproject.experisproject.services.PlayerService;
 import com.experisproject.experisproject.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,8 +28,6 @@ public class PlayerController {
 	private PersonService personService;
 	@Autowired
 	private PlayerService playerService;
-	@Autowired
-	private AddressService addressService;
 	@Autowired
 	private TeamService teamService;
 
@@ -61,24 +58,42 @@ public class PlayerController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void create(
-			@RequestBody PlayerForm form,
-			HttpServletResponse response
-	) {
+	public void createPlayer( @RequestBody PlayerForm form, HttpServletResponse response ) {
+		try {
+			//Create new player
+			Person person = personService.findById(form.getPersonId());
+			Team team = teamService.findById(form.getTeamId());
+			Player player = new Player(form.getNumber(), form.getNormalPosition(), person, team, null);
 
-		//Create new player
-		Address address = new Address(form.getAddressLine1(), form.getAddressLine2(), form.getAddressLine3(), form.getCity(), form.getPostalCode(), form.getCountry());
-		LocalDate dateOfBirth = LocalDate.of(form.getYear(), form.getMonth(), form.getDay());
-		Person person = new Person(form.getFirstName(), form.getLastName(), dateOfBirth, address);
-		Team team = new Team();
-		Player player = new Player(form.getNumber(), form.getNormalPosition(), person, team, null);
-
-		teamService.save(team);
-		addressService.save(address);
-		personService.save(person);
-		playerService.save(player);
-		//playerService.save(person);
-		response.setStatus(HttpStatus.OK.value());
+			playerService.save(player);
+			response.setStatus(HttpServletResponse.SC_CREATED);
+		} catch (Exception ex) {
+			ex.getCause();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
 	}
+
+	@RequestMapping(value = "", method = RequestMethod.PUT)
+	public void updatePlayer(@RequestBody PlayerForm form, HttpServletResponse response ) {
+		try {
+			//Update player
+			Player player = playerService.findById(form.getPersonId());
+			player.setNumber(form.getNumber());
+			player.setNormalPosition(form.getNormalPosition());
+			player.setPerson(personService.findById(form.getPersonId()));
+			player.setTeam(teamService.findById(form.getTeamId()));
+
+			playerService.updatePlayer(player);
+			response.setStatus(HttpServletResponse.SC_OK);
+		} catch (Exception ex) {
+			ex.getCause();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
+	}
+
+	/*--------------------------------------------------------------------------------------*
+	 *                                DELETE MAPPING/METHODS                                *
+	 * -------------------------------------------------------------------------------------*/
+
 
 }
