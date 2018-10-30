@@ -31,64 +31,57 @@ public class MatchGoalController {
 	private PlayerService playerService;
 
 	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
-	public List<MatchGoal> getAllMatchGoals(){
+	public List<MatchGoal> getAllMatchGoals() {
 		return matchGoalService.findAll();
 	}
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public List<MatchGoal> getMatchGoals(){
+	public List<MatchGoal> getMatchGoals() {
 		return matchGoalService.findMatchGoalIdDescriptionGoalTypeMatchPlayer();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public MatchGoal getMatchGoalById(@PathVariable int id, HttpServletResponse response){
+	public MatchGoal getMatchGoalById(@PathVariable int id, HttpServletResponse response) {
 		return matchGoalService.findById(id);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void createMatchGoal(@RequestBody MatchGoalForm form, HttpServletResponse response){
-		//edit method
+	public void createMatchGoal(@RequestBody MatchGoalForm form, HttpServletResponse response) {
 		try {
 			GoalType goalType = goalTypeService.findById(form.getGoalTypeId());
 			FootballMatch footballMatch = footballMatchService.findById(form.getFootballMatchId());
 			Player player = playerService.findById(form.getPlayerId());
-			MatchGoal matchGoal = new MatchGoal(form.getDescription(),goalType, footballMatch,player);
+			MatchGoal matchGoal = new MatchGoal(form.getDescription(), goalType, footballMatch, player);
 			matchGoalService.save(matchGoal);
 			response.setStatus(HttpServletResponse.SC_CREATED);
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.getCause();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
-
-
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.PUT)
-	public void updateMatchGoal(@RequestBody MatchGoalForm form, HttpServletResponse response){
-		//edit method
+	public void updateMatchGoal(@RequestBody MatchGoalForm form, HttpServletResponse response) {
 		try {
 			MatchGoal matchGoal = matchGoalService.findById(form.getMatchGoalId());
 			matchGoal.setDescription(form.getDescription());
-			GoalType goalType = goalTypeService.findById(form.getGoalTypeId());
-			matchGoal.setGoalType(goalType);
-			FootballMatch footballMatch = footballMatchService.findById(form.getFootballMatchId());
-			matchGoal.setFootballMatch(footballMatch);
-			Player player = playerService.findById(form.getPlayerId());
-			matchGoal.setPlayer(player);
+			matchGoal.setGoalType(goalTypeService.findById(form.getGoalTypeId()));
+			matchGoal.setFootballMatch(footballMatchService.findById(form.getFootballMatchId()));
+			matchGoal.setPlayer(playerService.findById(form.getPlayerId()));
 			matchGoalService.updateMatchGoal(matchGoal); //save()
 			response.setStatus(HttpServletResponse.SC_OK);
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.getCause();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
 	}
 
 	@RequestMapping(value = "{id}/delete", method = RequestMethod.DELETE)
-	public void deleteMatchGoalById(@PathVariable int id, HttpServletResponse response){
+	public void deleteMatchGoalById(@PathVariable int id, HttpServletResponse response) {
 		try {
 			matchGoalService.deleteById(id);
 			response.setStatus(HttpServletResponse.SC_OK);
-		}catch (Exception ex){
+		} catch (Exception ex) {
 			ex.getCause();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
@@ -99,7 +92,7 @@ public class MatchGoalController {
 	 *                  GOALTYPE MAPPING AND REQUEST METHODS							 *
 	 ***********************************************************************************/
 	@RequestMapping(value = "/goalType/allInfo", method = RequestMethod.GET)
-	public List<GoalType> getGoalTypes(){
+	public List<GoalType> getGoalTypes() {
 		return goalTypeService.findAll();
 	}
 
@@ -109,7 +102,7 @@ public class MatchGoalController {
 	}
 
 	@RequestMapping(value = "goalType/all", method = RequestMethod.GET)
-	public List<GoalType> findGoalTypes(){
+	public List<GoalType> findGoalTypes() {
 		return goalTypeService.findGoalTypes();
 	}
 
@@ -137,8 +130,8 @@ public class MatchGoalController {
 
 	@RequestMapping(value = "/goalType/{id}/delete", method = RequestMethod.DELETE)
 	public void deleteGoalTypeById(@PathVariable int id, HttpServletResponse response) {
-		 goalTypeService.deleteById(id);
-		 response.setStatus(HttpStatus.OK.value());
+		goalTypeService.deleteById(id);
+		response.setStatus(HttpStatus.OK.value());
 	}
 
 
