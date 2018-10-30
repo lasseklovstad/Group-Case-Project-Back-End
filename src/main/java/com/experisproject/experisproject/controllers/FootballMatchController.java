@@ -51,6 +51,8 @@ public class FootballMatchController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public void createFootballMatch(@RequestBody FootballMatchForm form, HttpServletResponse response) {
 		try {
+
+
 			FootballMatch footballMatch = new FootballMatch();
 			footballMatchService.save(footballMatch);
 			response.setStatus(HttpServletResponse.SC_CREATED);
@@ -68,7 +70,10 @@ public class FootballMatchController {
 			footballMatch.setLocation(locationService.findById(form.getLocationId()));
 			footballMatch.setHomeTeam(teamService.findById(form.getHomeTeamId()));
 			footballMatch.setAwayTeam(teamService.findById(form.getAwayTeamId()));
-			footballMatch.setPlayers(form.getPlayers());
+
+			//
+			//form.getPlayerIds();
+			//footballMatch.setPlayers();
 			footballMatchService.updateFootballMatch(footballMatch);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (Exception e) {

@@ -29,6 +29,11 @@ public class WatchlistService {
 		return watchlistRepository.findById(id).get();
 	}
 
+	public Watchlist findWatchlistByUserId(int userId){
+		return 	watchlistRepository.findWatchlistByUser_UserId(userId);
+
+	}
+
 	public void updateWatchlist(Watchlist watchlist){
 		save(watchlist);
 	}

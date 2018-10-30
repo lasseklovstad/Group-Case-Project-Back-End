@@ -1,8 +1,10 @@
 package com.experisproject.experisproject.controllers;
 
 import com.experisproject.experisproject.models.entities.User;
+import com.experisproject.experisproject.models.entities.Watchlist;
 import com.experisproject.experisproject.models.forms.UserForm;
 import com.experisproject.experisproject.services.UserService;
+import com.experisproject.experisproject.services.WatchlistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +19,11 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private WatchlistService watchlistService;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public 	List<User> getUsersIdUsernameEmail(){
+	public List<User> getUsersIdUsernameEmail() {
 		return userService.findUsersIdUsernameEmail();
 	}
 
@@ -35,14 +39,14 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/findByEmail/{email}", method = RequestMethod.GET)
-	public User getByEmail(@PathVariable String email){
+	public User getByEmail(@PathVariable String email) {
 		return userService.findByEmail(email);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	//@ResponseStatus(code = HttpStatus.OK)
 	public void createUser(@RequestBody UserForm form, HttpServletResponse response) {
-		if (form.getUserName().equals("admin")) {
+		if (form.getUserName().equals("admin") || form.getUserName().equals("tonje") || form.getUserName().equals("fredrik") || form.getUserName().equals("karoline")) {
 			form.setAdmin(true);
 		} else {
 			form.setAdmin(false);
@@ -50,6 +54,8 @@ public class UserController {
 		try {
 			User user = new User(form.getUserName(), form.getEmail(), form.getPassword(), form.isAdmin());
 			userService.save(user);
+			Watchlist watchlist = new Watchlist(null, null, user);
+			watchlistService.save(watchlist);
 			response.setStatus(HttpServletResponse.SC_CREATED);
 		} catch (Exception e) {
 			e.printStackTrace();

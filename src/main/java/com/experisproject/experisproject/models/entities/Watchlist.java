@@ -29,11 +29,11 @@ public class Watchlist {
 		this.user = user;
 	}
 
-	public List<String> getPlayerIds() {
+	public ArrayList<String> getPlayerIds() {
 		return playerIds;
 	}
 
-	public List<String> getTeamIds() {
+	public ArrayList<String> getTeamIds() {
 		return teamIds;
 	}
 

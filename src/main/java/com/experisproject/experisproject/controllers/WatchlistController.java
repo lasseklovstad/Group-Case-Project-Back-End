@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -32,10 +33,15 @@ public class WatchlistController {
 		return watchlistService.findAll();
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}/watchlist", method = RequestMethod.GET)
 	public Watchlist getWatchlistById(@PathVariable int id) {
 		//if exists
 		return watchlistService.findById(id);
+	}
+
+	@RequestMapping(value = "/{id}/user", method = RequestMethod.GET)
+	public Watchlist getWatchlistByUserId(@PathVariable int id) {
+		return watchlistService.findWatchlistByUserId(id);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
@@ -43,7 +49,10 @@ public class WatchlistController {
 		//if exists
 		try {
 			User user = userService.findById(form.getUserId());
-			Watchlist watchlist = new Watchlist(form.getPlayerIds(), form.getTeamIds(), user);
+			ArrayList<String> playerIds = new ArrayList<>();
+			ArrayList<String> teamIds = new ArrayList<>();
+
+			Watchlist watchlist = new Watchlist(playerIds, teamIds, user);
 			watchlistService.save(watchlist);
 			response.setStatus(HttpServletResponse.SC_CREATED);
 		} catch (Exception e) {
@@ -56,11 +65,21 @@ public class WatchlistController {
 	public void updateWatchlist(@RequestBody WatchlistForm form, HttpServletResponse response) {
 		//if exists
 		try {
-			Watchlist watchlist = watchlistService.findById(form.getWatchlistId());
-			watchlist.setPlayerIds(form.getPlayerIds());
-			watchlist.setTeamIds(form.getTeamIds());
+			Watchlist watchlist = watchlistService.findWatchlistByUserId(form.getUserId());
+			ArrayList<String> playerIds = watchlist.getPlayerIds();
+			ArrayList<String> teamIds = watchlist.getTeamIds();
+
+			if (form.getPlayerId() != 0) {
+				playerIds.add(Integer.toString(form.getPlayerId()));
+			}
+			else if (form.getTeamId() != 0) {
+				teamIds.add(Integer.toString(form.getTeamId()));
+			}
+
+			watchlist.setPlayerIds(playerIds);
+			watchlist.setTeamIds(teamIds);
 			watchlistService.updateWatchlist(watchlist);
-			response.setStatus(HttpServletResponse.SC_CREATED);
+			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (Exception e) {
 			e.getCause();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);

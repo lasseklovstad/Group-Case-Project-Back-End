@@ -1,10 +1,6 @@
 package com.experisproject.experisproject.models.forms;
 
-import com.experisproject.experisproject.models.entities.*;
-
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.List;
+import java.util.ArrayList;
 
 public class FootballMatchForm {
 
@@ -13,7 +9,7 @@ public class FootballMatchForm {
 	private int locationId;
 	private int homeTeamId;
 	private int awayTeamId;
-	private HashSet<Player> players;
+	private ArrayList<String> playerIds;
 
 	public int getFootballMatchId() {
 		return footballMatchId;
@@ -35,7 +31,7 @@ public class FootballMatchForm {
 		return awayTeamId;
 	}
 
-	public HashSet<Player> getPlayers() {
-		return players;
+	public ArrayList<String> getPlayerIds() {
+		return playerIds;
 	}
 }
