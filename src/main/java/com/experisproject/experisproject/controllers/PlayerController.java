@@ -77,10 +77,11 @@ public class PlayerController {
 	public void updatePlayer(@RequestBody PlayerForm form, HttpServletResponse response ) {
 		try {
 			//Update player
-			Person person = personService.findById(form.getPersonId());
-			Team team = teamService.findById(form.getTeamId());
-			//get fooballmatches to exactly this playerId, then set in the contructor
-			Player player = new Player(form.getNumber(), form.getNormalPosition(), person, team, null);
+			Player player = playerService.findById(form.getPersonId());
+			player.setNumber(form.getNumber());
+			player.setNormalPosition(form.getNormalPosition());
+			player.setPerson(personService.findById(form.getPersonId()));
+			player.setTeam(teamService.findById(form.getTeamId()));
 
 			playerService.updatePlayer(player);
 			response.setStatus(HttpServletResponse.SC_OK);
@@ -89,5 +90,10 @@ public class PlayerController {
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
 	}
+
+	/*--------------------------------------------------------------------------------------*
+	 *                                DELETE MAPPING/METHODS                                *
+	 * -------------------------------------------------------------------------------------*/
+
 
 }
