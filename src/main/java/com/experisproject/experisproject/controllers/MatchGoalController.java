@@ -1,9 +1,14 @@
 package com.experisproject.experisproject.controllers;
 
+import com.experisproject.experisproject.models.entities.FootballMatch;
 import com.experisproject.experisproject.models.entities.GoalType;
 import com.experisproject.experisproject.models.entities.MatchGoal;
+import com.experisproject.experisproject.models.entities.Player;
+import com.experisproject.experisproject.models.forms.MatchGoalForm;
+import com.experisproject.experisproject.services.FootballMatchService;
 import com.experisproject.experisproject.services.GoalTypeService;
 import com.experisproject.experisproject.services.MatchGoalService;
+import com.experisproject.experisproject.services.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +22,13 @@ import java.util.List;
 public class MatchGoalController {
 
 	@Autowired
-	MatchGoalService matchGoalService;
+	private MatchGoalService matchGoalService;
 	@Autowired
-	GoalTypeService goalTypeService;
+	private GoalTypeService goalTypeService;
+	@Autowired
+	private FootballMatchService footballMatchService;
+	@Autowired
+	private PlayerService playerService;
 
 	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
 	public List<MatchGoal> getAllMatchGoals(){
@@ -37,13 +46,41 @@ public class MatchGoalController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void createMatchGoal(){
+	public void createMatchGoal(@RequestBody MatchGoalForm form, HttpServletResponse response){
 		//edit method
+		try {
+			GoalType goalType = goalTypeService.findById(form.getGoalTypeId());
+			FootballMatch footballMatch = footballMatchService.findById(form.getFootballMatchId());
+			Player player = playerService.findById(form.getPlayerId());
+			MatchGoal matchGoal = new MatchGoal(form.getDescription(),goalType, footballMatch,player);
+			matchGoalService.save(matchGoal);
+			response.setStatus(HttpServletResponse.SC_CREATED);
+		}catch (Exception e){
+			e.getCause();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
+
+
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.PUT)
-	public void updateMatchGoal(){
+	public void updateMatchGoal(@RequestBody MatchGoalForm form, HttpServletResponse response){
 		//edit method
+		try {
+			MatchGoal matchGoal = matchGoalService.findById(form.getMatchGoalId());
+			matchGoal.setDescription(form.getDescription());
+			GoalType goalType = goalTypeService.findById(form.getGoalTypeId());
+			matchGoal.setGoalType(goalType);
+			FootballMatch footballMatch = footballMatchService.findById(form.getFootballMatchId());
+			matchGoal.setFootballMatch(footballMatch);
+			Player player = playerService.findById(form.getPlayerId());
+			matchGoal.setPlayer(player);
+			matchGoalService.updateMatchGoal(matchGoal); //save()
+			response.setStatus(HttpServletResponse.SC_OK);
+		}catch (Exception e){
+			e.getCause();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
 	}
 
 	@RequestMapping(value = "{id}/delete", method = RequestMethod.DELETE)

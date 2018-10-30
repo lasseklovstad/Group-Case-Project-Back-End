@@ -33,6 +33,13 @@ public class MatchGoalService {
 		return result;
 	}
 
+	public void updateMatchGoal(MatchGoal matchGoal){
+		save(matchGoal);
+	}
+
+	public void save(MatchGoal matchGoal){
+		matchGoalRepository.save(matchGoal);
+	}
 	public void deleteById(int id){
 		matchGoalRepository.deleteById(id);
 	}
