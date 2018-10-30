@@ -3,47 +3,39 @@ package com.experisproject.experisproject.models.forms;
 import com.experisproject.experisproject.models.entities.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 
 public class FootballMatchForm {
 
-	//footballMatch
-	private LocalDate matchDate;
+	private int footballMatchId;
+	private int seasonId;
+	private int locationId;
+	private int homeTeamId;
+	private int awayTeamId;
+	private HashSet<Player> players;
 
-	//Season
-	private String seasonName;
-	private LocalDate startDate;
-	private LocalDate endDate;
-	private String seasonDescription;
+	public int getFootballMatchId() {
+		return footballMatchId;
+	}
 
-	//Location
-	private String locationName;
-	private String locationDescription;
-	//address
+	public int getSeasonId() {
+		return seasonId;
+	}
 
+	public int getLocationId() {
+		return locationId;
+	}
 
-	//Team hometeam
-	private String homeTeamName;
-	private Association homeTeamAssociation;
-	private Owner homeTeamOwner;
-	private Coach homeTeamCoach;
-	private Location homeTeamLocation;
+	public int getHomeTeamId() {
+		return homeTeamId;
+	}
 
+	public int getAwayTeamId() {
+		return awayTeamId;
+	}
 
-	//Team awayTeam
-	private String awayTeamName;
-	private Association awayTeamAssociation;
-	private Owner awayTeamOwner;
-	private Coach awayTeamCoach;
-	private Location awayTeamLocation;
-
-
-	List<Player> players;
-
-
-
-
-
-
-
+	public HashSet<Player> getPlayers() {
+		return players;
+	}
 }

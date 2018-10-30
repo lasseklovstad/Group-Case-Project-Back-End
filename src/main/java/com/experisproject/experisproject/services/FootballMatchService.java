@@ -32,6 +32,9 @@ public class FootballMatchService {
 		return footballMatchRepository.findFootballMatchesResult();
 	}
 
+	public void updateFootballMatch(FootballMatch footballMatch){
+		save(footballMatch);
+	}
 
 	public void save(FootballMatch footballMatch){
 		footballMatchRepository.save(footballMatch);
