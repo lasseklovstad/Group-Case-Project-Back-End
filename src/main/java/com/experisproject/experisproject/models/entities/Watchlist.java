@@ -14,26 +14,26 @@ public class Watchlist {
 	@GeneratedValue
 	private int watchlistId;
 
-	private List<String> playerIds;
+	private ArrayList<String> playerIds;
 
-	private List<String> teamIds;
+	private ArrayList<String> teamIds;
 
 	@OneToOne
 	@JoinColumn(name = "userId")
 	@NotNull
 	private User user;
 
-	public Watchlist(List<String> playerIds, List<String> teamIds, @NotNull User user) {
+	public Watchlist(ArrayList<String> playerIds, ArrayList<String> teamIds, @NotNull User user) {
 		this.playerIds = playerIds;
 		this.teamIds = teamIds;
 		this.user = user;
 	}
 
-	public List<String> getPlayerIds() {
+	public ArrayList<String> getPlayerIds() {
 		return playerIds;
 	}
 
-	public List<String> getTeamIds() {
+	public ArrayList<String> getTeamIds() {
 		return teamIds;
 	}
 
@@ -41,11 +41,11 @@ public class Watchlist {
 		return user;
 	}
 
-	public void setPlayerIds(List<String> playerIds) {
+	public void setPlayerIds(ArrayList<String> playerIds) {
 		this.playerIds = playerIds;
 	}
 
-	public void setTeamIds(List<String> teamIds) {
+	public void setTeamIds(ArrayList<String> teamIds) {
 		this.teamIds = teamIds;
 	}
 }

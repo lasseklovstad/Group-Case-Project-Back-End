@@ -61,8 +61,8 @@ public class WatchlistController {
 		//if exists
 		try {
 			Watchlist watchlist = watchlistService.findWatchlistByUserId(form.getUserId());
-			List<String> playerIds = watchlist.getPlayerIds();
-			List<String> teamIds = watchlist.getTeamIds();
+			ArrayList<String> playerIds = watchlist.getPlayerIds();
+			ArrayList<String> teamIds = watchlist.getTeamIds();
 			playerIds.add(Integer.toString(form.getPlayerId()));
 			teamIds.add(Integer.toString(form.getTeamId()));
 
