@@ -32,10 +32,9 @@ public class LocationController {
 		return locationService.findAllLimited();
 	}
 
-	@RequestMapping(value = "/{id}")
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Location getLocation(@PathVariable int id) {
-		Location location = locationService.findById(id);
-		return location;
+		return locationService.findById(id);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
