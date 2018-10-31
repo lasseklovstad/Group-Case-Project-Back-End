@@ -17,7 +17,7 @@ public interface PlayerRepository extends JpaRepository<Player, Integer> {
 	@Query(value = "SELECT p.playerId as playerId, CONCAT(p.person.firstName,' ',p.person.lastName) as fullName, p.team.teamId, p.team.name FROM Player p")
 	List<Player> findPlayerShortInfo();
 
-	@Query(value = "SELECT p.playerId ,CONCAT(p.person.firstName,' ',p.person.lastName) FROM Player p WHERE p.team.teamId = :teamId")
+	@Query(value = "SELECT p.playerId ,CONCAT(p.person.firstName,' ',p.person.lastName),p.normalPosition FROM Player p WHERE p.team.teamId = :teamId")
 	List<Player> findByTeamId(@Param("teamId") int teamId);
 
 	@Query(value = "SELECT pl FROM Player pl INNER JOIN Person pers ON pl.person.personId = pers.personId INNER JOIN Team team ON pl.team.teamId = team.teamId")
