@@ -33,8 +33,6 @@ public class SeasonController {
 		return seasonService.findAllLimited();
 	}
 
-
-
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public void createNew(@RequestBody SeasonForm form, HttpServletResponse response) {
 
