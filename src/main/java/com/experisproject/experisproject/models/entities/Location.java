@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 public class Location {
 	@Id
 	@GeneratedValue
-	private Long locationId;
+	private int locationId;
 
 	@NotNull
 	@Column(unique = true)

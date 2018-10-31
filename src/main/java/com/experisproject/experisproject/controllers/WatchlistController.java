@@ -66,22 +66,28 @@ public class WatchlistController {
 		//if exists
 		try {
 			Watchlist watchlist = watchlistService.findWatchlistByUserIdGenerated(form.getUserId());
-			ArrayList<String> playerIds = watchlist.getPlayerIds();
-			ArrayList<String> teamIds = watchlist.getTeamIds();
+			System.out.println("sacked out the watchlist through user id");
 
+			ArrayList<String> playerIds = watchlist.getPlayerIds();
+			System.out.println(playerIds.size());
+			ArrayList<String> teamIds = watchlist.getTeamIds();
+			System.out.println("initate get teamids lists");
 			//if (form.getPlayerId() != 0) {}
-				playerIds.add(Integer.toString(form.getPlayerId()));
+
+			playerIds.add("2982");
+			System.out.println("after add player id");
 
 			//else if (form.getTeamId() != 0) {
-				teamIds.add(Integer.toString(form.getTeamId()));
+			teamIds.add(Integer.toString(form.getTeamId()));
 		//	}
+			System.out.println("after add team id");
 
 			watchlist.setPlayerIds(playerIds);
 			watchlist.setTeamIds(teamIds);
 			watchlistService.updateWatchlist(watchlist);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (Exception e) {
-			e.getCause();
+			e.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
 	}
