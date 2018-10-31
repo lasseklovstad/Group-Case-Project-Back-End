@@ -69,12 +69,12 @@ public class WatchlistController {
 			ArrayList<String> playerIds = watchlist.getPlayerIds();
 			ArrayList<String> teamIds = watchlist.getTeamIds();
 
-			if (form.getPlayerId() != 0) {
+			//if (form.getPlayerId() != 0) {}
 				playerIds.add(Integer.toString(form.getPlayerId()));
-			}
-			else if (form.getTeamId() != 0) {
+
+			//else if (form.getTeamId() != 0) {
 				teamIds.add(Integer.toString(form.getTeamId()));
-			}
+		//	}
 
 			watchlist.setPlayerIds(playerIds);
 			watchlist.setTeamIds(teamIds);
