@@ -26,19 +26,19 @@ public class Person {
 	@JoinColumn(name = "addressId")
 	private Address address;
 
-	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "person", orphanRemoval = true, cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Owner owner;
 
-	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "person", orphanRemoval = true, cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Coach coach;
 
-	@OneToOne(mappedBy = "person", cascade = CascadeType.ALL) //if a person is deleted and is a player, no longer a player
+	@OneToOne(mappedBy = "person", orphanRemoval = true, cascade = CascadeType.ALL) //if a person is deleted and is a player, no longer a player
 	@JsonIgnore
 	private Player player;
 
-	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "person", orphanRemoval = true, cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Contact> contacts;
 
