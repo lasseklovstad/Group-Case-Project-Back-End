@@ -8,9 +8,8 @@ public class PersonForm {
 	private String lastName;
 
 	//Date of birth
-	private int year;
-	private int month;
-	private int day;
+	private String date;
+
 
 	private int addressId;
 
@@ -29,16 +28,8 @@ public class PersonForm {
 		return lastName;
 	}
 
-	public int getYear() {
-		return year;
-	}
-
-	public int getMonth() {
-		return month;
-	}
-
-	public int getDay() {
-		return day;
+	public String getDate() {
+		return date;
 	}
 
 	public int getAddressId() {

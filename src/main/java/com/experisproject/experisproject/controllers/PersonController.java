@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 @RestController
@@ -46,7 +48,9 @@ public class PersonController {
 	public void createPerson(@RequestBody PersonForm form, HttpServletResponse response){
 		try {
 			Address address = addressService.findById(form.getAddressId());
-			LocalDate dateOfBirth = LocalDate.of(form.getYear(), form.getMonth(), form.getDay());
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			dtf = dtf.withLocale(Locale.US);
+			LocalDate dateOfBirth = LocalDate.parse(form.getDate(),dtf);
 			Person person = new Person(form.getFirstName(), form.getLastName(),dateOfBirth, address);
 			personService.save(person);
 			response.setStatus(HttpServletResponse.SC_CREATED);
@@ -61,7 +65,9 @@ public class PersonController {
 		//almost exactly the same as create method createPerson(form,response)
 		try {
 			Address address = addressService.findById(form.getAddressId());
-			LocalDate dateOfBirth = LocalDate.of(form.getYear(), form.getMonth(), form.getDay());
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			dtf = dtf.withLocale(Locale.US);
+			LocalDate dateOfBirth = LocalDate.parse(form.getDate(),dtf);
 			Person person = personService.findById(form.getPersonId());
 			person.setFirstName(form.getFirstName());
 			person.setLastName(form.getLastName());
