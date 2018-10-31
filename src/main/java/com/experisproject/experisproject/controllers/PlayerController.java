@@ -75,9 +75,11 @@ public class PlayerController {
 
 	@RequestMapping(value = "", method = RequestMethod.PUT)
 	public void updatePlayer(@RequestBody PlayerForm form, HttpServletResponse response ) {
+
 		try {
 			//Update player
-			Player player = playerService.findById(form.getPersonId());
+			System.out.println(form);
+			Player player = playerService.findById(form.getPlayerId());
 			player.setNumber(form.getNumber());
 			player.setNormalPosition(form.getNormalPosition());
 			player.setPerson(personService.findById(form.getPersonId()));
@@ -86,7 +88,9 @@ public class PlayerController {
 			playerService.updatePlayer(player);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (Exception ex) {
+			System.out.println("Fail");
 			ex.getCause();
+			ex.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
 	}
