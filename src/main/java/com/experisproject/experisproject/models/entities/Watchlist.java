@@ -5,7 +5,6 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Data
@@ -15,18 +14,36 @@ public class Watchlist {
 	private int watchlistId;
 
 	private ArrayList<String> playerIds;
+	private ArrayList<String> playerNames;
 
 	private ArrayList<String> teamIds;
+	private ArrayList<String> teamNames;
 
 	@OneToOne
 	@JoinColumn(name = "userId")
 	@NotNull
 	private User user;
 
-	public Watchlist(ArrayList<String> playerIds, ArrayList<String> teamIds, @NotNull User user) {
+	public Watchlist(ArrayList<String> playerIds, ArrayList<String> teamIds, ArrayList<String> playerNames, ArrayList<String> teamNames, @NotNull User user) {
 		this.playerIds = playerIds;
 		this.teamIds = teamIds;
 		this.user = user;
+	}
+
+	public ArrayList<String> getPlayerNames() {
+		return playerNames;
+	}
+
+	public void setPlayerNames(ArrayList<String> playerNames) {
+		this.playerNames = playerNames;
+	}
+
+	public ArrayList<String> getTeamNames() {
+		return teamNames;
+	}
+
+	public void setTeamNames(ArrayList<String> teamNames) {
+		this.teamNames = teamNames;
 	}
 
 	public ArrayList<String> getPlayerIds() {

@@ -50,9 +50,11 @@ public class WatchlistController {
 		try {
 			User user = userService.findById(form.getUserId());
 			ArrayList<String> playerIds = new ArrayList<>();
+			ArrayList<String> playerNames = new ArrayList<>();
 			ArrayList<String> teamIds = new ArrayList<>();
+			ArrayList<String> teamNames = new ArrayList<>();
 
-			Watchlist watchlist = new Watchlist(playerIds, teamIds, user);
+			Watchlist watchlist = new Watchlist(playerIds, playerNames, teamIds, teamNames, user);
 			watchlistService.save(watchlist);
 			response.setStatus(HttpServletResponse.SC_CREATED);
 		} catch (Exception e) {
@@ -66,24 +68,28 @@ public class WatchlistController {
 		//if exists
 		try {
 			Watchlist watchlist = watchlistService.findWatchlistByUserIdGenerated(form.getUserId());
-			System.out.println("sacked out the watchlist through user id");
-
 			ArrayList<String> playerIds = watchlist.getPlayerIds();
-			System.out.println(playerIds.size());
+			ArrayList<String> playerNames = watchlist.getPlayerNames();
 			ArrayList<String> teamIds = watchlist.getTeamIds();
-			System.out.println("initate get teamids lists");
-			//if (form.getPlayerId() != 0) {}
+			ArrayList<String> teamNames = watchlist.getTeamNames();
 
-			playerIds.add("2982");
-			System.out.println("after add player id");
-
-			//else if (form.getTeamId() != 0) {
-			teamIds.add(Integer.toString(form.getTeamId()));
-		//	}
-			System.out.println("after add team id");
+			if (form.getPlayerId() != 0) {
+				playerIds.add(Integer.toString(form.getPlayerId()));
+			}
+			if (!form.getPlayerName().isEmpty()) {
+				playerNames.add(form.getPlayerName());
+			}
+			if (form.getTeamId() != 0) {
+				teamIds.add(Integer.toString(form.getTeamId()));
+			}
+			if (!form.getTeamName().isEmpty()) {
+				teamNames.add(form.getTeamName());
+			}
 
 			watchlist.setPlayerIds(playerIds);
+			watchlist.setPlayerNames(playerNames);
 			watchlist.setTeamIds(teamIds);
+			watchlist.setTeamNames(teamNames);
 			watchlistService.updateWatchlist(watchlist);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (Exception e) {
