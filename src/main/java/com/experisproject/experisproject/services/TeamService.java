@@ -43,8 +43,15 @@ public class TeamService {
 		return result;
 	}
 
+	public void updateTeam(Team team){
+		save(team);
+	}
 	public void save(Team team) {
 		teamRepository.save(team);
+	}
+
+	public void deleteById(int id){
+		teamRepository.deleteById(id);
 	}
 
 	public void deleteAll() {
