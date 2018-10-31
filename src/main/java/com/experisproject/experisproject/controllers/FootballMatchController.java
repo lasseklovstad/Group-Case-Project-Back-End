@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/api/footballMatch")
@@ -58,7 +56,9 @@ public class FootballMatchController {
 			Location location = locationService.findById(form.getLocationId());
 			Team homeTeam = teamService.findById(form.getHomeTeamId());
 			Team awayTeam = teamService.findById(form.getAwayTeamId());
-			LocalDate matchDate = LocalDate.of(form.getYear(), form.getMonth(), form.getDay());
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			dtf = dtf.withLocale(Locale.US);
+			LocalDate matchDate = LocalDate.parse(form.getDate(),dtf);
 			Set<Player> players = new HashSet<>();
 			if (form.getPlayerIds() != null) {
 				players = convertIdsToPlayers(form.getPlayerIds());
@@ -67,7 +67,7 @@ public class FootballMatchController {
 			footballMatchService.save(footballMatch);
 			response.setStatus(HttpServletResponse.SC_CREATED);
 		} catch (Exception e) {
-			e.getCause();
+			e.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
 	}
@@ -76,7 +76,9 @@ public class FootballMatchController {
 	public void updateFootballMatch(@RequestBody FootballMatchForm form, HttpServletResponse response) {
 		try {
 			FootballMatch footballMatch = footballMatchService.findById(form.getFootballMatchId());
-			LocalDate matchDate = LocalDate.of(form.getYear(), form.getMonth(), form.getDay());
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			dtf = dtf.withLocale(Locale.US);
+			LocalDate matchDate = LocalDate.parse(form.getDate(),dtf);
 			footballMatch.setMatchDate(matchDate);
 			footballMatch.setSeason(seasonService.findById(form.getSeasonId()));
 			footballMatch.setLocation(locationService.findById(form.getLocationId()));
@@ -89,7 +91,7 @@ public class FootballMatchController {
 			footballMatchService.updateFootballMatch(footballMatch);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (Exception e) {
-			e.getCause();
+			e.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
 	}

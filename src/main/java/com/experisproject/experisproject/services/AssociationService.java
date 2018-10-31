@@ -16,6 +16,10 @@ public class AssociationService {
 		return this.associationRepository = associationRepository;
 	}
 
+	public Association findByName(String name){
+		return associationRepository.findByName(name);
+	}
+
 	public List<Association> findAssociationsIdNameDescription(){
 		return associationRepository.findAssociationsIdNameDescription();
 	}

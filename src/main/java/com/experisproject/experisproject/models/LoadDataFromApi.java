@@ -29,7 +29,7 @@ public class LoadDataFromApi {
         return this.restTemplate=restTemplate;
     }
 
-    private int teamNumber=1;
+    private int teamNumber=0;
 
     @Autowired
     TeamService teamService;
@@ -50,14 +50,11 @@ public class LoadDataFromApi {
 
     //@Scheduled(cron = "*/10 * * * * *")
     public void getData() throws IOException {
-
-        Random r = new Random();
-        int Low = 1;
-        int High = 4637;
-        teamNumber = r.nextInt(High-Low) + Low;
-        System.out.print(teamNumber);
-
         System.out.println("Sending request");
+
+        teamNumber++;
+
+
 
         try{
             String url = "http://api.football-data.org/v2/teams/"+teamNumber;
@@ -68,7 +65,7 @@ public class LoadDataFromApi {
             HttpEntity<String> response = restTemplate.exchange(url, HttpMethod.GET,request, String.class);
             TeamData team = new ObjectMapper().readValue(response.getBody(),TeamData.class);
 
-
+            System.out.println(team.getVenue());
             key = "96deffbb5ec69d";
             url = "https://eu1.locationiq.com/v1/search.php?key="+key+"&q="+team.getVenue()+"&format=json&addressdetails=1&limit=1";
             HttpEntity<String> addressResponse = restTemplate.exchange(url, HttpMethod.GET,null, String.class);
@@ -79,17 +76,26 @@ public class LoadDataFromApi {
                     locationData[0].getAddress().getCountry()==null ||
                     locationData[0].getAddress().getPostcode() == null
             ){
-                System.out.println("Team not Added");
+
                 return;
             }
-
+            System.out.println(locationData[0].getAddress().getCity());
             Address locationAddress = new Address(locationData[0].getAddress().getRoad(),locationData[0].getAddress().getHouse_number(),"",locationData[0].getAddress().getCity(),locationData[0].getAddress().getPostcode(),locationData[0].getAddress().getCountry());
             //Save address
             try{
-                addressService.save(locationAddress);
-                Location venue = new Location("Venue",null,locationAddress);
+                Location venue= locationService.findByName(team.getVenue());
+                if(venue==null){
+                    addressService.save(locationAddress);
+                    venue = new Location(team.getVenue(),null,locationAddress);
+                }
+
+
                 locationService.save(venue);
-                Association association = new Association(locationData[0].getAddress().getCountry()+"Football Assocation","");
+                Association association=associationService.findByName(locationData[0].getAddress().getCountry()+"Football Assocation");
+                if(association==null){
+                    association = new Association(locationData[0].getAddress().getCountry()+"Football Assocation","");
+                }
+
                 associationService.save(association);
 
 
@@ -140,14 +146,16 @@ public class LoadDataFromApi {
 
 
             }catch (org.springframework.transaction.TransactionSystemException e){
-                System.out.println("Error adding team");
+                e.printStackTrace();
             }catch (org.springframework.dao.DataIntegrityViolationException e){
-                System.out.println("Error adding team");
+                e.printStackTrace();
             }
 
 
         }catch (org.springframework.web.client.HttpClientErrorException e){
-            System.out.println("Error adding team");
+            e.printStackTrace();
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
 

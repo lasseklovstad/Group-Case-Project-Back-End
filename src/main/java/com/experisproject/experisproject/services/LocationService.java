@@ -20,6 +20,9 @@ public class LocationService {
 	public Location findById(int id) {
 		return locationRepository.findById(id).get();
 	}
+	public Location findByName(String name){
+		return locationRepository.findByName(name);
+	}
 
 	public 	List<Location> findLocationIdNameDescriptionAddress(){
 		return locationRepository.findLocationIdNameDescriptionAddress();

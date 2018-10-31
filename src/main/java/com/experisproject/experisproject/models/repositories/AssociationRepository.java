@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface AssociationRepository extends JpaRepository<Association, Integer> {
 
-
+	Association findByName(String name);
 	@Query(value = "SELECT a.associationId, a.name, a.description FROM Association a")
 	List<Association> findAssociationsIdNameDescription();
 
