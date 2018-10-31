@@ -26,7 +26,7 @@ public class User {
 	@NotNull
 	private boolean isAdmin;
 
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.PERSIST)
 	@JsonIgnore
 	private Watchlist watchlist;
 

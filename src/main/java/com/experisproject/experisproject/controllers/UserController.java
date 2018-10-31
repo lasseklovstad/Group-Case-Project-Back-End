@@ -54,7 +54,7 @@ public class UserController {
 		try {
 			User user = new User(form.getUserName(), form.getEmail(), form.getPassword(), form.isAdmin());
 			userService.save(user);
-			Watchlist watchlist = new Watchlist(new ArrayList<String>(), new ArrayList<String>(), user);
+			Watchlist watchlist = new Watchlist(new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>(), user);
 			watchlistService.save(watchlist);
 			response.setStatus(HttpServletResponse.SC_CREATED);
 		} catch (Exception e) {
@@ -68,6 +68,17 @@ public class UserController {
 	public String fallbackMethod() {
 		return "fallback method";
 	}
+
+	/*--------------------------------------------------------------------------------------*
+	 *                                DELETE MAPPING/METHODS                                *
+	 * -------------------------------------------------------------------------------------*/
+
+	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
+	public void deleteUserById(@PathVariable int id){
+		userService.deleteById(id);
+	}
+
+
 
 
 }
