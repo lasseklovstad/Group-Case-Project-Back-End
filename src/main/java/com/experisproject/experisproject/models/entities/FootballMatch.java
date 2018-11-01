@@ -31,12 +31,12 @@ public class FootballMatch {
 	private Location location;
 
 	@ManyToOne
-	@JoinColumn(name = "teamId")
+	@JoinColumn(name = "homeTeam")
 	@NotNull
 	private Team homeTeam;
 
 	@ManyToOne
-	@JoinColumn(name = "teamId", updatable = false, insertable = false)
+	@JoinColumn(name = "awayTeam")
 	@NotNull
 	private Team awayTeam;
 
