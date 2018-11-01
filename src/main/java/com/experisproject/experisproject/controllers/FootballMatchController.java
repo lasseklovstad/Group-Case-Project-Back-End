@@ -27,6 +27,8 @@ public class FootballMatchController {
 	private TeamService teamService;
 	@Autowired
 	private PlayerService playerService;
+	@Autowired
+	private TeamResultService teamResultService;
 
 	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
 	public List<FootballMatch> getFootballMatchesInfo() {
