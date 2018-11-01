@@ -72,7 +72,6 @@ public class TeamResultController {
 		}
 	}
 
-
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
 	public void deleteTeamResultById(@PathVariable int id) {
 		teamResultService.deleteById(id);
