@@ -45,16 +45,11 @@ public class FootballMatchController {
 		return footballMatchService.findById(id);
 	}
 
+	//need to check something
 	@RequestMapping(value = "/all/result", method = RequestMethod.GET)
 	public List<FootballMatch> getFootballMatchesResult() {
 		return footballMatchService.findFootballMatchesResult();
 	}
-
-	//  @RequestMapping(value = "" , method = RequestMethod.POST)
-	//    public void create(
-	//            @RequestBody FootballMatchForm form,
-	//            HttpServletResponse response
-	//    ){//create new match -> save()}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public void createFootballMatch(@RequestBody FootballMatchForm form, HttpServletResponse response) {
