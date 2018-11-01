@@ -23,6 +23,10 @@ public class FootballMatchService {
 		footballMatchRepository.findAll().forEach(footballMatch-> result.add(footballMatch));
 		return result;
 	}
+	public List<FootballMatch> findFootballMatchIdDateSeasonLocationTeamsPlayers(){
+		return footballMatchRepository.findFootballMatchIdDateSeasonLocationTeamsPlayers();
+	}
+
 
 	public FootballMatch findById(int id){
 		return footballMatchRepository.getOne(id);

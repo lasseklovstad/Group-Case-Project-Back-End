@@ -33,6 +33,11 @@ public class FootballMatchController {
 		return footballMatchService.findAll();
 	}
 
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public List<FootballMatch> getFootballMatches() {
+		return footballMatchService.findFootballMatchIdDateSeasonLocationTeamsPlayers();
+	}
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public FootballMatch getFootballMatchById(@PathVariable int id) {
 		return footballMatchService.findById(id);

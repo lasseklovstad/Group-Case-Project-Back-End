@@ -11,6 +11,9 @@ import java.util.List;
 @Repository
 public interface FootballMatchRepository extends JpaRepository<FootballMatch, Integer> {
 
+	@Query(value = "SELECT fm.footballMatchId, fm.matchDate, fm.season.name, fm.location.name, fm.homeTeam.teamId, fm.homeTeam.name FROM FootballMatch fm")
+	List<FootballMatch> findFootballMatchIdDateSeasonLocationTeamsPlayers();
+
 	@Query(value = "SELECT fm.homeTeam.name, fm.awayTeam.name, fm.homeTeam.teamResults, fm.awayTeam.teamResults FROM FootballMatch fm, TeamResult tr, Team t WHERE fm.footballMatchId = tr.footballMatch.footballMatchId AND fm.homeTeam.teamId = t.teamId AND fm.awayTeam.teamId = t.teamId")
 	List<FootballMatch> findFootballMatchesResult();
 
