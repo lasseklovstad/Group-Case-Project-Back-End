@@ -1,5 +1,6 @@
 package com.experisproject.experisproject.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -24,10 +25,10 @@ public class Location {
 
 	/*  Unnecessary for now to map the entities bidirectional
 	@OneToMany(mappedBy = "location")
-	private List<FootballMatch> footballMatches;
+	private List<FootballMatch> footballMatches;*/
 	@OneToOne(mappedBy = "location")
+	@JsonIgnore
 	private Team team;
-	*/
 
 	public Location() {
 	}

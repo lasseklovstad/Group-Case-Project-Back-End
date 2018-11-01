@@ -40,15 +40,17 @@ public class Team {
 	@OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<TeamResult> teamResults;
-
-	/*  Unnecessary for now to map the entities bidirectional
+/*
 	@OneToMany(mappedBy = "team")
+	@JsonIgnore
 	private List<Player> players;
 	@OneToMany(mappedBy = "homeTeam")
+	@JsonIgnore
 	private List<FootballMatch> homeFootballMatches;
 	@OneToMany(mappedBy = "awayTeam")
+	@JsonIgnore
 	private List<FootballMatch> awayFootballMatches;
-	*/
+*/
 
 	public Team() {
 	}
