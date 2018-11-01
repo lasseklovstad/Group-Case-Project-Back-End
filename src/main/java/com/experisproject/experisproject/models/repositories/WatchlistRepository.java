@@ -14,7 +14,7 @@ public interface WatchlistRepository extends JpaRepository<Watchlist, Integer> {
 	@Query(value = "SELECT w.watchlistId, w.playerIds, w.playerNames, w.teamIds, w.teamNames, w.user.userId FROM Watchlist w ")
 	List<Watchlist> findWatchlists();
 
-	@Query(value = "SELECT w.playerIds, w.playerNames, w.teamIds, w.teamNames FROM Watchlist w WHERE w.user.userId = :userId")
+	@Query(value = "SELECT w.watchlistId, w.playerIds, w.playerNames, w.teamIds, w.teamNames, w.user FROM Watchlist w WHERE w.user.userId = :userId")
 	Watchlist findWatchListByUserId(@Param("userId") int userId);
 
 	Watchlist findWatchlistByUser_UserId(int userId);

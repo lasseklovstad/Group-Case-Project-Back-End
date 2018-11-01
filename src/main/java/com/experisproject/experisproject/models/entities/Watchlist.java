@@ -24,7 +24,7 @@ public class Watchlist {
 	@NotNull
 	private User user;
 
-	public Watchlist(ArrayList<String> playerIds, ArrayList<String> teamIds, ArrayList<String> playerNames, ArrayList<String> teamNames, @NotNull User user) {
+	public Watchlist(ArrayList<String> playerIds, ArrayList<String> playerNames, ArrayList<String> teamIds, ArrayList<String> teamNames, @NotNull User user) {
 		this.playerIds = playerIds;
 		this.playerNames = playerNames;
 		this.teamIds = teamIds;
