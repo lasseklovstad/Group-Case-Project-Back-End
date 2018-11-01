@@ -28,6 +28,10 @@ public class TeamResultService {
 		return result;
 	}
 
+	public List<TeamResult> findTeamResultsIdGoalsResultTeamIdName(){
+		return teamResultRepository.findTeamResultsIdGoalsResultTeamIdName();
+	}
+
 	public void updatePlayer(TeamResult teamResult){
 		save(teamResult);
 	}
