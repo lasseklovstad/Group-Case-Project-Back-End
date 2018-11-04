@@ -32,6 +32,10 @@ public class TeamResultService {
 		return teamResultRepository.findTeamResultsIdGoalsResultTeamIdName();
 	}
 
+	public 	List<TeamResult> findTeamResultsByFootballMatchId(int footballMatchId){
+		return teamResultRepository.findTeamResultsByFootballMatchId(footballMatchId);
+	}
+
 	public void updatePlayer(TeamResult teamResult){
 		save(teamResult);
 	}

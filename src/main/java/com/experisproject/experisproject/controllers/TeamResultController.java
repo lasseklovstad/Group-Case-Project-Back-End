@@ -40,6 +40,12 @@ public class TeamResultController {
 		return teamResultService.findById(id);
 	}
 
+	@RequestMapping(value = "/{id}/byFootballMatchId", method = RequestMethod.GET)
+	public 	List<TeamResult> getTeamResultsByFootballMatchId(@PathVariable int id){
+		return teamResultService.findTeamResultsByFootballMatchId(id);
+	}
+
+
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public void createTeamResult(@RequestBody TeamResultForm form, HttpServletResponse response) {
 		try {
