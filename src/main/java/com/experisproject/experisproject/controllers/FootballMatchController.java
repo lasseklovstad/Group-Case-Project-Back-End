@@ -2,7 +2,6 @@ package com.experisproject.experisproject.controllers;
 
 import com.experisproject.experisproject.models.entities.*;
 import com.experisproject.experisproject.models.forms.FootballMatchForm;
-import com.experisproject.experisproject.pojos.FootballMatchResultsInfo;
 import com.experisproject.experisproject.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

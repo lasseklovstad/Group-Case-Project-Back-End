@@ -30,7 +30,7 @@ public class WatchlistService {
 		return watchlistRepository.findById(id).get();
 	}
 
-	public Watchlist findWatchListByUserId(int userId){
+	public List<Watchlist> findWatchListByUserId(int userId){
 		return watchlistRepository.findWatchListByUserId(userId);
 	}
 
