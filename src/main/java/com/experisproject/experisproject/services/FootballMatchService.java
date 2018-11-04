@@ -2,7 +2,6 @@ package com.experisproject.experisproject.services;
 
 import com.experisproject.experisproject.models.entities.FootballMatch;
 import com.experisproject.experisproject.models.repositories.FootballMatchRepository;
-import com.experisproject.experisproject.pojos.FootballMatchResultsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
