@@ -74,19 +74,30 @@ public class WatchlistController {
 			ArrayList<String> teamIds = watchlist.getTeamIds();
 			ArrayList<String> teamNames = watchlist.getTeamNames();
 
-			if (form.getPlayerId() != 0) {
-				playerIds.add(Integer.toString(form.getPlayerId()));
+			String playerId = Integer.toString(form.getPlayerId());
+			String playerName = form.getPlayerName();
+			String teamId = Integer.toString(form.getTeamId());
+			String teamName = form.getTeamName();
+			if (!"0".equals(playerId)) {
+				if (!playerIds.remove(playerId)) {
+					playerIds.add(playerId);
+				}
 			}
-			if (!form.getPlayerName().isEmpty()) {
-				playerNames.add(form.getPlayerName());
+			if (!playerName.isEmpty()) {
+				if (!playerNames.remove(playerName)) {
+					playerNames.add(playerName);
+				}
 			}
-			if (form.getTeamId() != 0) {
-				teamIds.add(Integer.toString(form.getTeamId()));
+			if (!"0".equals(teamId)) {
+				if (!playerIds.remove(teamId)) {
+					teamIds.add(teamId);
+				}
 			}
-			if (!form.getTeamName().isEmpty()) {
-				teamNames.add(form.getTeamName());
+			if (!teamName.isEmpty()) {
+				if (!teamNames.remove(teamName)) {
+					teamNames.add(teamName);
+				}
 			}
-
 			watchlist.setPlayerIds(playerIds);
 			watchlist.setPlayerNames(playerNames);
 			watchlist.setTeamIds(teamIds);
@@ -99,6 +110,17 @@ public class WatchlistController {
 		}
 	}
 
+	@RequestMapping(value = "/{id}/clear", method = RequestMethod.GET)
+	public void clearWatchlist(@PathVariable int id) {
+		//we set all the lists to new lists, we still want the lits to exist
+		Watchlist watchlist = watchlistService.findWatchlistByUserIdGenerated(id);
+		watchlist.setPlayerIds(new ArrayList<>());
+		watchlist.setPlayerNames(new ArrayList<>());
+		watchlist.setTeamIds(new ArrayList<>());
+		watchlist.setTeamNames(new ArrayList<>());
+		watchlistService.updateWatchlist(watchlist);
+	}
+
 
 	/*--------------------------------------------------------------------------------------*
 	 *                                DELETE MAPPING/METHODS                                *
@@ -106,7 +128,6 @@ public class WatchlistController {
 
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
 	public void deleteWatchlist(@PathVariable int id) {
-		//check if exists
 		watchlistService.deleteById(id);
 	}
 
