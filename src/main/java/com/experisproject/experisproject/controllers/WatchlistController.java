@@ -39,7 +39,7 @@ public class WatchlistController {
 		return watchlistService.findById(id);
 	}
 
-	@RequestMapping(value = "/{id}/user", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}/byUserId", method = RequestMethod.GET)
 	public List<Watchlist> getWatchlistByUserId(@PathVariable int id) {
 		//doesn't work as it is supposed to work... check if user created now when I changed constructor mistake made it work
 		return watchlistService.findWatchListByUserId(id);
