@@ -31,6 +31,14 @@ public class TeamResultService {
 	public List<TeamResult> findTeamResultsIdGoalsResultTeamIdName(){
 		return teamResultRepository.findTeamResultsIdGoalsResultTeamIdName();
 	}
+	public List<TeamResult> findHomeTeamResults(){
+		return teamResultRepository.findHomeTeamResults();
+	}
+
+	public List<TeamResult> findAwayTeamResults(){
+		return teamResultRepository.findAwayTeamResults();
+	}
+
 
 	public 	List<TeamResult> findTeamResultsByFootballMatchId(int footballMatchId){
 		return teamResultRepository.findTeamResultsByFootballMatchId(footballMatchId);

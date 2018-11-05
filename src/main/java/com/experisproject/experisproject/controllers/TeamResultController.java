@@ -40,6 +40,17 @@ public class TeamResultController {
 		return teamResultService.findById(id);
 	}
 
+	@GetMapping(value = "/homeTeam")
+	public List<TeamResult> findHomeTeamResults(){
+		return teamResultService.findHomeTeamResults();
+	}
+
+	@GetMapping(value = "/awayTeam")
+	public List<TeamResult> findAwayTeamResults() {
+		return teamResultService.findAwayTeamResults();
+	}
+
+
 	@RequestMapping(value = "/{id}/byFootballMatchId", method = RequestMethod.GET)
 	public 	List<TeamResult> getTeamResultsByFootballMatchId(@PathVariable int id){
 		return teamResultService.findTeamResultsByFootballMatchId(id);
