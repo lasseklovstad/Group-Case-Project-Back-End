@@ -45,7 +45,7 @@ public class PlayerController {
 	}
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	@PreAuthorize("hasRole('USER') or hasAuthority('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<Player> getAllPlayersIdNameAndTeam() {
 		return playerService.findPlayerShortInfo();
 	}
