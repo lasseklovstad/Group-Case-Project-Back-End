@@ -15,7 +15,7 @@ import java.util.Set;
 public class Users {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int userId;
 
 	@NotBlank
 	@Size(min = 3, max = 50)
@@ -48,8 +48,8 @@ public class Users {
 		this.password = password;
 	}
 
-	public int getId() {
-		return id;
+	public int getUserId() {
+		return userId;
 	}
 
 	public String getUserName() {

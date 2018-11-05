@@ -5,13 +5,10 @@ import java.util.Set;
 import javax.validation.constraints.*;
 
 public class SignUpForm {
-	@NotBlank
-	@Size(min = 3, max = 50)
-	private String name;
 
 	@NotBlank
 	@Size(min = 3, max = 50)
-	private String username;
+	private String userName;
 
 	@NotBlank
 	@Size(max = 60)
@@ -24,20 +21,12 @@ public class SignUpForm {
 	@Size(min = 6, max = 40)
 	private String password;
 
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsername(String userName) {
+		this.userName = userName;
 	}
 
 	public String getEmail() {

@@ -6,6 +6,7 @@ import com.experisproject.experisproject.models.forms.ContactForm;
 import com.experisproject.experisproject.services.ContactService;
 import com.experisproject.experisproject.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -21,22 +22,26 @@ public class ContactController {
 	private PersonService personService;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<Contact> getContactsIdTypeDetailAndName() {
 		return contactService.findContactsIdTypeDetailAndName();
 	}
 
 	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('ADMIN')")
 	public List<Contact> getContactsAllInfo() {
 		return contactService.findAll();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Contact getContactById(@PathVariable int id, HttpServletResponse response) {
 		return contactService.findById(id);
 		//response.setStatus(HttpServletResponse.SC_OK);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void createContact(@RequestBody ContactForm form, HttpServletResponse response) {
 		try {
 			Person person = personService.findById(form.getPersonId());
@@ -50,6 +55,7 @@ public class ContactController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void updateContact(@RequestBody ContactForm form, HttpServletResponse response) {
 		try {
 			Person person = personService.findById(form.getPersonId());
@@ -70,6 +76,7 @@ public class ContactController {
 	 *                                DELETE MAPPING/METHODS                                *
 	 * -------------------------------------------------------------------------------------*/
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void deleteContactById(@PathVariable int id, HttpServletResponse response) {
 		try {
 			contactService.deleteById(id);

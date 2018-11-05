@@ -49,16 +49,12 @@ public class AuthRestAPI {
 
 	@Autowired
 	AuthenticationManager authenticationManager;
-
 	@Autowired
 	UsersRepository usersRepository;
-
 	@Autowired
 	RoleRepository roleRepository;
-
 	@Autowired
 	PasswordEncoder encoder;
-
 	@Autowired
 	JwtProvider jwtProvider;
 
@@ -74,13 +70,13 @@ public class AuthRestAPI {
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
-		String jwt = jwtProvider.generateJwtToken(authentication);
+		String jwt = jwtProvider.generateJwtToken(authentication); //email, userId, isAdmin
 		return ResponseEntity.ok(new JwtResponse(jwt));
 	}
 
 	@PostMapping("/signup")
 	public ResponseEntity<String> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
-		if (usersRepository.existsByUserName(signUpRequest.getUsername())) {
+		if (usersRepository.existsByUserName(signUpRequest.getUserName())) {
 			return new ResponseEntity<String>("Fail -> Username is already taken!",
 					HttpStatus.BAD_REQUEST);
 		}
@@ -91,7 +87,7 @@ public class AuthRestAPI {
 		}
 
 		// Creating user's account
-		Users user = new Users(signUpRequest.getUsername(),
+		Users user = new Users(signUpRequest.getUserName(),
 				signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
 
 		Set<String> strRoles = signUpRequest.getRole();
@@ -100,13 +96,13 @@ public class AuthRestAPI {
 		strRoles.forEach(role -> {
 			switch (role) {
 				case "admin":
-					Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
+					Role adminRole = roleRepository.findByName(RoleName.ADMIN)
 							.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
 					roles.add(adminRole);
 
 					break;
 				default:
-					Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
+					Role userRole = roleRepository.findByName(RoleName.USER)
 							.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
 					roles.add(userRole);
 			}

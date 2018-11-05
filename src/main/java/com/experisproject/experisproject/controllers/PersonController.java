@@ -8,6 +8,7 @@ import com.experisproject.experisproject.services.AddressService;
 import com.experisproject.experisproject.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -29,22 +30,26 @@ public class PersonController {
 	private AddressService addressService;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<Person> getPersonsIdAndName() {
 		return personService.findPersonsIdName();
 	}
 
 	@RequestMapping(value = "allInfo", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('ADMIN')")
 	public List<Person> getPersonsAllInfo(){
 		return personService.findAll();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Person getById(@PathVariable int id) {
 		return personService.findById(id);
 	}
 
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void createPerson(@RequestBody PersonForm form, HttpServletResponse response){
 		try {
 			Address address = addressService.findById(form.getAddressId());
@@ -61,6 +66,7 @@ public class PersonController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void updatePerson(@RequestBody PersonForm form, HttpServletResponse response){
 		//almost exactly the same as create method createPerson(form,response)
 		try {
@@ -85,6 +91,7 @@ public class PersonController {
 	 *                                DELETE MAPPING/METHODS                                *
 	 * -------------------------------------------------------------------------------------*/
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void deletePersonById(@PathVariable int id, HttpServletResponse response) {
 		try {
 			personService.deleteById(id);

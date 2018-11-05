@@ -15,7 +15,7 @@ public class UsersPrinciple implements UserDetails {
 
 		private static final long serialVersionUID = 1L;
 
-		private int id;
+		private int userId;
 
 		private String userName;
 
@@ -26,9 +26,9 @@ public class UsersPrinciple implements UserDetails {
 
 		private Collection<? extends GrantedAuthority> authorities;
 
-		public UsersPrinciple(int id, String userName, String email, String password,
+		public UsersPrinciple(int userId, String userName, String email, String password,
 							 Collection<? extends GrantedAuthority> authorities) {
-			this.id = id;
+			this.userId = userId;
 			this.userName = userName;
 			this.email = email;
 			this.password = password;
@@ -41,7 +41,7 @@ public class UsersPrinciple implements UserDetails {
 			).collect(Collectors.toList());
 
 			return new UsersPrinciple(
-					user.getId(),
+					user.getUserId(),
 					user.getUserName(),
 					user.getEmail(),
 					user.getPassword(),
@@ -49,8 +49,8 @@ public class UsersPrinciple implements UserDetails {
 			);
 		}
 
-		public int getId() {
-			return id;
+		public int getUserId() {
+			return userId;
 		}
 
 		public String getEmail() {
@@ -98,7 +98,7 @@ public class UsersPrinciple implements UserDetails {
 			if (o == null || getClass() != o.getClass()) return false;
 
 			UsersPrinciple user = (UsersPrinciple) o;
-			return Objects.equals(id, user.id);
+			return Objects.equals(userId, user.userId);
 		}
 
 }

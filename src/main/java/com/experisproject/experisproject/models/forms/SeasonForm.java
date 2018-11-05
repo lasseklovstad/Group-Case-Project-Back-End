@@ -1,7 +1,12 @@
 package com.experisproject.experisproject.models.forms;
 
 public class SeasonForm {
+	private int seasonId;
 	private String name, description, startDate, endDate;
+
+	public int getSeasonId() {
+		return seasonId;
+	}
 
 	public String getName() {
 		return name;

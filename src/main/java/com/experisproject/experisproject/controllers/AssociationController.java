@@ -3,6 +3,7 @@ package com.experisproject.experisproject.controllers;
 import com.experisproject.experisproject.models.entities.Association;
 import com.experisproject.experisproject.services.AssociationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -17,17 +18,20 @@ public class AssociationController {
 	AssociationService associationService;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<Association> getAssociationsIdNameDescription(){
 		return associationService.findAssociationsIdNameDescription();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Association getAssociationById(@PathVariable int id) {
 		Association association = associationService.findById(id);
 		return association;
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void createAssociation(@RequestBody Association association, HttpServletResponse response) {
 		try {
 			//if exists??
@@ -40,6 +44,7 @@ public class AssociationController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void updateAssociation(@RequestBody Association association, HttpServletResponse response) {
 		try {
 			//if exists??
@@ -56,6 +61,7 @@ public class AssociationController {
 	 *                                DELETE MAPPING/METHODS                                *
 	 * -------------------------------------------------------------------------------------*/
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void deleteAssociationById(@PathVariable int id, HttpServletResponse response){
 		try {
 			associationService.deleteById(id);
@@ -68,6 +74,7 @@ public class AssociationController {
 	}
 
 	@RequestMapping(value = "/all/delete", method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void deleteAllAssociations(HttpServletResponse response){
 		try {
 			associationService.deleteAll();

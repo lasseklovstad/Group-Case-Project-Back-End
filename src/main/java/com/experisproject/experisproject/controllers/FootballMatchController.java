@@ -5,6 +5,7 @@ import com.experisproject.experisproject.models.forms.FootballMatchForm;
 import com.experisproject.experisproject.pojos.FootballMatchResultsInfo;
 import com.experisproject.experisproject.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -29,32 +30,31 @@ public class FootballMatchController {
 	private PlayerService playerService;
 
 	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('ADMIN')")
 	public List<FootballMatch> getFootballMatchesInfo() {
 		return footballMatchService.findAll();
 	}
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<FootballMatch> getFootballMatches() {
 		return footballMatchService.findFootballMatchIdDateSeasonLocationTeamsPlayers();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public FootballMatch getFootballMatchById(@PathVariable int id) {
 		return footballMatchService.findById(id);
 	}
 
-	@RequestMapping(value = "/all/result", method = RequestMethod.GET)
+	//@RequestMapping(value = "/all/result", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<FootballMatch> getFootballMatchesResult() {
 		return footballMatchService.findFootballMatchesResult();
 	}
 
-	//  @RequestMapping(value = "" , method = RequestMethod.POST)
-	//    public void create(
-	//            @RequestBody FootballMatchForm form,
-	//            HttpServletResponse response
-	//    ){//create new match -> save()}
-
 	@RequestMapping(value = "", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void createFootballMatch(@RequestBody FootballMatchForm form, HttpServletResponse response) {
 		try {
 			Season season = seasonService.findById(form.getSeasonId());
@@ -78,6 +78,7 @@ public class FootballMatchController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void updateFootballMatch(@RequestBody FootballMatchForm form, HttpServletResponse response) {
 		try {
 			FootballMatch footballMatch = footballMatchService.findById(form.getFootballMatchId());
@@ -113,6 +114,7 @@ public class FootballMatchController {
 	 *                                DELETE MAPPING/METHODS                                *
 	 * -------------------------------------------------------------------------------------*/
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void deleteFootballMatchById(@PathVariable int id, HttpServletResponse response) {
 		try {
 			footballMatchService.deleteById(id);
