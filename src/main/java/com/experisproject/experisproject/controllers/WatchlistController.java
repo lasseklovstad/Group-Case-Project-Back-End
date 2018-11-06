@@ -88,7 +88,7 @@ public class WatchlistController {
 					}
 				}
 			}
-			if (!playerName.isEmpty()) {
+			if (!playerName.isEmpty()) { //logically this doesn't allow for players with same name to be added
 				if (!playerNames.remove(playerName) && playerNames.size() < 5){
 						playerNames.add(playerName);
 				}
@@ -102,7 +102,7 @@ public class WatchlistController {
 					}
 				}
 			}
-			if (!teamName.isEmpty()) {
+			if (!teamName.isEmpty()) { //logically this doesn't allow for team with same name to be added (no prob - db doesn't allow it)
 				if (!teamNames.remove(teamName) && teamNames.size() < 5) {
 					teamNames.add(teamName);
 				}
