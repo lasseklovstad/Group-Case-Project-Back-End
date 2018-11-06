@@ -78,22 +78,27 @@ public class WatchlistController {
 			String playerName = form.getPlayerName();
 			String teamId = Integer.toString(form.getTeamId());
 			String teamName = form.getTeamName();
-			if (!"0".equals(playerId)) {
+
+			if (!"0".equals(playerId) && playerIds.size()<6) {
 				if (!playerIds.remove(playerId)) {
 					playerIds.add(playerId);
 				}
+			} else {
+				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			}
-			if (!playerName.isEmpty()) {
+			if (!playerName.isEmpty() && playerNames.size()<6) {
 				if (!playerNames.remove(playerName)) {
 					playerNames.add(playerName);
 				}
 			}
-			if (!"0".equals(teamId)) {
-				if (!playerIds.remove(teamId)) {
+			if (!"0".equals(teamId) && teamIds.size()<6) {
+				if (!teamIds.remove(teamId)) {
 					teamIds.add(teamId);
 				}
+			} else {
+				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			}
-			if (!teamName.isEmpty()) {
+			if (!teamName.isEmpty() && teamNames.size()<6) {
 				if (!teamNames.remove(teamName)) {
 					teamNames.add(teamName);
 				}
@@ -106,13 +111,13 @@ public class WatchlistController {
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
 	}
 
 	@RequestMapping(value = "/{id}/clear", method = RequestMethod.GET)
 	public void clearWatchlist(@PathVariable int id) {
-		//we set all the lists to new lists, we still want the lits to exist
+		//set all the lists to new lists, we still want the list to exist
 		Watchlist watchlist = watchlistService.findWatchlistByUserIdGenerated(id);
 		watchlist.setPlayerIds(new ArrayList<>());
 		watchlist.setPlayerNames(new ArrayList<>());
