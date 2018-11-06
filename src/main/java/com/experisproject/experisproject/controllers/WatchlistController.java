@@ -79,27 +79,29 @@ public class WatchlistController {
 			String teamId = Integer.toString(form.getTeamId());
 			String teamName = form.getTeamName();
 
-			if (!"0".equals(playerId) && playerIds.size()<6) {
-				if (!playerIds.remove(playerId)) {
+			if (!"0".equals(playerId)) {
+				if (!playerIds.remove(playerId) && playerIds.size()<5) {
 					playerIds.add(playerId);
 				}
-			} else {
-				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+				else {
+					response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+				}
 			}
-			if (!playerName.isEmpty() && playerNames.size()<6) {
-				if (!playerNames.remove(playerName)) {
+			if (!playerName.isEmpty()) {
+				if (!playerNames.remove(playerName)&& playerNames.size()<5) {
 					playerNames.add(playerName);
 				}
 			}
-			if (!"0".equals(teamId) && teamIds.size()<6) {
-				if (!teamIds.remove(teamId)) {
+			if (!"0".equals(teamId)) {
+				if (!teamIds.remove(teamId) && teamIds.size()<5) {
 					teamIds.add(teamId);
 				}
-			} else {
-				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+				else {
+					response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+				}
 			}
-			if (!teamName.isEmpty() && teamNames.size()<6) {
-				if (!teamNames.remove(teamName)) {
+			if (!teamName.isEmpty()) {
+				if (!teamNames.remove(teamName) && teamNames.size()<5) {
 					teamNames.add(teamName);
 				}
 			}
@@ -111,7 +113,7 @@ public class WatchlistController {
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
 	}
 
