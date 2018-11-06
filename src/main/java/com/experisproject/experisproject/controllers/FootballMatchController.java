@@ -2,7 +2,6 @@ package com.experisproject.experisproject.controllers;
 
 import com.experisproject.experisproject.models.entities.*;
 import com.experisproject.experisproject.models.forms.FootballMatchForm;
-import com.experisproject.experisproject.pojos.FootballMatchResultsInfo;
 import com.experisproject.experisproject.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,6 +27,8 @@ public class FootballMatchController {
 	private TeamService teamService;
 	@Autowired
 	private PlayerService playerService;
+	@Autowired
+	private TeamResultService teamResultService;
 
 	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('ADMIN')")
@@ -46,6 +47,7 @@ public class FootballMatchController {
 	public FootballMatch getFootballMatchById(@PathVariable int id) {
 		return footballMatchService.findById(id);
 	}
+
 
 	//@RequestMapping(value = "/all/result", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")

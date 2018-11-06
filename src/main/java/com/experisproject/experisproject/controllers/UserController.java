@@ -42,7 +42,14 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/findByEmail/{email}", method = RequestMethod.GET)
-	public User getByEmail(@PathVariable String email) {
+	public User getByEmail(@PathVariable String email, HttpServletResponse response) {
+		if(!userService.existsByEmail(email)){
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}else{
+			response.setStatus(HttpServletResponse.SC_OK);
+		}
+
+
 		return userService.findByEmail(email);
 	}
 

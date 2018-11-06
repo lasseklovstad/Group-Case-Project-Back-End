@@ -46,7 +46,8 @@ public class WatchlistController {
 	@RequestMapping(value = "/{id}/byUserId", method = RequestMethod.GET)
 	//able to get own watchlist
 	@PreAuthorize("#id == authentication.principal.userId or hasRole('ADMIN')")
-	public Watchlist getWatchlistByUserId(@PathVariable int id) {
+	public List<Watchlist> getWatchlistByUserId(@PathVariable int id) {
+		//doesn't work as it is supposed to work... check if user created now when I changed constructor mistake made it work
 		return watchlistService.findWatchListByUserId(id);
 	}
 
@@ -81,19 +82,39 @@ public class WatchlistController {
 			ArrayList<String> teamIds = watchlist.getTeamIds();
 			ArrayList<String> teamNames = watchlist.getTeamNames();
 
-			if (form.getPlayerId() != 0) {
-				playerIds.add(Integer.toString(form.getPlayerId()));
-			}
-			if (!form.getPlayerName().isEmpty()) {
-				playerNames.add(form.getPlayerName());
-			}
-			if (form.getTeamId() != 0) {
-				teamIds.add(Integer.toString(form.getTeamId()));
-			}
-			if (!form.getTeamName().isEmpty()) {
-				teamNames.add(form.getTeamName());
-			}
+			String playerId = Integer.toString(form.getPlayerId());
+			String playerName = form.getPlayerName();
+			String teamId = Integer.toString(form.getTeamId());
+			String teamName = form.getTeamName();
 
+			if (!"0".equals(playerId)) {
+				if (!playerIds.remove(playerId)){
+					if (playerIds.size() < 5) {
+						playerIds.add(playerId);
+					} else { //if too many elements in list, send response - the ids are handling the logic
+						response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+					}
+				}
+			}
+			if (!playerName.isEmpty()) { //logically this doesn't allow for players with same name to be added
+				if (!playerNames.remove(playerName) && playerNames.size() < 5){
+						playerNames.add(playerName);
+				}
+			}
+			if (!"0".equals(teamId)) {
+				if (!teamIds.remove(teamId)) {
+					if (5 > teamIds.size()){
+						teamIds.add(teamId);
+					} else { //if too many elements in list, send response - the ids are handling the logic
+						response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+					}
+				}
+			}
+			if (!teamName.isEmpty()) { //logically this doesn't allow for team with same name to be added (no prob - db doesn't allow it)
+				if (!teamNames.remove(teamName) && teamNames.size() < 5) {
+					teamNames.add(teamName);
+				}
+			}
 			watchlist.setPlayerIds(playerIds);
 			watchlist.setPlayerNames(playerNames);
 			watchlist.setTeamIds(teamIds);
@@ -106,6 +127,16 @@ public class WatchlistController {
 		}
 	}
 
+	@RequestMapping(value = "/{id}/clear", method = RequestMethod.GET)
+	public void clearWatchlist(@PathVariable int id) {
+		//set all the lists to new lists, we still want the list to exist
+		Watchlist watchlist = watchlistService.findWatchlistByUserIdGenerated(id);
+		watchlist.setPlayerIds(new ArrayList<>());
+		watchlist.setPlayerNames(new ArrayList<>());
+		watchlist.setTeamIds(new ArrayList<>());
+		watchlist.setTeamNames(new ArrayList<>());
+		watchlistService.updateWatchlist(watchlist);
+	}
 
 	/*--------------------------------------------------------------------------------------*
 	 *                                DELETE MAPPING/METHODS                                *
@@ -114,7 +145,6 @@ public class WatchlistController {
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
 	@PreAuthorize("hasRole('ADMIN')")
 	public void deleteWatchlist(@PathVariable int id) {
-		//check if exists
 		watchlistService.deleteById(id);
 	}
 

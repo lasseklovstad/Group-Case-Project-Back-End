@@ -39,7 +39,9 @@ public class UserService {
 	public  void deleteById(int id){
 		userRepository.deleteById(id);
 	}
-
+	public Boolean existsByEmail(String email){
+		return userRepository.existsByEmail(email);
+	}
 
 	public void save(User user) {
 		userRepository.save(user);

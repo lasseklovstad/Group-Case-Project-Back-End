@@ -85,7 +85,7 @@ public class PlayerController {
 	public void updatePlayer(@RequestBody PlayerForm form, HttpServletResponse response ) {
 		try {
 			//Update player
-			Player player = playerService.findById(form.getPersonId());
+			Player player = playerService.findById(form.getPlayerId());
 			player.setNumber(form.getNumber());
 			player.setNormalPosition(form.getNormalPosition());
 			player.setPerson(personService.findById(form.getPersonId()));
@@ -94,7 +94,7 @@ public class PlayerController {
 			playerService.updatePlayer(player);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (Exception ex) {
-			ex.getCause();
+			ex.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
 	}
