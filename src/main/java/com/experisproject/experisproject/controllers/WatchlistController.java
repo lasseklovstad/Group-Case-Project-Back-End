@@ -80,28 +80,30 @@ public class WatchlistController {
 			String teamName = form.getTeamName();
 
 			if (!"0".equals(playerId)) {
-				if (!playerIds.remove(playerId) && playerIds.size()<5) {
-					playerIds.add(playerId);
-				}
-				else {
-					response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+				if (!playerIds.remove(playerId)){
+					if (playerIds.size() < 5) {
+						playerIds.add(playerId);
+					} else { //if too many elements in list, send response - the ids are handling the logic
+						response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+					}
 				}
 			}
 			if (!playerName.isEmpty()) {
-				if (!playerNames.remove(playerName)&& playerNames.size()<5) {
-					playerNames.add(playerName);
+				if (!playerNames.remove(playerName) && playerNames.size() < 5){
+						playerNames.add(playerName);
 				}
 			}
 			if (!"0".equals(teamId)) {
-				if (!teamIds.remove(teamId) && teamIds.size()<5) {
-					teamIds.add(teamId);
-				}
-				else {
-					response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+				if (!teamIds.remove(teamId)) {
+					if (5 > teamIds.size()){
+						teamIds.add(teamId);
+					} else { //if too many elements in list, send response - the ids are handling the logic
+						response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+					}
 				}
 			}
 			if (!teamName.isEmpty()) {
-				if (!teamNames.remove(teamName) && teamNames.size()<5) {
+				if (!teamNames.remove(teamName) && teamNames.size() < 5) {
 					teamNames.add(teamName);
 				}
 			}
