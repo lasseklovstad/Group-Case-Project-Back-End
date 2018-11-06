@@ -126,7 +126,6 @@ public class WatchlistController {
 		watchlistService.updateWatchlist(watchlist);
 	}
 
-
 	/*--------------------------------------------------------------------------------------*
 	 *                                DELETE MAPPING/METHODS                                *
 	 * -------------------------------------------------------------------------------------*/
