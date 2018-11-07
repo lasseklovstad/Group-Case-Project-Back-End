@@ -1,5 +1,6 @@
 package com.experisproject.experisproject.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.NaturalId;
 
@@ -32,6 +33,11 @@ public class Users {
 	@NotBlank
 	@Size(min = 6, max = 100)
 	private String password;
+
+	@OneToOne(mappedBy = "users", orphanRemoval = true, cascade = CascadeType.PERSIST)
+	@JsonIgnore
+	private FavouriteList favouriteList;
+
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "userRoles",
