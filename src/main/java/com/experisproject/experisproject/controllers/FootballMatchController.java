@@ -49,8 +49,7 @@ public class FootballMatchController {
 	}
 
 
-	//@RequestMapping(value = "/all/result", method = RequestMethod.GET)
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	@RequestMapping(value = "/all/result", method = RequestMethod.GET)
 	public List<FootballMatch> getFootballMatchesResult() {
 		return footballMatchService.findFootballMatchesResult();
 	}
