@@ -9,8 +9,8 @@ import java.util.List;
 
 @Repository
 public interface FootballMatchRepository extends JpaRepository<FootballMatch, Integer> {
-
-	@Query(value = "SELECT fm.location.locationId, fm.location.name, fm.homeTeam.teamId, fm.homeTeam.name, fm.footballMatchId, fm.matchDate, fm.awayTeam.teamId, fm.awayTeam.name, fm.season.seasonId, fm.season.name   FROM FootballMatch fm")
+	
+	@Query(value = "SELECT fm.footballMatchId, fm.matchDate,  fm.homeTeam.teamId, fm.homeTeam.name, fm.footballMatchId, fm.matchDate, fm.awayTeam.teamId, fm.awayTeam.name, fm.location.locationId, fm.location.name  FROM FootballMatch fm")
 	List<FootballMatch> findFootballMatchIdDateSeasonLocationTeamsPlayers();
 
 
