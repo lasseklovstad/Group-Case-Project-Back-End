@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
@@ -43,9 +44,8 @@ public class PlayerController {
 	public List<Player> getPlayersByTeamName(@PathVariable String teamName) {
 		return playerService.findPlayerByTeamName(teamName);
 	}
-
+	@PreAuthorize("permitAll()")
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<Player> getAllPlayersIdNameAndTeam() {
 		return playerService.findPlayerShortInfo();
 	}
