@@ -13,6 +13,7 @@ package com.experisproject.experisproject.controllers;
 -> Generate JWT token, then return JWT to client
 */
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,12 +22,12 @@ import javax.validation.Valid;
 import com.experisproject.experisproject.message.request.LoginForm;
 import com.experisproject.experisproject.message.request.SignUpForm;
 import com.experisproject.experisproject.message.response.JwtResponse;
-import com.experisproject.experisproject.models.entities.Role;
-import com.experisproject.experisproject.models.entities.RoleName;
-import com.experisproject.experisproject.models.entities.Users;
+import com.experisproject.experisproject.models.entities.*;
 import com.experisproject.experisproject.models.repositories.RoleRepository;
 import com.experisproject.experisproject.models.repositories.UsersRepository;
 import com.experisproject.experisproject.models.security.jwt.JwtProvider;
+import com.experisproject.experisproject.services.FavouriteListService;
+import com.experisproject.experisproject.services.WatchlistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,6 +52,8 @@ public class AuthRestAPI {
 	AuthenticationManager authenticationManager;
 	@Autowired
 	UsersRepository usersRepository;
+	@Autowired
+	FavouriteListService favouriteListService;
 	@Autowired
 	RoleRepository roleRepository;
 	@Autowired
@@ -89,7 +92,7 @@ public class AuthRestAPI {
 		// Creating user's account
 		Users user = new Users(signUpRequest.getUserName(),
 				signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
-
+		FavouriteList favouriteList = new FavouriteList(new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>(), user);
 		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();
 
@@ -97,18 +100,19 @@ public class AuthRestAPI {
 			switch (role) {
 				case "admin":
 					Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
-							.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+							.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not found."));
 					roles.add(adminRole);
 
 					break;
 				default:
 					Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
-							.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+							.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not found."));
 					roles.add(userRole);
 			}
 		});
 		user.setRoles(roles);
 		usersRepository.save(user);
+		favouriteListService.save(favouriteList);
 
 		return ResponseEntity.ok().body("User registered successfully!");
 	}
