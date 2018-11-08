@@ -34,6 +34,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -77,9 +78,7 @@ public class AuthRestAPI {
 		String jwt = jwtProvider.generateJwtToken(authentication); //email, userId, isAdmin
 
 		String role;
-		Role admin = roleRepository.findByName(RoleName.ROLE_ADMIN)
-				.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not found."));
-		if (authentication.getAuthorities().contains(admin)) {
+		if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
 			role = "admin";
 		} else {
 			role = "user";
