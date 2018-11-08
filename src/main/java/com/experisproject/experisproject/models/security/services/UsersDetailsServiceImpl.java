@@ -60,9 +60,15 @@ public class UsersDetailsServiceImpl implements UserDetailsService {
 		return usersRepository.existsByEmail(email);
 	}
 
+	public void updateUsers(Users users){
+		save(users);
+	}
 	public void save(Users users) {
 		usersRepository.save(users);
 	}
 
+	public int findUserIdByUserName(String userName){
+		return usersRepository.findUsers_userIdByUserName(userName);
+	}
 
 }
