@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface LocationRepository extends JpaRepository<Location, Integer> {
 
-	@Query(value = "SELECT l.locationId, l.name, l.description, l.address.addressId, CONCAT(l.address.addressLine1,', ' ,l.address.city,', ', l.address.country), l.team.teamId, l.team.name FROM Location l")
+	@Query(value = "SELECT l.locationId, l.name, l.team.teamId, l.team.name, l.address.addressId, CONCAT(l.address.addressLine1,', ' ,l.address.city,', ', l.address.country) FROM Location l")
 	List<Location> findLocationIdNameDescriptionAddress();
 
 	@Query(value = "SELECT l FROM Location l")
