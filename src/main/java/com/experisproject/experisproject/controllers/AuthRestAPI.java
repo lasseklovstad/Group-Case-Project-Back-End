@@ -26,8 +26,8 @@ import com.experisproject.experisproject.models.entities.*;
 import com.experisproject.experisproject.models.repositories.RoleRepository;
 import com.experisproject.experisproject.models.repositories.UsersRepository;
 import com.experisproject.experisproject.models.security.jwt.JwtProvider;
+import com.experisproject.experisproject.models.security.services.UsersDetailsServiceImpl;
 import com.experisproject.experisproject.services.FavouriteListService;
-import com.experisproject.experisproject.services.WatchlistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,6 +53,8 @@ public class AuthRestAPI {
 	@Autowired
 	UsersRepository usersRepository;
 	@Autowired
+	UsersDetailsServiceImpl usersDetailsService;
+	@Autowired
 	FavouriteListService favouriteListService;
 	@Autowired
 	RoleRepository roleRepository;
@@ -74,7 +76,18 @@ public class AuthRestAPI {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
 		String jwt = jwtProvider.generateJwtToken(authentication); //email, userId, isAdmin
-		return ResponseEntity.ok(new JwtResponse(jwt));
+
+		String role = "";
+		Role admin = roleRepository.findByName(RoleName.ROLE_ADMIN)
+				.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not found."));
+		if (authentication.getAuthorities().contains(admin)){
+			role = "admin";
+		}else {
+			role = "user";
+		}
+
+
+		return ResponseEntity.ok().header("role", role).body(new JwtResponse(jwt));
 	}
 
 	@PostMapping("/signup")
