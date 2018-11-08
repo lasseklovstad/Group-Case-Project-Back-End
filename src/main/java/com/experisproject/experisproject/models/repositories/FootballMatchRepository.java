@@ -15,7 +15,7 @@ public interface FootballMatchRepository extends JpaRepository<FootballMatch, In
 
 
 	//error
-	@Query(value = "SELECT fm.homeTeam.name,fm.homeTeam.teamResults, fm.awayTeam.name, fm.awayTeam.teamResults FROM FootballMatch fm, TeamResult tr, Team t WHERE fm.footballMatchId = tr.footballMatch.footballMatchId AND fm.homeTeam.teamId = t.teamId AND fm.awayTeam.teamId = t.teamId")
+	@Query(value = "SELECT fm.homeTeam.name, fm.awayTeam.name, fm.awayTeam.teamResults FROM FootballMatch fm, TeamResult tr, Team t WHERE fm.footballMatchId = tr.footballMatch.footballMatchId AND fm.homeTeam.teamId = t.teamId AND fm.awayTeam.teamId = t.teamId")
 	List<FootballMatch> findFootballMatchesResult();
 
 	// new com.experisproject.experisproject.pojos.FootballMatchResultsInfo
