@@ -1,7 +1,6 @@
 package com.experisproject.experisproject.controllers;
 
 import com.experisproject.experisproject.models.entities.Users;
-import com.experisproject.experisproject.models.forms.UserForm;
 import com.experisproject.experisproject.models.security.services.UsersDetailsServiceImpl;
 import com.experisproject.experisproject.services.FavouriteListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +34,15 @@ public class UsersController {
 		return userList;
 	}
 
-	@RequestMapping(value = "/findById/{id}", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/findIdByUserName/{userName}", method = RequestMethod.GET)
+	@PreAuthorize("#userName == authentication.principal.userName or hasRole('ADMIN')")
+	public int findUserIdByUserName(@PathVariable String userName){
+		return usersService.findUserIdByUserName(userName);
+	}
+
+
+		@RequestMapping(value = "/findById/{id}", method = RequestMethod.GET)
 	@PreAuthorize("#id == authentication.principal.userId or hasRole('ADMIN')")
 	public Users getUserById(@PathVariable int id) {
 		return usersService.findById(id);
