@@ -74,18 +74,16 @@ public class AuthRestAPI {
 		);
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-
 		String jwt = jwtProvider.generateJwtToken(authentication); //email, userId, isAdmin
 
-		String role = "";
+		String role;
 		Role admin = roleRepository.findByName(RoleName.ROLE_ADMIN)
 				.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not found."));
-		if (authentication.getAuthorities().contains(admin)){
+		if (authentication.getAuthorities().contains(admin)) {
 			role = "admin";
-		}else {
+		} else {
 			role = "user";
 		}
-
 
 		return ResponseEntity.ok().header("role", role).body(new JwtResponse(jwt));
 	}
