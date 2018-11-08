@@ -1,12 +1,11 @@
 package com.experisproject.experisproject.controllers;
 
-import com.experisproject.experisproject.models.entities.Address;
+
 import com.experisproject.experisproject.models.entities.Person;
 import com.experisproject.experisproject.models.entities.Player;
 import com.experisproject.experisproject.models.entities.Team;
 import com.experisproject.experisproject.models.forms.PlayerForm;
 import com.experisproject.experisproject.projections.PlayerLimited;
-import com.experisproject.experisproject.services.AddressService;
 import com.experisproject.experisproject.services.PersonService;
 import com.experisproject.experisproject.services.PlayerService;
 import com.experisproject.experisproject.services.TeamService;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.time.LocalDate;
+
 import java.util.List;
 
 
@@ -44,8 +43,8 @@ public class PlayerController {
 	public List<Player> getPlayersByTeamName(@PathVariable String teamName) {
 		return playerService.findPlayerByTeamName(teamName);
 	}
-	@PreAuthorize("permitAll()")
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	@PreAuthorize("permitAll()")
 	public List<Player> getAllPlayersIdNameAndTeam() {
 		return playerService.findPlayerShortInfo();
 	}
