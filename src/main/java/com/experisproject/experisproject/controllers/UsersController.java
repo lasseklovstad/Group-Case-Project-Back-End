@@ -24,7 +24,6 @@ public class UsersController {
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('ADMIN')")
-
 	public List<Users> getUsersIdUsernameEmail() {
 		return usersService.findUsersIdUsernameEmail();
 	}
