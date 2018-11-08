@@ -2,6 +2,7 @@ package com.experisproject.experisproject.models.security.jwt;
 
 import com.experisproject.experisproject.models.security.services.UsersPrinciple;
 import io.jsonwebtoken.*;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,11 +26,13 @@ public class JwtProvider {
 	public String generateJwtToken(Authentication authentication) {
 
 		UsersPrinciple userPrincipal = (UsersPrinciple) authentication.getPrincipal();
+		byte[] secretEncoded = Base64.encodeBase64(jwtSecret.getBytes());
+
 
 		return Jwts.builder() //.setIssuedAt(new Date())
 				.setSubject((userPrincipal.getUsername()))
 				.setExpiration(new Date((new Date()).getTime() + jwtExpiration))
-				.signWith(SignatureAlgorithm.HS512, jwtSecret)
+				.signWith(SignatureAlgorithm.HS512, secretEncoded)
 				.compact();
 	}
 
