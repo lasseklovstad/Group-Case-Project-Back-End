@@ -25,6 +25,10 @@ public class ContactService {
 		return contactRepository.findById(id).get();
 	}
 
+	public List<Contact> findContactByPersonId(int personId){
+		return contactRepository.findContactByPersonId(personId);
+	}
+
 	public List<Contact> findAll(){
 		return contactRepository.findAll();
 	}

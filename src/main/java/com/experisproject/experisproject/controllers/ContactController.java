@@ -40,6 +40,13 @@ public class ContactController {
 		//response.setStatus(HttpServletResponse.SC_OK);
 	}
 
+	@RequestMapping(value = "/byPersonId/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public List<Contact> findContactByPersonId(int id){
+		return contactService.findContactByPersonId(id);
+	}
+
+
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('ADMIN')")
 	public void createContact(@RequestBody ContactForm form, HttpServletResponse response) {
