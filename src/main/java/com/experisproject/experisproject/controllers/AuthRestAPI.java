@@ -28,8 +28,11 @@ import com.experisproject.experisproject.models.repositories.UsersRepository;
 import com.experisproject.experisproject.models.security.jwt.JwtProvider;
 import com.experisproject.experisproject.models.security.services.UsersDetailsServiceImpl;
 import com.experisproject.experisproject.services.FavouriteListService;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -42,6 +45,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import sun.jvm.hotspot.memory.HeapBlock;
 
 
 @RestController
@@ -83,8 +87,12 @@ public class AuthRestAPI {
 		} else {
 			role = "user";
 		}
+		Users user = usersRepository.findByUserName(loginRequest.getUserName()).orElseThrow(() -> new RuntimeException("Fail! -> Cause: User not found."));;
+		HttpHeaders header = new HttpHeaders();
+		header.add("role",role);
+		header.add("id",Integer.toString(user.getUserId()));
 
-		return ResponseEntity.ok().header("role", role).body(new JwtResponse(jwt));
+		return ResponseEntity.ok().headers(header).body(new JwtResponse(jwt));
 	}
 
 	@PostMapping("/signup")

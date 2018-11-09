@@ -101,14 +101,15 @@ public class PlayerController {
 	/*--------------------------------------------------------------------------------------*
 	 *                                DELETE MAPPING/METHODS                                *
 	 * -------------------------------------------------------------------------------------*/
-	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@PreAuthorize("hasRole('ADMIN')")
 	public void deletePlayerById(@PathVariable int id, HttpServletResponse response) {
+		System.out.println("DELETE PLAYER");
 		try {
 			playerService.deleteById(id);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (Exception ex) {
-			ex.getCause();
+			ex.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
 	}

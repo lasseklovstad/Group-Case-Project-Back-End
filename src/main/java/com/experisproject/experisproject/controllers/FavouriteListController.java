@@ -71,7 +71,7 @@ public class FavouriteListController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.PUT)
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER')")
 	public void updateFavouriteList(@RequestBody FavouriteListForm form, HttpServletResponse response) {
 		//if exists
 		try {
