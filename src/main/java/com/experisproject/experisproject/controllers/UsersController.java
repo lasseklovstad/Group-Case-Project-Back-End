@@ -42,7 +42,7 @@ public class UsersController {
 	}
 
 
-		@RequestMapping(value = "/findById/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/findById/{id}", method = RequestMethod.GET)
 	@PreAuthorize("#id == authentication.principal.userId or hasRole('ADMIN')")
 	public Users getUserById(@PathVariable int id) {
 		return usersService.findById(id);

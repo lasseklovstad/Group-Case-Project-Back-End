@@ -36,7 +36,6 @@ public class CoachService {
 		return coachRepository.findById(id).get();
 	}
 
-
 	public void save(Coach coach){
         coachRepository.save(coach);
     }

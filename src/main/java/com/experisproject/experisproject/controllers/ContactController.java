@@ -42,7 +42,7 @@ public class ContactController {
 
 	@RequestMapping(value = "/byPersonId/{id}", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public List<Contact> findContactByPersonId(int id){
+	public List<Contact> findContactByPersonId(@PathVariable int id){
 		return contactService.findContactByPersonId(id);
 	}
 
