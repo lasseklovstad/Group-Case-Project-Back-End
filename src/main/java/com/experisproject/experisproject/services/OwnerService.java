@@ -42,7 +42,12 @@ public class OwnerService {
 	public void save(Owner owner){
         ownerRepository.save(owner);
     }
-    public void deleteAll(){
+
+    public void deleteById(int id){
+    	ownerRepository.deleteById(id);
+	}
+
+	public void deleteAll(){
         ownerRepository.deleteAll();
     }
 
