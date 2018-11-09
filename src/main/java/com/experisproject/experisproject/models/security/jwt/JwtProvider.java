@@ -38,14 +38,14 @@ public class JwtProvider {
 
 	public String getUserNameFromJwtToken(String token) {
 		return Jwts.parser()
-				.setSigningKey(jwtSecret)
+				.setSigningKey(Base64.encodeBase64(jwtSecret.getBytes()))
 				.parseClaimsJws(token)
 				.getBody().getSubject();
 	}
 
 	public boolean validateJwtToken(String authToken) {
 		try {
-			Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
+			Jwts.parser().setSigningKey(Base64.encodeBase64(jwtSecret.getBytes())).parseClaimsJws(authToken);
 			return true;
 		} catch (SignatureException e) {
 			logger.error("Invalid JWT signature -> Message: {} ", e);
