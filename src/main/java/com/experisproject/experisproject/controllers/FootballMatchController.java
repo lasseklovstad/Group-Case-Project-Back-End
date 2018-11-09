@@ -70,6 +70,7 @@ public class FootballMatchController {
 			if (form.getPlayerIds() != null) {
 				players = convertIdsToPlayers(form.getPlayerIds());
 			}
+			System.out.println("Almost there------------------------------------------>");
 			FootballMatch footballMatch = new FootballMatch(matchDate, season, location, homeTeam, awayTeam, players);
 			footballMatchService.save(footballMatch);
 			response.setStatus(HttpServletResponse.SC_CREATED);
