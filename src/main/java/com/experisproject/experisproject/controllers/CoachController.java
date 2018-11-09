@@ -8,6 +8,7 @@ import com.experisproject.experisproject.services.AddressService;
 import com.experisproject.experisproject.services.CoachService;
 import com.experisproject.experisproject.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -24,27 +25,32 @@ public class CoachController {
 	private PersonService personService;
 
 	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<Coach> getAllCoaches() {
 		return coachService.findAll();
 	}
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<Coach> getCoachesIdNameAndTeam() {
 		return coachService.findCoachesIdNameAndTeam();
 	}
 
 	@RequestMapping(value = "/limitedInfo", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<CoachLimited> getCoachesLimitedInfo() {
 		return coachService.findAllLimited();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Coach getCoachById(@PathVariable int id) {
 		Coach coach = coachService.findById(id);
 		return coach;
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void createCoach(@RequestBody CoachForm form, HttpServletResponse response) {
 		try {
 			Person person = personService.findById(form.getPersonId());
@@ -59,6 +65,7 @@ public class CoachController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void updateCoach(@RequestBody CoachForm form, HttpServletResponse response) {
 		try {
 			//does it make any sense to do this???

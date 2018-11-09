@@ -45,10 +45,12 @@ public class PlayerService {
 	public void updatePlayer(Player player){
     	playerRepository.save(player);
 	}
-
 	public void save(Player player){
         playerRepository.save(player);
     }
+	public void deleteById(int id){
+    	playerRepository.deleteById(id);
+	}
     public void deleteAll(){playerRepository.deleteAll();}
 
 

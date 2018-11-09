@@ -7,6 +7,7 @@ import com.experisproject.experisproject.projections.OwnerLimited;
 import com.experisproject.experisproject.services.OwnerService;
 import com.experisproject.experisproject.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -23,29 +24,34 @@ public class OwnerController {
 	private PersonService personService;
 
 	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<Owner> getAllOwners() {
 		List<Owner> ownerList = ownerService.findAll();
 		return ownerList;
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Owner getOwnerById(@PathVariable int id) {
 		Owner owner = ownerService.findById(id);
 		return owner;
 	}
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<Owner> getOwnersIdNameAndTeam() {
 		return ownerService.findOwnersIdNameAndTeam();
 	}
 
 
 	@RequestMapping(value = "/limitedInfo", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<OwnerLimited> getOwnersLimitedInfo() {
 		return ownerService.findAllLimited();
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void createOwner(@RequestBody OwnerForm form, HttpServletResponse response){
 		try {
 			Person person = personService.findById(form.getPersonId());
@@ -60,6 +66,7 @@ public class OwnerController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void updateOwner(@RequestBody OwnerForm form, HttpServletResponse response){
 		try {
 			Person person = personService.findById(form.getPersonId());
@@ -72,12 +79,24 @@ public class OwnerController {
 		}
 	}
 
-
-
 	/*--------------------------------------------------------------------------------------*
 	 *                                DELETE MAPPING/METHODS                                *
 	 * -------------------------------------------------------------------------------------*/
 
+	@DeleteMapping("/{id}/delete")
+	@PreAuthorize("hasRole('ADMIN')")
+	public void deleteOwnerById(@PathVariable int id, HttpServletResponse response){
+		try {
+			ownerService.deleteById(id);
+			response.setStatus(HttpServletResponse.SC_OK);
+		}
+		catch (Exception ex){
+			ex.printStackTrace();
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		}
+
+
+	}
 
 
 }

@@ -15,7 +15,8 @@ public class CorsConfig {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/**").allowedOrigins("*");
+                registry.addMapping("/api/**").allowedOrigins("*").allowCredentials(true);
+
                 //registry.addMapping("/api/person").allowedOrigins("http://localhost:3000");
             }
         };

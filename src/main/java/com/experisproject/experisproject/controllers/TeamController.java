@@ -6,6 +6,7 @@ import com.experisproject.experisproject.projections.TeamLimited;
 import com.experisproject.experisproject.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -34,34 +35,41 @@ public class TeamController implements CommandLineRunner {
 	@Autowired
 	PlayerService playerService;
 
+
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<Team> getTeamsIdsNameCoachLocation() {
 		return teamService.findTeamsIdsNameCoachLocation();
 	}
 
 	@RequestMapping(value = "/limitedInfo", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<TeamLimited> getAllLimited() {
 		return teamService.findAllLimited();
 
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Team getTeamById(@PathVariable int id) {
 		return teamService.findById(id);
 	}
 
 	@RequestMapping(value = "/getPlayersByTeamId/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<Player> getPlayersByTeamId(@PathVariable int id) {
 		return playerService.findPlayersByTeamId(id);
 	}
 
 	@RequestMapping(value = "/byName/{name}", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<Team> getTeamsByName(@PathVariable String name) {
 		return teamService.findAllByName(name);
 	}
 
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void createTeam(@RequestBody TeamForm form, HttpServletResponse response) {
 		try {
 			Association association = associationService.findById(form.getAssociationId());
@@ -79,6 +87,7 @@ public class TeamController implements CommandLineRunner {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void updateTeam(@RequestBody TeamForm form, HttpServletResponse response) {
 		try {
 			Team team = teamService.findById(form.getTeamId());
@@ -97,6 +106,7 @@ public class TeamController implements CommandLineRunner {
 	}
 
 	@RequestMapping(value = "{id}/delete", method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void deleteTeamById(@PathVariable int id) {
 		teamService.deleteById(id);
 	}

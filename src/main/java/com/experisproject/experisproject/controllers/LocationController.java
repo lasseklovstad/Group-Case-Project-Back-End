@@ -8,6 +8,7 @@ import com.experisproject.experisproject.services.AddressService;
 import com.experisproject.experisproject.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -23,21 +24,25 @@ public class LocationController {
 	AddressService addressService;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<Location> getLocationIdNameAndDescription() {
 		return locationService.findLocationIdNameDescriptionAddress();
 	}
 
 	@RequestMapping(value = "/limitedInfo", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<LocationLimited> getAllLimited() {
 		return locationService.findAllLimited();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Location getLocation(@PathVariable int id) {
 		return locationService.findById(id);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void createLocation(@RequestBody LocationForm form, HttpServletResponse response) {
 		try {
 			Address address = addressService.findById(form.getAddressId());
@@ -51,6 +56,7 @@ public class LocationController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.PUT)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void updateLocation(@RequestBody LocationForm form, HttpServletResponse response) {
 		try {
 			Address address = addressService.findById(form.getAddressId());
@@ -72,6 +78,7 @@ public class LocationController {
 	 *                                DELETE MAPPING/METHODS                                *
 	 * -------------------------------------------------------------------------------------*/
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void deleteLocationById(@PathVariable int id, HttpServletResponse response) {
 		try {
 			locationService.deleteById(id);
@@ -84,6 +91,7 @@ public class LocationController {
 	}
 
 	@RequestMapping(value = "/all/delete", method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('ADMIN')")
 	public void deleteAllLocations(HttpServletResponse response) {
 		try {
 			locationService.deleteAll();
