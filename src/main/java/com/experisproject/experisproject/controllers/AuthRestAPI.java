@@ -111,7 +111,7 @@ public class AuthRestAPI {
 		FavouriteList favouriteList = new FavouriteList(new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>(), user);
 		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();
-		System.out.println(strRoles);
+
 		strRoles.forEach(role -> {
 			switch (role) {
 				case "admin":
