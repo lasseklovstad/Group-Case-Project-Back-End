@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -42,8 +43,14 @@ public class ContactController {
 
 	@RequestMapping(value = "/byPersonId/{id}", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public List<Contact> findContactByPersonId(@PathVariable int id){
-		return contactService.findContactByPersonId(id);
+	public List<Contact> findContactByPersonId(@PathVariable int id, HttpServletResponse response) throws IOException {
+		List<Contact> contact = contactService.findContactByPersonId(id);
+			if (contact.isEmpty()){
+				response.sendError(HttpServletResponse.SC_FORBIDDEN, "The current person doesn't have contact info.");
+			}else{
+				response.setStatus(HttpServletResponse.SC_OK);
+			}
+		return contact;
 	}
 
 
