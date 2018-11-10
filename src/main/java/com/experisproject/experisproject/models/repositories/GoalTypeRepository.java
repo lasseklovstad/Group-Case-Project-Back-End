@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface GoalTypeRepository extends JpaRepository<GoalType, Integer> {
 
-	@Query(value = "SELECT gt.type FROM GoalType gt")
+	@Query(value = "SELECT gt.goalTypeId, gt.type FROM GoalType gt")
 	List<GoalType> findGoalTypes();
 }
