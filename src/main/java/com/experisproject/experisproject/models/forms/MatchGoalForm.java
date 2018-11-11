@@ -7,6 +7,11 @@ public class MatchGoalForm {
 	private int goalTypeId;
 	private int footballMatchId;
 	private int playerId;
+	private int teamId;
+
+	public int getTeamId() {
+		return teamId;
+	}
 
 	public int getMatchGoalId() {
 		return matchGoalId;

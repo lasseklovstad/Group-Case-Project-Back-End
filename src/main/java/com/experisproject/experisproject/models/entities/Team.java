@@ -63,6 +63,10 @@ public class Team {
 		this.location = location;
 	}
 
+	public int getTeamId() {
+		return teamId;
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}

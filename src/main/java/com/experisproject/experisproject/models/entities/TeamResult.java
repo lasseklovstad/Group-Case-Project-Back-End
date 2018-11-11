@@ -36,6 +36,26 @@ public class TeamResult {
 		this.team = team;
 	}
 
+	public int getTeamResultId() {
+		return teamResultId;
+	}
+
+	public FootballMatch getFootballMatch() {
+		return footballMatch;
+	}
+
+	public Team getTeam() {
+		return team;
+	}
+
+	public int getGoals() {
+		return goals;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
 	public void setGoals(int goals) {
 		this.goals = goals;
 	}
