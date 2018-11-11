@@ -70,9 +70,14 @@ public class FootballMatchController {
 			if (form.getPlayerIds() != null) {
 				players = convertIdsToPlayers(form.getPlayerIds());
 			}
-			System.out.println("Almost there------------------------------------------>");
 			FootballMatch footballMatch = new FootballMatch(matchDate, season, location, homeTeam, awayTeam, players);
 			footballMatchService.save(footballMatch);
+			//create teamResult
+			TeamResult homeTeamResult = new TeamResult(0, "draw", footballMatch, homeTeam);
+			TeamResult awayTeamResult = new TeamResult(0, "draw", footballMatch, awayTeam);
+			teamResultService.save(homeTeamResult);
+			teamResultService.save(awayTeamResult);
+
 			response.setStatus(HttpServletResponse.SC_CREATED);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -85,6 +90,7 @@ public class FootballMatchController {
 	public void updateFootballMatch(@RequestBody FootballMatchForm form, HttpServletResponse response) {
 		try {
 			FootballMatch footballMatch = footballMatchService.findById(form.getFootballMatchId());
+//			TeamResult homeTeamResult = teamResultService.findByFootballMatchIdAndTeamId(form.getFootballMatchId(), form.getHomeTeamId());
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			dtf = dtf.withLocale(Locale.US);
 			LocalDate matchDate = LocalDate.parse(form.getDate(),dtf);
@@ -96,6 +102,7 @@ public class FootballMatchController {
 			//it's possible to change players for the game to zero
 			Set<Player> players = convertIdsToPlayers(form.getPlayerIds());
 			footballMatch.setPlayers(players);
+			// update teamResults, get List<TeamResults> and then change setTeam for the two results
 
 			footballMatchService.updateFootballMatch(footballMatch);
 			response.setStatus(HttpServletResponse.SC_OK);
