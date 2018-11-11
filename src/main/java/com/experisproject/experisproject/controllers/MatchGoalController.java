@@ -130,8 +130,8 @@ public class MatchGoalController {
 	public void deleteMatchGoalById(@PathVariable int id, HttpServletResponse response) {
 		try {
 			matchGoalService.deleteById(id);
-			//int goal = -1;
-			//updateTeamResults(form,goal);
+			int goal = -1;
+			updateTeamResults(form,goal);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (Exception ex) {
 			ex.getCause();
