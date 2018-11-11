@@ -37,7 +37,7 @@ public class Team {
 	@NotNull
 	private Location location;
 
-	@OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "team", orphanRemoval = true, cascade = CascadeType.PERSIST)
 	@JsonIgnore
 	private List<TeamResult> teamResults;
 /*

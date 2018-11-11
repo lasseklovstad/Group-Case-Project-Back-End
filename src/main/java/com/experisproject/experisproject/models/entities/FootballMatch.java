@@ -1,5 +1,6 @@
 package com.experisproject.experisproject.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -39,6 +40,10 @@ public class FootballMatch {
 	@JoinColumn(name = "awayTeam")
 	@NotNull
 	private Team awayTeam;
+
+	@OneToMany(mappedBy = "footballMatch", orphanRemoval = true, cascade = CascadeType.PERSIST)
+	@JsonIgnore
+	private List<TeamResult> teamResults;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "matchPosition",
