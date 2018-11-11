@@ -91,6 +91,7 @@ public class AuthRestAPI {
 		HttpHeaders header = new HttpHeaders();
 		header.add("role",role);
 		header.add("id",Integer.toString(user.getUserId()));
+		header.add("userName",user.getUserName());
 		return ResponseEntity.ok().headers(header).body(new JwtResponse(jwt));
 	}
 
