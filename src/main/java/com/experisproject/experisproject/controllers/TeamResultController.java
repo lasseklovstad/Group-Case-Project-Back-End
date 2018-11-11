@@ -81,7 +81,7 @@ public class TeamResultController {
 			teamResult.setResult(form.getResult());
 			teamResult.setFootballMatch(footballMatchService.findById(form.getFootballMatchId()));
 			teamResult.setTeam(teamService.findById(form.getTeamId()));
-			teamResultService.updatePlayer(teamResult);
+			teamResultService.updateTeamResult(teamResult);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (Exception ex) {
 			ex.printStackTrace();

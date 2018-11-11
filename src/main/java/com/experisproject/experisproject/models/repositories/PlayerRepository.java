@@ -14,7 +14,7 @@ public interface PlayerRepository extends JpaRepository<Player, Integer> {
 
 	List<Player> findPlayerByTeam_NameContaining(String name);
 
-	@Query(value = "SELECT p.playerId as playerId, CONCAT(p.person.firstName,' ',p.person.lastName) as fullName, p.team.teamId, p.team.name FROM Player p")
+	@Query(value = "SELECT p.playerId, CONCAT(p.person.firstName,' ',p.person.lastName) as fullName, p.team.teamId, p.team.name FROM Player p")
 	List<Player> findPlayerShortInfo();
 
 	@Query(value = "SELECT p.playerId, CONCAT(p.person.firstName,' ',p.person.lastName),p.normalPosition FROM Player p WHERE p.team.teamId = :teamId")
