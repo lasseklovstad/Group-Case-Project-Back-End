@@ -1,14 +1,8 @@
 package com.experisproject.experisproject.controllers;
 
-import com.experisproject.experisproject.models.entities.FootballMatch;
-import com.experisproject.experisproject.models.entities.GoalType;
-import com.experisproject.experisproject.models.entities.MatchGoal;
-import com.experisproject.experisproject.models.entities.Player;
+import com.experisproject.experisproject.models.entities.*;
 import com.experisproject.experisproject.models.forms.MatchGoalForm;
-import com.experisproject.experisproject.services.FootballMatchService;
-import com.experisproject.experisproject.services.GoalTypeService;
-import com.experisproject.experisproject.services.MatchGoalService;
-import com.experisproject.experisproject.services.PlayerService;
+import com.experisproject.experisproject.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,6 +24,11 @@ public class MatchGoalController {
 	private FootballMatchService footballMatchService;
 	@Autowired
 	private PlayerService playerService;
+	@Autowired
+	private TeamResultService teamResultService;
+
+	private MatchGoalForm form;
+
 
 	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('ADMIN')")
@@ -53,17 +52,59 @@ public class MatchGoalController {
 	@PreAuthorize("hasRole('ADMIN')")
 	public void createMatchGoal(@RequestBody MatchGoalForm form, HttpServletResponse response) {
 		try {
+			this.form = form;
 			GoalType goalType = goalTypeService.findById(form.getGoalTypeId());
 			FootballMatch footballMatch = footballMatchService.findById(form.getFootballMatchId());
 			Player player = playerService.findById(form.getPlayerId());
 			MatchGoal matchGoal = new MatchGoal(form.getDescription(), goalType, footballMatch, player);
 			matchGoalService.save(matchGoal);
+			System.out.println("saved matchgoal");
+			int goal = 1;
+			updateTeamResults(form, goal);
 			response.setStatus(HttpServletResponse.SC_CREATED);
 		} catch (Exception e) {
-			e.getCause();
+			e.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
 	}
+
+	private void updateTeamResults(MatchGoalForm form, int goal) {
+		if (teamResultService.existsByFootballMatchIdAndAndTeamId(form.getFootballMatchId(), form.getTeamId())) {
+			List<TeamResult> results = teamResultService.findRealTeamResultsByFootballMatchId(form.getFootballMatchId());
+
+			TeamResult teamResult = teamResultService.findByFootballMatchIdAndTeamId(form.getFootballMatchId(), form.getTeamId());
+			teamResult.setGoals(teamResult.getGoals() + goal);
+
+			int teamIndex = 0;
+			int otherIndex = 1;
+			if (form.getTeamId() == results.get(0).getTeam().getTeamId()) {
+				teamIndex = 0;
+				otherIndex = 1;
+			} else {
+				teamIndex = 1;
+				otherIndex = 0;
+			}
+			TeamResult thisTeamResult = results.get(teamIndex);
+			TeamResult otherTeamResult = results.get(otherIndex);
+
+			if (thisTeamResult.getResult().matches(("draw")) || thisTeamResult.getResult().matches("win")) {
+				thisTeamResult.setResult("win");
+				otherTeamResult.setResult("loss");
+			}
+
+			int diff = thisTeamResult.getGoals() - otherTeamResult.getGoals();
+			if (diff < -1) {
+				thisTeamResult.setResult("win");
+				otherTeamResult.setResult("loss");
+			} else if (diff == 0) {
+				thisTeamResult.setResult("draw");
+				otherTeamResult.setResult("draw");
+			}
+			teamResultService.updateTeamResult(thisTeamResult);
+			teamResultService.updateTeamResult(otherTeamResult);
+		}
+	}
+
 
 	@RequestMapping(value = "", method = RequestMethod.PUT)
 	@PreAuthorize("hasRole('ADMIN')")
@@ -74,10 +115,12 @@ public class MatchGoalController {
 			matchGoal.setGoalType(goalTypeService.findById(form.getGoalTypeId()));
 			matchGoal.setFootballMatch(footballMatchService.findById(form.getFootballMatchId()));
 			matchGoal.setPlayer(playerService.findById(form.getPlayerId()));
+
+			//change the things into teamResult, find logid to do so.. if changes the player, and goalType
 			matchGoalService.updateMatchGoal(matchGoal); //save()
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (Exception e) {
-			e.getCause();
+			e.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
 	}
@@ -87,6 +130,8 @@ public class MatchGoalController {
 	public void deleteMatchGoalById(@PathVariable int id, HttpServletResponse response) {
 		try {
 			matchGoalService.deleteById(id);
+			//int goal = -1;
+			//updateTeamResults(form,goal);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (Exception ex) {
 			ex.getCause();

@@ -43,15 +43,26 @@ public class TeamResultService {
 	public 	List<TeamResult> findTeamResultsByFootballMatchId(int footballMatchId){
 		return teamResultRepository.findTeamResultsByFootballMatchId(footballMatchId);
 	}
+	public List<TeamResult> findRealTeamResultsByFootballMatchId(int footballMatchId){
+		return teamResultRepository.findByFootballMatch_FootballMatchId(footballMatchId);
+	}
 
-	public void updatePlayer(TeamResult teamResult){
+
+	public boolean existsByFootballMatchIdAndAndTeamId(int footballMatchId, int teamId){
+		return teamResultRepository.existsByFootballMatch_FootballMatchIdAndAndTeam_TeamId(footballMatchId, teamId);
+	}
+
+	public 	TeamResult findByFootballMatchIdAndTeamId(int footballMatchId, int teamId){
+		return teamResultRepository.findByFootballMatch_FootballMatchIdAndTeam_TeamId(footballMatchId, teamId);
+	}
+
+	public void updateTeamResult(TeamResult teamResult){
 		save(teamResult);
 	}
 
 	public void save(TeamResult teamResult){
 		teamResultRepository.save(teamResult);
 	}
-
 
 	public void deleteById(int id){
 		teamResultRepository.findById(id);

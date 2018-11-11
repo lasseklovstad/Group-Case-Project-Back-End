@@ -24,4 +24,9 @@ public interface TeamResultRepository extends JpaRepository<TeamResult, Integer>
 	@Query(value = "SELECT tr.footballMatch.footballMatchId, tr.footballMatch.matchDate, tr.team.teamId, tr.team.name, tr.footballMatch.location.locationId, tr.footballMatch.location.name, tr.goals, tr.result FROM TeamResult tr WHERE tr.team.teamId = tr.footballMatch.awayTeam.teamId")
 	List<TeamResult> findAwayTeamResults();
 
+	boolean existsByFootballMatch_FootballMatchIdAndAndTeam_TeamId(int footballMatchId, int teamId);
+
+	TeamResult findByFootballMatch_FootballMatchIdAndTeam_TeamId(int footballMatchId, int teamId);
+
+	List<TeamResult> findByFootballMatch_FootballMatchId(int footballMatchId);
 }
