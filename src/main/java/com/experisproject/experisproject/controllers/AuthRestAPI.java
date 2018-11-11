@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import com.experisproject.experisproject.message.request.LoginForm;
@@ -67,7 +69,7 @@ public class AuthRestAPI {
 	JwtProvider jwtProvider;
 
 	@PostMapping("/signin")
-	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
+	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest, HttpServletResponse response) {
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(
@@ -89,7 +91,6 @@ public class AuthRestAPI {
 		HttpHeaders header = new HttpHeaders();
 		header.add("role",role);
 		header.add("id",Integer.toString(user.getUserId()));
-
 		return ResponseEntity.ok().headers(header).body(new JwtResponse(jwt));
 	}
 
