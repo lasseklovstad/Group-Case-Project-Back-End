@@ -45,6 +45,10 @@ public class FootballMatch {
 	@JsonIgnore
 	private List<TeamResult> teamResults;
 
+	@OneToMany(mappedBy = "footballMatch", orphanRemoval = true, cascade = CascadeType.PERSIST)
+	@JsonIgnore
+	private List<MatchGoal> matchGoals;
+
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "matchPosition",
 			joinColumns = {@JoinColumn(name = "footballMatchId")},
