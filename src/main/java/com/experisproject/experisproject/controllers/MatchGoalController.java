@@ -27,9 +27,6 @@ public class MatchGoalController {
 	@Autowired
 	private TeamResultService teamResultService;
 
-	private MatchGoalForm form;
-
-
 	@RequestMapping(value = "/allInfo", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('ADMIN')")
 	public List<MatchGoal> getAllMatchGoals() {
@@ -52,13 +49,11 @@ public class MatchGoalController {
 	@PreAuthorize("hasRole('ADMIN')")
 	public void createMatchGoal(@RequestBody MatchGoalForm form, HttpServletResponse response) {
 		try {
-			this.form = form;
 			GoalType goalType = goalTypeService.findById(form.getGoalTypeId());
 			FootballMatch footballMatch = footballMatchService.findById(form.getFootballMatchId());
 			Player player = playerService.findById(form.getPlayerId());
 			MatchGoal matchGoal = new MatchGoal(form.getDescription(), goalType, footballMatch, player);
 			matchGoalService.save(matchGoal);
-			System.out.println("saved matchgoal");
 			int goal = 1;
 			updateTeamResults(form, goal);
 			response.setStatus(HttpServletResponse.SC_CREATED);
@@ -127,14 +122,14 @@ public class MatchGoalController {
 
 	@RequestMapping(value = "{id}/delete", method = RequestMethod.DELETE)
 	@PreAuthorize("hasRole('ADMIN')")
-	public void deleteMatchGoalById(@PathVariable int id, HttpServletResponse response) {
+	public void deleteMatchGoalById(@PathVariable int id, @RequestBody MatchGoalForm form, HttpServletResponse response) {
 		try {
 			matchGoalService.deleteById(id);
 			int goal = -1;
 			updateTeamResults(form,goal);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} catch (Exception ex) {
-			ex.getCause();
+			ex.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
 	}
@@ -169,7 +164,7 @@ public class MatchGoalController {
 			goalTypeService.save(goalType);
 			response.setStatus(HttpServletResponse.SC_CREATED);
 		} catch (Exception e) {
-			e.getStackTrace();
+			e.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
 	}
