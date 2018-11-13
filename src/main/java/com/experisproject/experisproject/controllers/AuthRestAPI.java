@@ -24,6 +24,7 @@ import javax.validation.Valid;
 import com.experisproject.experisproject.message.request.LoginForm;
 import com.experisproject.experisproject.message.request.SignUpForm;
 import com.experisproject.experisproject.message.response.JwtResponse;
+import com.experisproject.experisproject.message.response.Response;
 import com.experisproject.experisproject.models.entities.*;
 import com.experisproject.experisproject.models.repositories.RoleRepository;
 import com.experisproject.experisproject.models.repositories.UsersRepository;
@@ -42,11 +43,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -95,15 +92,20 @@ public class AuthRestAPI {
 		return ResponseEntity.ok().headers(header).body(new JwtResponse(jwt));
 	}
 
-	@PostMapping("/signup")
-	public ResponseEntity<String> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
+	@RequestMapping(value = "/signup",method= RequestMethod.POST,produces = "application/json")
+	public ResponseEntity<Response> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
 		if (usersRepository.existsByUserName(signUpRequest.getUserName())) {
-			return new ResponseEntity<String>("Fail -> Username is already taken!",
+
+			Response response = new Response("Username is already taken!");
+			response.setItem("userName");
+			return new ResponseEntity<Response>(response,
 					HttpStatus.BAD_REQUEST);
 		}
 
 		if (usersRepository.existsByEmail(signUpRequest.getEmail())) {
-			return new ResponseEntity<String>("Fail -> Email is already in use!",
+			Response response = new Response("Email is already in use!");
+			response.setItem("email");
+			return new ResponseEntity<Response>(response,
 					HttpStatus.BAD_REQUEST);
 		}
 
@@ -118,20 +120,20 @@ public class AuthRestAPI {
 			switch (role) {
 				case "admin":
 					Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
-							.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not found."));
+							.orElseThrow(() -> new RuntimeException("Cause: User Role not found."));
 					roles.add(adminRole);
 
 					break;
 				default:
 					Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
-							.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not found."));
+							.orElseThrow(() -> new RuntimeException("Cause: User Role not found."));
 					roles.add(userRole);
 			}
 		});
 		user.setRoles(roles);
 		usersRepository.save(user);
 		favouriteListService.save(favouriteList);
-
-		return ResponseEntity.ok().body("User registered successfully!");
+		Response response = new Response("User registered successfully!");
+		return ResponseEntity.ok().body(response);
 	}
 }
