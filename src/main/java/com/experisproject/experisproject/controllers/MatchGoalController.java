@@ -120,11 +120,11 @@ public class MatchGoalController {
 		}
 	}
 
-	@RequestMapping(value = "{id}/delete", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('ADMIN')")
-	public void deleteMatchGoalById(@PathVariable int id, @RequestBody MatchGoalForm form, HttpServletResponse response) {
+	public void deleteMatchGoalById(@RequestBody MatchGoalForm form, HttpServletResponse response) {
 		try {
-			matchGoalService.deleteById(id);
+			matchGoalService.deleteById(form.getMatchGoalId());
 			int goal = -1;
 			updateTeamResults(form,goal);
 			response.setStatus(HttpServletResponse.SC_OK);

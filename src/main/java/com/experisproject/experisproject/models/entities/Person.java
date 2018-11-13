@@ -53,6 +53,14 @@ public class Person {
 		this.address = address;
 	}
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}

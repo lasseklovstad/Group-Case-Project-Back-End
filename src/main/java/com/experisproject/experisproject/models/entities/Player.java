@@ -46,6 +46,14 @@ public class Player {
 		this.footballMatches = footballMatches;
 	}
 
+	public int getPlayerId() {
+		return playerId;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
 	public void setNumber(String number) {
 		this.number = number;
 	}
