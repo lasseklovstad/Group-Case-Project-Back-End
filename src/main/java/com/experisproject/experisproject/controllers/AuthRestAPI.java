@@ -92,7 +92,7 @@ public class AuthRestAPI {
 		return ResponseEntity.ok().headers(header).body(new JwtResponse(jwt));
 	}
 
-	@RequestMapping(value = "/signup",method= RequestMethod.POST,produces = "application/json")
+	@RequestMapping(value = "/signup",method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<Response> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
 		if (usersRepository.existsByUserName(signUpRequest.getUserName())) {
 
